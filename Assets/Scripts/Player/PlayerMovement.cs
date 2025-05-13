@@ -17,20 +17,15 @@ public class PlayerMovement : MonoBehaviour
         _navMeshAgent.acceleration = 1000f;
         _navMeshAgent.angularSpeed = 720f;
         _navMeshAgent.stoppingDistance = 0f;
-        _navMeshAgent.autoBraking = false; // ½ÃµµÇØº¸°í ¹Ì²ô·¯Áö¸é ²¨ÁÖ¼¼¿ä
+        _navMeshAgent.autoBraking = false; // ì‹œë„í•´ë³´ê³  ë¯¸ë„ëŸ¬ì§€ë©´ êº¼ì£¼ì„¸ìš”
     }
 
-    void Update()
+    public void OnRightMouseDown()
     {
-        if (Input.GetMouseButtonDown(1))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100f, _groundMask))
-            {
-                _navMeshAgent.SetDestination(hit.point);
-            }
+            _navMeshAgent.SetDestination(hit.point);
         }
     }
 }
