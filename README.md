@@ -16,7 +16,16 @@
 * 기획서 : [#](https://docs.google.com/document/d/1Ngr8-0ZfCslvwFVuVeaGYnyTzzbXi3fjfOGeicOP2jo/edit?usp=sharing)
 
 ## 주요 코딩 컨벤션
-1. Public 변수 명은 띄어쓰지 않고, 대문자로 표기(Public⭕, public❌ / Public ~ NumVar)
-2. private 변수 명은 _로 시작(private ~ _numVar)
+1. Public 변수 명은 띄어쓰지 않고, 대문자로 표기
+  
+   (Public⭕, public❌ / Public ~ NumVar)
+   
+2. private 변수 명은 _로 시작
+   
+   (private ~ _numVar)
+   
 3. 변수 명은 명사, 메소드 명은 동사
-4. 파일과 폴더 명은 붙여쓰고 영어로 작성(FileName⭕, fileName❌)
+   
+4. 파일과 폴더 명은 붙여쓰고 영어로 작성
+
+   (FileName⭕, fileName❌)
