@@ -17,7 +17,6 @@ public class PlayerController : UnitController
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
-
     }
 
     private void Update()

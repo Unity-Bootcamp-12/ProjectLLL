@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
         _navMeshAgent.acceleration = 1000f;
         _navMeshAgent.angularSpeed = 720f;
         _navMeshAgent.stoppingDistance = 0f;
-        _navMeshAgent.autoBraking = false;
+        _navMeshAgent.autoBraking = false; // 시도해보고 미끄러지면 꺼주세요
     }
 
     public void OnRightMouseDown()
