@@ -1,11 +1,29 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : UnitController
 {
     private PlayerMovement _playerMovement;
 
-	private void Awake()
+    public override void Dead()
     {
-		_playerMovement = GetComponent<PlayerMovement>();
+        IsDead = true
+    }
+
+    public override void ReceiveDamage(float damage)
+    {
+        HPController.ChangeHP(-damage);
+    }
+
+    private void Awake()
+    {
+        _playerMovement = GetComponent<PlayerMovement>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            _playerMovement.OnRightMouseDown();
+        }
     }
 }
