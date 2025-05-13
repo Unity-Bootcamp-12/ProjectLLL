@@ -17,20 +17,15 @@ public class PlayerMovement : MonoBehaviour
         _navMeshAgent.acceleration = 1000f;
         _navMeshAgent.angularSpeed = 720f;
         _navMeshAgent.stoppingDistance = 0f;
-        _navMeshAgent.autoBraking = false; // 시도해보고 미끄러지면 꺼주세요
+        _navMeshAgent.autoBraking = false;
     }
 
-    void Update()
+    public void OnRightMouseDown()
     {
-        if (Input.GetMouseButtonDown(1))
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 100f, _groundMask))
-            {
-                _navMeshAgent.SetDestination(hit.point);
-            }
+            _navMeshAgent.SetDestination(hit.point);
         }
     }
 }
