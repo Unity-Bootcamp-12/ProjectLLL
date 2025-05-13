@@ -4,8 +4,8 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerMovement _playerMovement;
 
-    private void Awake()
+	private void Awake()
     {
-        _playerMovement = GetComponent<PlayerMovement>();
+		_playerMovement = GetComponent<PlayerMovement>();
     }
 }
