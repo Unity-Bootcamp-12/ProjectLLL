@@ -26,6 +26,21 @@ public abstract class UnitController : MonoBehaviour
         TeamType = teamType;
     }
 
+    public float GetAttackPower()
+    {
+        return _unitStatusController.GetAttackPower();
+    }
+
+    public float GetAttackRange()
+    {
+        return _unitStatusController.GetAttackRange();
+    }
+
+    public float GetAttackSpeed()
+    {
+        return _unitStatusController.GetAttackSpeed();
+    }
+
     public abstract void ReceiveDamage(float damage);
     public abstract void Dead();
 

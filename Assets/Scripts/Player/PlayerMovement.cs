@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     const float MOVE_STOPPING_DISTANCE = 3.0f;
 
-    private Transform _target;
+    private UnitController _target;
+    private bool _isAttacking = false;
 
     private void Awake()
     {
@@ -34,9 +35,33 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_target != null)
         {
-            if (Vector3.Distance(transform.position, _target.position) > MOVE_STOPPING_DISTANCE)
+            if (_playerController.TeamType != _target.TeamType)
             {
-                _navMeshAgent.SetDestination(_target.position);
+                if (Vector3.Distance(transform.position, _target.transform.position) <= _playerController.GetAttackRange())
+                {
+                    if (_isAttacking != true)
+                    {
+                        GameManager.Instance.PlayAfterCoroutine(() =>
+                        {
+                            _isAttacking = true;
+
+                            Attack(_target);
+
+                            GameManager.Instance.PlayAfterCoroutine(() =>
+                            {
+                                _isAttacking = false;
+                            }, _playerController.GetAttackSpeed());
+
+                        }, _playerController.GetAttackSpeed());
+
+                        return;
+                    }
+                }
+            }
+
+            if (Vector3.Distance(transform.position, _target.transform.position) > MOVE_STOPPING_DISTANCE)
+            {
+                _navMeshAgent.SetDestination(_target.transform.position);
             }
         }
     }
@@ -67,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (unit.TeamType != _playerController.TeamType)
                     {
-                        _target = hitObject.transform;
+                        _target = unit;
                     }
                 }
             }
@@ -95,12 +120,17 @@ public class PlayerMovement : MonoBehaviour
 
             if (hitObject.TryGetComponent<UnitController>(out var unit))
             {
-                _target = hitObject.transform;
+                _target = unit;
             }
         }
         else if (Physics.Raycast(ray, out RaycastHit groundHit, 100f, _groundMask))
         {
             _navMeshAgent.SetDestination(groundHit.point);
         }
+    }
+
+    public void Attack(UnitController unitController)
+    {
+        unitController.ReceiveDamage(unitController.GetAttackPower());
     }
 }
