@@ -6,7 +6,7 @@ public class HPController : MonoBehaviour
     [SerializeReference] private float _currentHP;
     [SerializeReference] private float _maxHP;
 
-    public UnityEvent OnChangeHPEvent = new UnityEvent();
+    public UnityEvent<float, float> OnChangeHPEvent = new UnityEvent<float, float>();
     public UnityEvent OnDeadEvent = new UnityEvent();
 
     public void Init(float maxHP)
@@ -38,7 +38,7 @@ public class HPController : MonoBehaviour
     public void ChangeHP(float damage)
     {
         _currentHP = Mathf.Clamp(_currentHP + damage, 0, _maxHP);
-        OnChangeHPEvent?.Invoke();
+        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
 
         if (_currentHP <= 0)
         {

@@ -5,7 +5,9 @@ using UnityEngine;
 /// </summary>
 public abstract class UnitController : MonoBehaviour
 {
-    public HPController HPController { get; private set; }
+    [SerializeField] private UnitHpBarUI _unitHpBarUI;
+
+    protected HPController _hpController;
     protected UnitStatusController _unitStatusController;
     protected Collider _collider;
 
@@ -29,9 +31,14 @@ public abstract class UnitController : MonoBehaviour
     protected void Awake()
     {
         Logger.Info($"UnitController Awake: {gameObject.name}");
-        HPController = GetComponent<HPController>();
+        _hpController = GetComponent<HPController>();
         _unitStatusController = GetComponent<UnitStatusController>();
         _collider = GetComponent<Collider>();
+    }
+
+    protected void Start()
+    {
+        _unitHpBarUI.Init(_hpController.OnChangeHPEvent);
     }
 }
 
