@@ -43,12 +43,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void StopMove()
     {
+        _target = null;
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
     }
 
     public void OnLeftMouseDown()
     {
+        if (_playerController.IsDead)
+        {
+            return;
+        }
+
         if (_playerController.IsAttackButtonDown)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -75,6 +81,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnRightMouseDown()
     {
+        if (_playerController.IsDead)
+        {
+            return;
+        }
+
         _target = null;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

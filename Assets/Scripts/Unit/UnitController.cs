@@ -1,11 +1,14 @@
 using UnityEngine;
 
 /// <summary>
-/// Ã¨ÇÇ¾ğ, ¹Ì´Ï¾ğ, Å¸¿ö µî HP¸¦ °¡Áø À¯´ÖÀÇ Base Å¬·¡½º
+/// ì±”í”¼ì–¸, ë¯¸ë‹ˆì–¸, íƒ€ì›Œ ë“± HPë¥¼ ê°€ì§„ ìœ ë‹›ì˜ Base í´ë˜ìŠ¤
 /// </summary>
 public abstract class UnitController : MonoBehaviour
 {
     public HPController HPController { get; private set; }
+    protected UnitStatusController _unitStatusController;
+    protected Collider _collider;
+
     public UnitTeamType TeamType { get; private set; }
 
     public bool IsDead { get; protected set; }
@@ -23,9 +26,12 @@ public abstract class UnitController : MonoBehaviour
     public abstract void ReceiveDamage(float damage);
     public abstract void Dead();
 
-    private void Awake()
+    protected void Awake()
     {
+        Logger.Info($"UnitController Awake: {gameObject.name}");
         HPController = GetComponent<HPController>();
+        _unitStatusController = GetComponent<UnitStatusController>();
+        _collider = GetComponent<Collider>();
     }
 }
 
