@@ -23,15 +23,15 @@ public class UnitStatusController : MonoBehaviour
     }
 
     #region 스탯 관련
-    public float GetMaxHP => _heroSO.HeroStatus.MaxHP + _changeStatus.MaxHP;
-    public float GetAttackPower => _heroSO.HeroStatus.AttackPower + _changeStatus.AttackPower;
-    public float GetAttackSpeed => _heroSO.HeroStatus.AttackSpeed + _changeStatus.AttackSpeed;
-    public float GetAttackRange => _heroSO.HeroStatus.AttackRange + _changeStatus.AttackRange;
-    public float GetMoveSpeed => _heroSO.HeroStatus.MoveSpeed + _changeStatus.MoveSpeed; 
+    public float GetMaxHP() => _heroSO.HeroStatus.MaxHP + _changeStatus.MaxHP;
+    public float GetAttackPower() => _heroSO.HeroStatus.AttackPower + _changeStatus.AttackPower;
+    public float GetAttackSpeed() => _heroSO.HeroStatus.AttackSpeed + _changeStatus.AttackSpeed;
+    public float GetAttackRange() => _heroSO.HeroStatus.AttackRange + _changeStatus.AttackRange;
+    public float GetMoveSpeed() => _heroSO.HeroStatus.MoveSpeed + _changeStatus.MoveSpeed; 
     #endregion
 
     #region 경험치 관련
-    public int GetExperience => _experience;
+    public int GetExperience() => _experience;
     private int SetExperience(int value)
     {
         _experience = Mathf.Clamp(value, 0, _heroSO.GetAmountOfExperience()[_level]);
@@ -71,7 +71,7 @@ public class UnitStatusController : MonoBehaviour
     #endregion
 
     #region 레벨 관련
-    public int GetLevel => _level;
+    public int GetLevel() => _level;
     private int SetLevel(int value)
     {
         _level = Mathf.Clamp(value, 0, _maxLevel);
@@ -91,21 +91,21 @@ public class UnitStatusController : MonoBehaviour
 
     #region 스킬포인트 관련
     public int AvailableSkillPoints => _level - _usedSkillPoints;
-    public int GetUsedSkillPoints => _usedSkillPoints;
+    public int GetUsedSkillPoints() => _usedSkillPoints;
 
     /// <summary>
     /// AvailableSkillPoints가 있나 조건 확인 후 AddUsedSkillPoints로 사용한 스킬 포인트 증가 = 스킬 포인트 사용
     /// </summary>
     /// <returns></returns>
-    public void UseSkillPoint()
+    public bool UseSkillPoint()
     {
         if (AvailableSkillPoints <= 0)
         {
             // 사용할 수 있는 스킬포인트가 없으면 return
-            return;
+            return false;
         }
         _usedSkillPoints = Mathf.Min(_level, ++_usedSkillPoints);
-        return;
+        return true;
     }
     #endregion
 }
