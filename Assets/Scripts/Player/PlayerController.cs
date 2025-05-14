@@ -4,7 +4,11 @@ using UnityEngine;
 public class PlayerController : UnitController
 {
     [SerializeField] private Transform _respawnAnchor;//나중에 할당으로 수정해야 함
-    
+    /// <summary>
+    /// 레벨에 따른 부활시간 RESAPWN_TIME[현재레벨], 단위는 초
+    /// </summary>
+    readonly float[] RESPAWN_TIME = { 0.0f, 5.0f, 10.0f, 15.0f, 20.0f, 25.0f, 30.0f, 35.0f, 40.0f, 45.0f };
+
     private PlayerMovement _playerMovement;
     
     public bool IsAttackButtonDown { get; private set; }
@@ -50,7 +54,7 @@ public class PlayerController : UnitController
         GameManager.Instance.PlayAfterCoroutine(() =>
         {
             Respawn();
-        }, 3.0f);
+        }, RESPAWN_TIME[_unitStatusController.GetLevel()]);
     }
 
     public void Respawn()
