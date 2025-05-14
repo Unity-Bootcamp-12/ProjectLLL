@@ -5,11 +5,12 @@ using UnityEngine;
 /// </summary>
 public abstract class UnitController : MonoBehaviour
 {
-    [SerializeField] private UnitHpBarUI _unitHpBarUI;
+    [SerializeField] private UnitHPBarUI _unitHPBarUI;
+
+    protected Collider _collider;
 
     protected HPController _hpController;
     protected UnitStatusController _unitStatusController;
-    protected Collider _collider;
 
     public UnitTeamType TeamType { get; private set; }
 
@@ -38,7 +39,7 @@ public abstract class UnitController : MonoBehaviour
 
     protected void Start()
     {
-        _unitHpBarUI.Init(_hpController.OnChangeHPEvent);
+        _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
 }
 

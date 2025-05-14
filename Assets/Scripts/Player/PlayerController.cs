@@ -15,8 +15,10 @@ public class PlayerController : UnitController
         _playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackButtonDown);
