@@ -15,14 +15,16 @@ public class PlayerController : UnitController
         _playerMovement = GetComponent<PlayerMovement>();
     }
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
+
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackButtonDown);
 
-        HPController.Init(_unitStatusController.GetMaxHP());
-        HPController.OnDeadEvent.AddListener(Dead);
+        _hpController.Init(_unitStatusController.GetMaxHP());
+        _hpController.OnDeadEvent.AddListener(Dead);
     }
 
     private void OnLeftMouseDown()
@@ -56,11 +58,11 @@ public class PlayerController : UnitController
         IsDead = false;
         _collider.enabled = true;
         transform.position = _respawnAnchor.position;
-        HPController.Init(_unitStatusController.GetMaxHP());
+        _hpController.Init(_unitStatusController.GetMaxHP());
     }
 
     public override void ReceiveDamage(float damage)
     {
-        HPController.ChangeHP(-damage);
+        _hpController.ChangeHP(-damage);
     }
 }
