@@ -5,9 +5,12 @@ using UnityEngine;
 /// </summary>
 public abstract class UnitController : MonoBehaviour
 {
-    public HPController HPController { get; private set; }
-    protected UnitStatusController _unitStatusController;
+    [SerializeField] private UnitHPBarUI _unitHPBarUI;
+
     protected Collider _collider;
+
+    protected HPController _hpController;
+    protected UnitStatusController _unitStatusController;
 
     public UnitTeamType TeamType { get; private set; }
 
@@ -29,9 +32,14 @@ public abstract class UnitController : MonoBehaviour
     protected void Awake()
     {
         Logger.Info($"UnitController Awake: {gameObject.name}");
-        HPController = GetComponent<HPController>();
+        _hpController = GetComponent<HPController>();
         _unitStatusController = GetComponent<UnitStatusController>();
         _collider = GetComponent<Collider>();
+    }
+
+    protected void Start()
+    {
+        _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
 }
 

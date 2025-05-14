@@ -65,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
 
                 if (hitObject.TryGetComponent<UnitController>(out var unit))
                 {
-                    Debug.Log($"유닛 감지: {hitObject.name}");
                     if (unit.TeamType != _playerController.TeamType)
                     {
                         _target = hitObject.transform;
@@ -96,7 +95,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (hitObject.TryGetComponent<UnitController>(out var unit))
             {
-                Debug.Log($"유닛 감지: {hitObject.name}");
                 _target = hitObject.transform;
             }
         }
