@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,7 +13,7 @@ public abstract class UnitController : MonoBehaviour
     protected HPController _hpController;
     protected UnitStatusController _unitStatusController;
 
-    public UnitTeamType TeamType { get; private set; }
+    [SerializeField] public UnitTeamType TeamType;// { get; private set; }
 
     public bool IsDead { get; protected set; }
 
@@ -58,6 +59,7 @@ public abstract class UnitController : MonoBehaviour
     }
 }
 
+[Serializable]
 public enum UnitTeamType
 {
     RedTeam,

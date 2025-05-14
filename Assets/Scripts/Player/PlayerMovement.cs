@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private UnitController _target;
     private bool _isAttacking = false;
+    private float _nextAttackTime = 0.0f;
 
     private void Awake()
     {
@@ -35,27 +36,34 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_target != null)
         {
+            if (_target.IsDead)
+            {
+                _target = null;
+                return;
+            }
+            Logger.Info($"{_target.name}");
             if (_playerController.TeamType != _target.TeamType)
             {
-                if (Vector3.Distance(transform.position, _target.transform.position) <= _playerController.GetAttackRange())
+                if (Vector3.Distance(transform.position, _target.transform.position) <= _playerController.GetAttackRange()
+                    && Time.time >= _nextAttackTime)
                 {
-                    if (_isAttacking != true)
+                    GameManager.Instance.PlayAfterCoroutine(() =>
                     {
-                        GameManager.Instance.PlayAfterCoroutine(() =>
+                        if (!_isAttacking)
                         {
                             _isAttacking = true;
-
                             Attack(_target);
+                            Logger.Info("공격 진행 중");
 
                             GameManager.Instance.PlayAfterCoroutine(() =>
                             {
                                 _isAttacking = false;
-                            }, _playerController.GetAttackSpeed());
+                                Logger.Info($"{_isAttacking}");
 
-                        }, _playerController.GetAttackSpeed());
-
-                        return;
-                    }
+                                _nextAttackTime = Time.time + 3.0f;
+                            }, 3.0f);
+                        }
+                    }, 3.0f);
                 }
             }
 
@@ -77,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_playerController.IsDead)
         {
+            Logger.Info("IsDead 켜져있음");
             return;
         }
 
@@ -107,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_playerController.IsDead)
         {
+            Logger.Info("IsDead 켜져있음");
             return;
         }
 
@@ -131,6 +141,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Attack(UnitController unitController)
     {
-        unitController.ReceiveDamage(unitController.GetAttackPower());
+        unitController.ReceiveDamage(_playerController.GetAttackPower());
     }
 }
