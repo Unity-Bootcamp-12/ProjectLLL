@@ -14,7 +14,7 @@ public class UnitStatusController : MonoBehaviour
 
     private int _experience = 0;
     private int _level = 1;
-    private const int _maxLevel = 9;
+    const int MAX_LEVEL = 9;
     private int _usedSkillPoints = 0;
 
     private void Start()
