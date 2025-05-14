@@ -3,11 +3,11 @@ using UnityEngine.Events;
 
 public class HPController : MonoBehaviour
 {
-    private float _currentHP;
-    private float _maxHP;
+    [SerializeReference] private float _currentHP;
+    [SerializeReference] private float _maxHP;
 
-    public UnityEvent OnChangeHP = new UnityEvent();
-    public UnityEvent OnDead = new UnityEvent();
+    public UnityEvent OnChangeHPEvent = new UnityEvent();
+    public UnityEvent OnDeadEvent = new UnityEvent();
 
     public void Init(float maxHP)
     {
@@ -38,11 +38,11 @@ public class HPController : MonoBehaviour
     public void ChangeHP(float damage)
     {
         _currentHP = Mathf.Clamp(_currentHP + damage, 0, _maxHP);
-        OnChangeHP?.Invoke();
+        OnChangeHPEvent?.Invoke();
 
         if (_currentHP <= 0)
         {
-            OnDead?.Invoke();
+            OnDeadEvent?.Invoke();
         }
     }
 }
