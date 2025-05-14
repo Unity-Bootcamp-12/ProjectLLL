@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerController _playerController;
     private NavMeshAgent _navMeshAgent;
 
-    const float _moveStoppingDistance = 3.0f;
+    const float MOVE_STOPPING_DISTANCE = 3.0f;
 
     private Transform _target;
 
@@ -24,16 +24,17 @@ public class PlayerMovement : MonoBehaviour
         _navMeshAgent.acceleration = 1000f;
         _navMeshAgent.angularSpeed = 720f;
         _navMeshAgent.stoppingDistance = 0f;
-        _navMeshAgent.autoBraking = false; // 시도해보고 미끄러지면 꺼주세요
+        _navMeshAgent.autoBraking = false;
 
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
+        PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
     }
 
     private void Update()
     {
         if (_target != null)
         {
-            if (Vector3.Distance(transform.position, _target.position) > _moveStoppingDistance)
+            if (Vector3.Distance(transform.position, _target.position) > MOVE_STOPPING_DISTANCE)
             {
                 _navMeshAgent.SetDestination(_target.position);
             }
