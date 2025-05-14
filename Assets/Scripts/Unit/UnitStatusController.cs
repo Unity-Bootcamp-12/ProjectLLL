@@ -53,7 +53,7 @@ public class UnitStatusController : MonoBehaviour
     {
         int remainingExp = addExp;
 
-        while (remainingExp > 0 && _level < _maxLevel)
+        while (remainingExp > 0 && _level < MAX_LEVEL)
         {
             int requiredExp = _heroSO.GetAmountOfExperience()[_level] - _experience;
             int gainedExp = Mathf.Min(remainingExp, requiredExp);
@@ -74,17 +74,17 @@ public class UnitStatusController : MonoBehaviour
     public int GetLevel() => _level;
     private int SetLevel(int value)
     {
-        _level = Mathf.Clamp(value, 0, _maxLevel);
+        _level = Mathf.Clamp(value, 0, MAX_LEVEL);
         return _level;
     }
     private int AddLevel()
     {
-        if (_level >= _maxLevel)
+        if (_level >= MAX_LEVEL)
         {
             return _level;
         }
 
-        _level = Mathf.Clamp(++_level, 0, _maxLevel);
+        _level = Mathf.Clamp(++_level, 0, MAX_LEVEL);
         return _level;
     }
     #endregion
