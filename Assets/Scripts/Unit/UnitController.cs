@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -12,18 +13,29 @@ public abstract class UnitController : MonoBehaviour
     protected HPController _hpController;
     protected UnitStatusController _unitStatusController;
 
-    public UnitTeamType TeamType { get; private set; }
+    public UnitTeamType TeamType => _teamType;
+    [SerializeField] private UnitTeamType _teamType;
 
     public bool IsDead { get; protected set; }
 
-    public UnitTeamType GetTeamType()
-    {
-        return TeamType;
-    }
-
     public void SetTeamType(UnitTeamType teamType)
     {
-        TeamType = teamType;
+        _teamType = teamType;
+    }
+
+    public float GetAttackPower()
+    {
+        return _unitStatusController.GetAttackPower();
+    }
+
+    public float GetAttackRange()
+    {
+        return _unitStatusController.GetAttackRange();
+    }
+
+    public float GetAttackSpeed()
+    {
+        return _unitStatusController.GetAttackSpeed();
     }
 
     public abstract void ReceiveDamage(float damage);
@@ -39,10 +51,13 @@ public abstract class UnitController : MonoBehaviour
 
     protected void Start()
     {
+        _hpController.Init(_unitStatusController.GetMaxHP());
+        _hpController.OnDeadEvent.AddListener(Dead);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
 }
 
+[Serializable]
 public enum UnitTeamType
 {
     RedTeam,
