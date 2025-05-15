@@ -13,6 +13,7 @@ public class HPController : MonoBehaviour
     {
         _maxHP = maxHP;
         _currentHP = maxHP;
+        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
     }
 
     public float GetCurrentHP()
@@ -23,6 +24,7 @@ public class HPController : MonoBehaviour
     public void SetCurrentHP(float hp)
     {
         _currentHP = hp;
+        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
     }
 
     public float GetMaxHP()
@@ -33,6 +35,7 @@ public class HPController : MonoBehaviour
     public void SetMaxHP(float hp)
     {
         _maxHP = hp;
+        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
     }
 
     public void ChangeHP(float damage)
