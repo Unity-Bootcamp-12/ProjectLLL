@@ -18,7 +18,6 @@ public class PlayerInputManager : MonoBehaviour
 
     public UnityEvent OnLeftClickEvent;
     public UnityEvent OnRightClickEvent;
-
     public UnityEvent OnAttackButtonEvent;
 
     void Update()
