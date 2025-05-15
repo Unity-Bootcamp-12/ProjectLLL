@@ -57,7 +57,7 @@ public class PlayerController : UnitController
     /// </summary>
     /// <param name="waitTime"></param>
     /// <returns></returns>
-    private IEnumerator WaitRespawn(float waitTime)
+    private IEnumerator WaitRespawnCoroutine(float waitTime)
     {
         float elapsedTime = 0.0f;
         int logCounter = 1;
