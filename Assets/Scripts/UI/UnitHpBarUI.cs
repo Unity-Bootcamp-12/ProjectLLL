@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class UnitHPBarUI : MonoBehaviour
 {
-    [SerializeField] private Slider _hpBarSlider;
+    [SerializeField] private Slider _MyhpBarSlider;
+    [SerializeField] private Slider _YouhpBarSlider;
+    private PlayerController _playerController;
+    public UnitTeamType TeamType;
 
     public void Init(UnityEvent<float, float> onChangeHPEvent)
     {
@@ -13,10 +16,14 @@ public class UnitHPBarUI : MonoBehaviour
 
     public void UpdateUI(float maxHP, float currentHP)
     {
-        if (_hpBarSlider != null)
+        if (_playerController == null)
         {
-            _hpBarSlider.value = currentHP / maxHP;
+            _MyhpBarSlider.value = currentHP / maxHP;
         }
+        //if (TeamType == UnitTeamType.RedTeam)
+        //{
+        //    _YouhpBarSlider.value = currentHP / maxHP;
+        //}
     }
 
     private void LateUpdate()
