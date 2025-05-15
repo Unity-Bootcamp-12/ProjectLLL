@@ -5,14 +5,14 @@ public class PlayerController : UnitController
 {
     [SerializeField] private Transform _respawnAnchor;//나중에 할당으로 수정해야 함
     
-    private PlayerMovement _playerMovement;
+    private PlayerAction _playerAction;
     
     public bool IsAttackButtonDown { get; private set; }
 
     private new void Awake()
     {
         base.Awake();
-        _playerMovement = GetComponent<PlayerMovement>();
+        _playerAction = GetComponent<PlayerAction>();
     }
 
     private new void Start()
@@ -22,9 +22,6 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackButtonDown);
-
-        _hpController.Init(_unitStatusController.GetMaxHP());
-        _hpController.OnDeadEvent.AddListener(Dead);
     }
 
     private void OnLeftMouseDown()
@@ -44,7 +41,7 @@ public class PlayerController : UnitController
     public override void Dead()
     {
         IsDead = true;
-        _playerMovement.StopMove();
+        _playerAction.StopMove();
         _collider.enabled = false;
 
         GameManager.Instance.PlayAfterCoroutine(() =>

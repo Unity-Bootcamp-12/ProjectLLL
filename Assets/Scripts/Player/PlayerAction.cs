@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerAction : MonoBehaviour
 {
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private LayerMask _unitMask;
@@ -12,8 +13,12 @@ public class PlayerMovement : MonoBehaviour
     const float MOVE_STOPPING_DISTANCE = 3.0f;
 
     private UnitController _target;
+    private Coroutine _attackCoroutine = null;
+
     private bool _isAttacking = false;
-    private float _nextAttackTime = 0.0f;
+    private bool _isPreAttacking = false;
+    private bool _isPostAttacking = false;
+    //private float _nextAttackTime = 0.0f;
 
     private void Awake()
     {
@@ -34,43 +39,42 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_target != null)
+        if (_target == null)
         {
-            if (_target.IsDead)
+            return;
+        }
+
+        if (_target.IsDead)
+        {
+            _target = null;
+            return;
+        }
+
+        //Logger.Info($"{_target.name}");
+
+        float distanceToTarget = Vector3.Distance(transform.position, _target.transform.position);
+        if (_playerController.TeamType != _target.TeamType)
+        {
+            if (_isAttacking)
             {
-                _target = null;
                 return;
             }
-            Logger.Info($"{_target.name}");
-            if (_playerController.TeamType != _target.TeamType)
+            else
             {
-                if (Vector3.Distance(transform.position, _target.transform.position) <= _playerController.GetAttackRange()
-                    && Time.time >= _nextAttackTime)
+                if (distanceToTarget < _playerController.GetAttackRange())
                 {
-                    GameManager.Instance.PlayAfterCoroutine(() =>
-                    {
-                        if (!_isAttacking)
-                        {
-                            _isAttacking = true;
-                            Attack(_target);
-                            Logger.Info("공격 진행 중");
-
-                            GameManager.Instance.PlayAfterCoroutine(() =>
-                            {
-                                _isAttacking = false;
-                                Logger.Info($"{_isAttacking}");
-
-                                _nextAttackTime = Time.time + 3.0f;
-                            }, 3.0f);
-                        }
-                    }, 3.0f);
+                    _attackCoroutine = StartCoroutine(AttackCoroutine(1.0f, 1.0f));
+                }
+                else
+                {
+                    _navMeshAgent.SetDestination(_target.transform.position);
                 }
             }
+        }
 
-            if (Vector3.Distance(transform.position, _target.transform.position) > MOVE_STOPPING_DISTANCE)
-            {
-                _navMeshAgent.SetDestination(_target.transform.position);
-            }
+        if (distanceToTarget > MOVE_STOPPING_DISTANCE)
+        {
+            _navMeshAgent.SetDestination(_target.transform.position);
         }
     }
 
@@ -79,6 +83,37 @@ public class PlayerMovement : MonoBehaviour
         _target = null;
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
+    }
+
+    public void StopAttack()
+    {
+        if (_attackCoroutine != null)
+        {
+            StopCoroutine(_attackCoroutine);
+        }
+        _isAttacking = false;
+        _isPreAttacking = false;
+        _isPostAttacking = false;
+    }
+
+    private IEnumerator AttackCoroutine(float preAttackDelayTime, float postAttackDelayTime)
+    {
+        _isAttacking = true;
+        _isPreAttacking = true;
+        Logger.Info("Attack Start");
+
+        yield return new WaitForSeconds(preAttackDelayTime);
+
+        Logger.Info("Attack");
+        Attack(_target);
+
+        _isPostAttacking = false;
+        yield return new WaitForSeconds(postAttackDelayTime);
+
+        _isAttacking = false;
+        _isPreAttacking = false;
+        _isPostAttacking = false;
+        Logger.Info("Attack End");
     }
 
     public void OnLeftMouseDown()
@@ -130,6 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (hitObject.TryGetComponent<UnitController>(out var unit))
             {
+                Logger.Info($"Mouse Hit Unit: {unit.name}");
                 _target = unit;
             }
         }
