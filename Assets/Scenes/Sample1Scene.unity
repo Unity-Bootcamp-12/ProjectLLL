@@ -1128,8 +1128,8 @@ MonoBehaviour:
     Restrictions: 0
   VerticalAxis:
     Value: 60
-    Center: 20
-    Range: {x: 20, y: 60}
+    Center: 60
+    Range: {x: 20, y: 100}
     Wrap: 0
     Recentering:
       Enabled: 0

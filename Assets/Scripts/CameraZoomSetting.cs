@@ -7,9 +7,9 @@ public class CameraZoomSetting : MonoBehaviour
 {
     private CinemachineCamera _camera;
 
-    private float _scrollSpeed = 2000.0f;
+    private float _scrollSpeed = 3000.0f;
 	private float _minFov = 60.0f;
-	private float _maxFov = 80.0f;
+	private float _maxFov = 100.0f;
 
 	private void Awake()
     {
@@ -18,20 +18,20 @@ public class CameraZoomSetting : MonoBehaviour
 
 	private void Update()
 	{
-		// ¸¶¿ì½º ÈÙ °ª ¾ò±â
+		// ë§ˆìš°ìŠ¤ íœ  ê°’ ì–»ê¸°
 		float scroll = Input.GetAxis("Mouse ScrollWheel");
 		if(Mathf.Abs(scroll) > 0.001f)
 		{
-			// ÇöÀç ·»Áî ¼¼ÆÃ º¹»ç
+			// í˜„ìž¬ ë Œì¦ˆ ì„¸íŒ… ë³µì‚¬
 			var lens = _camera.Lens;
 
-			// FOV Á¶Á¤(½ºÅ©·Ñ ¾Õ/µÚ ¹Î°¨µµ, µ¨Å¸Å¸ÀÓ, Å¬·¥ÇÁ·Î ¹üÀ§ Á¦ÇÑ)
+			// FOV ì¡°ì •(ìŠ¤í¬ë¡¤ ì•ž/ë’¤ ë¯¼ê°ë„, ë¸íƒ€íƒ€ìž„, í´ëž¨í”„ë¡œ ë²”ìœ„ ì œí•œ)
 			lens.FieldOfView = Mathf.Clamp(
 				lens.FieldOfView - scroll * _scrollSpeed * Time.deltaTime,
 				_minFov, _maxFov
 			);
 
-			// º¯°æµÈ ·»Áî ¼¼ÆÃ Àû¿ë
+			// ë³€ê²½ëœ ë Œì¦ˆ ì„¸íŒ… ì ìš©
 			_camera.Lens = lens;
 		}
 	}
