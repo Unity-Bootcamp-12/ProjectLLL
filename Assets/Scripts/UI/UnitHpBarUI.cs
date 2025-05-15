@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class UnitHPBarUI : MonoBehaviour
 {
     [SerializeField] private Slider _hpBarSlider;
+    [SerializeField] private Text _levelText;
+    [SerializeField] private Text _heroNameText;
 
     public void Init(UnityEvent<float, float> onChangeHPEvent)
     {

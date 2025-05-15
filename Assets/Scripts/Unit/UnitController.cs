@@ -38,6 +38,11 @@ public abstract class UnitController : MonoBehaviour
         return _unitStatusController.GetAttackSpeed();
     }
 
+    public int GetLevel()
+    {
+        return _unitStatusController.GetLevel();
+    }
+
     public abstract void ReceiveDamage(float damage);
     public abstract void Dead();
 
