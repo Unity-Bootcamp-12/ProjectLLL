@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : UnitController
 {
     [SerializeField] private Transform _respawnAnchor;//나중에 할당으로 수정해야 함
+    [SerializeField] private Text _levelText;
+    [SerializeField] private Text _heroNameText;
 
     private PlayerAction _playerAction;
     /// <summary>
@@ -22,6 +25,12 @@ public class PlayerController : UnitController
     private new void Start()
     {
         base.Start();
+
+        Logger.Info($"챔피언 이름 : {GetHeroName()}");
+        _heroNameText.text = GetHeroName();
+
+        Logger.Info($"현재 레벨 : {GetLevel()}");
+        _levelText.text = GetLevel().ToString();
 
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
