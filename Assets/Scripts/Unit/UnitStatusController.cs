@@ -12,10 +12,10 @@ public class UnitStatusController : MonoBehaviour
     /// </summary>
     private UnitStatus _changeStatus;
 
-    private int _experience = 0;
-    private int _level = 1;
+    [SerializeField] private int _experience = 0;
+    [SerializeField] private int _level = 1;
+    [SerializeField] private int _usedSkillPoints = 0;
     const int MAX_LEVEL = 9;
-    private int _usedSkillPoints = 0;
 
     private void Start()
     {

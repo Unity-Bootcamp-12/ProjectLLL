@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : UnitController
@@ -48,14 +49,32 @@ public class PlayerController : UnitController
         _playerAction.StopMove();
         _collider.enabled = false;
 
-        GameManager.Instance.PlayAfterCoroutine(() =>
+        StartCoroutine(WaitRespawn(RESPAWN_TIME[_unitStatusController.GetLevel()]));
+    }
+
+    /// <summary>
+    /// 리스폰 대기시간 (임시)
+    /// </summary>
+    /// <param name="waitTime"></param>
+    /// <returns></returns>
+    private IEnumerator WaitRespawn(float waitTime)
+    {
+        float elapsedTime = 0.0f;
+        int logCounter = 1;
+
+        while (elapsedTime < waitTime)
         {
-            Respawn();
-        }, RESPAWN_TIME[_unitStatusController.GetLevel()]);
+            yield return new WaitForSeconds(1.0f);
+            elapsedTime += 1f;
+            Logger.Info($"Logger.Info: {logCounter}초 경과");
+            logCounter++;
+        }
+        Respawn();
     }
 
     public void Respawn()
     {
+        Logger.Info("Respawn");
         IsDead = false;
         _collider.enabled = true;
         transform.position = _respawnAnchor.position;
