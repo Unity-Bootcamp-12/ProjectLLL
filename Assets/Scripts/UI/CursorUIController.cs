@@ -5,14 +5,11 @@ using UnityEngine.Events;
 public class CursorUIController : MonoBehaviour
 {
     public enum CursorType { Default, Attack, Hover }
-    [SerializeField] Texture2D defaultCursor;
-    [SerializeField] Texture2D attackCursor;
-    [SerializeField] Texture2D hoverCursor;
+    [SerializeField] private Texture2D _defaultCursor;
+    [SerializeField] private Texture2D _attackCursor;
+    [SerializeField] private Texture2D _hoverCursor;
 
-    [Header("레이어 설정")]
     [SerializeField] private LayerMask _unitLayer;
-
-    [SerializeField] private Camera mainCamera;
 
     private CursorType _currentState = CursorType.Default;
     private bool _isHovering = false;
@@ -23,6 +20,7 @@ public class CursorUIController : MonoBehaviour
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(SetDefaultCursor);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(SetDefaultCursor);
         SetCursor(CursorType.Default);
+
     }
 
     private void Update()
@@ -62,20 +60,20 @@ public class CursorUIController : MonoBehaviour
         switch (type)
         {
             case CursorType.Attack:
-                Cursor.SetCursor(attackCursor, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(_attackCursor, Vector2.zero, CursorMode.Auto);
                 break;
             case CursorType.Hover:
-                Cursor.SetCursor(hoverCursor, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(_hoverCursor, Vector2.zero, CursorMode.Auto);
                 break;
             default:
-                Cursor.SetCursor(defaultCursor, Vector2.zero, CursorMode.Auto);
+                Cursor.SetCursor(_defaultCursor, Vector2.zero, CursorMode.Auto);
                 break;
         }
     }
 
     private void CheckHoverTarget()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         _isHovering = Physics.Raycast(ray, out RaycastHit unitHit, Mathf.Infinity, _unitLayer) && unitHit.transform.tag != "Player"; // 같은 팀은 호버상태 안키도록 수정 필요
 
         if (_isHovering && _currentState != CursorType.Attack)
