@@ -49,7 +49,7 @@ public class PlayerController : UnitController
         _playerAction.StopMove();
         _collider.enabled = false;
 
-        StartCoroutine(WaitRespawn(RESPAWN_TIME[_unitStatusController.GetLevel()]));
+        StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME[_unitStatusController.GetLevel()]));
     }
 
     /// <summary>
