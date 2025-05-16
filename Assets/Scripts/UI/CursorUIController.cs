@@ -2,7 +2,13 @@ using UnityEngine;
 
 public class CursorUIController : MonoBehaviour
 {
-    public enum CursorType { Default, Attack, Hover }
+    public enum CursorType
+    {
+        Default,
+        Attack,
+        Hover
+    }
+
     [SerializeField] private Texture2D _cursorDefault;
     [SerializeField] private Texture2D _cursorAttack;
     [SerializeField] private Texture2D _cursorHover;
