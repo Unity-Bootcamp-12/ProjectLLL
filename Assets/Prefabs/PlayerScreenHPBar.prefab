@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 226663042000129687}
   - component: {fileID: 2298303576326281444}
   m_Layer: 5
-  m_Name: HeroHPUiBar
+  m_Name: PlayerScreenHPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
