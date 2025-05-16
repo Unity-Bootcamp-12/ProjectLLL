@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance { get; private set; }
 
@@ -15,6 +16,19 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        Logger.Info("OnNetworkSpawn : " + NetworkManager.Singleton.LocalClientId);
+        if (IsHost)
+        {
+            Logger.Info("Server started");
+        }
+        else if (IsClient)
+        {
+            Logger.Info("Client started");
+        }
     }
 
     public void PlayAfterCoroutine(Action action, float time) => StartCoroutine(PlayCoroutine(action, time));
