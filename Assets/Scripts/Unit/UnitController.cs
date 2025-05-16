@@ -55,7 +55,7 @@ public abstract class UnitController : MonoBehaviour
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
-        _playerScreenHPBarUI.InitHPBarUI(_hpController.OnChangeHPEvent);
+        _playerScreenHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
 }
 

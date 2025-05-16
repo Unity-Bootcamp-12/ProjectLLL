@@ -1309,7 +1309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c1014a70a95c14ab36f73260a7bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _herohpBarSlider: {fileID: 0}
+  _heroTopHpBarSlider: {fileID: 1672589538}
 --- !u!1 &1869309124
 GameObject:
   m_ObjectHideFlags: 0
