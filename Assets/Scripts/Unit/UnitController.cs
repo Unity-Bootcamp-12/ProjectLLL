@@ -1,12 +1,14 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 /// <summary>
 /// 챔피언, 미니언, 타워 등 HP를 가진 유닛의 Base 클래스
 /// </summary>
-public abstract class UnitController : MonoBehaviour
+public abstract class UnitController : NetworkBehaviour
 {
     [SerializeField] private UnitHPBarUI _unitHPBarUI;
+    [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
 
     protected Collider _collider;
 
@@ -64,6 +66,7 @@ public abstract class UnitController : MonoBehaviour
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
+        _playerScreenHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
 }
 

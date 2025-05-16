@@ -1,8 +1,10 @@
 using System.Collections;
+using Unity.Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerAction : MonoBehaviour
+public class PlayerAction : NetworkBehaviour
 {
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private LayerMask _unitMask;
@@ -30,7 +32,7 @@ public class PlayerAction : MonoBehaviour
     {
         _navMeshAgent.acceleration = 1000f;
         _navMeshAgent.angularSpeed = 720f;
-        _navMeshAgent.stoppingDistance = 0f;
+        _navMeshAgent.stoppingDistance = 0.1f;
         _navMeshAgent.autoBraking = false;
 
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
@@ -39,6 +41,11 @@ public class PlayerAction : MonoBehaviour
 
     private void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         if (_target == null)
         {
             return;
@@ -67,14 +74,14 @@ public class PlayerAction : MonoBehaviour
                 }
                 else
                 {
-                    _navMeshAgent.SetDestination(_target.transform.position);
+                    SetMoveDestinationRpc(_target.transform.position);
                 }
             }
         }
 
         if (distanceToTarget > MOVE_STOPPING_DISTANCE)
         {
-            _navMeshAgent.SetDestination(_target.transform.position);
+            SetMoveDestinationRpc(_target.transform.position);
         }
     }
 
@@ -118,6 +125,11 @@ public class PlayerAction : MonoBehaviour
 
     public void OnLeftMouseDown()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         if (_playerController.IsDead)
         {
             Logger.Info("IsDead 켜져있음");
@@ -142,13 +154,18 @@ public class PlayerAction : MonoBehaviour
             }
             else if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
             {
-                _navMeshAgent.SetDestination(hit.point);
+                SetMoveDestinationRpc(hit.point);
             }
         }
     }
 
     public void OnRightMouseDown()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         if (_playerController.IsDead)
         {
             Logger.Info("IsDead 켜져있음");
@@ -171,8 +188,15 @@ public class PlayerAction : MonoBehaviour
         }
         else if (Physics.Raycast(ray, out RaycastHit groundHit, 100f, _groundMask))
         {
-            _navMeshAgent.SetDestination(groundHit.point);
+            //_navMeshAgent.SetDestination(groundHit.point);
+            SetMoveDestinationRpc(groundHit.point);
         }
+    }
+
+    [Rpc(SendTo.Server)]
+    private void SetMoveDestinationRpc(Vector3 target)
+    { 
+        _navMeshAgent.SetDestination(target);
     }
 
     public void Attack(UnitController unitController)
