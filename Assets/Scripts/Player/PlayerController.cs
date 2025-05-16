@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerController : UnitController
@@ -27,6 +28,21 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackButtonDown);
+
+        // TEST
+        if (IsOwner)
+        {
+            FindAnyObjectByType<CinemachineCamera>().Follow = transform;
+        }
+
+        if (IsLocalPlayer)
+        {
+            gameObject.name = "PLAYER";
+        }
+        else
+        {
+            gameObject.name = "OTHER";
+        }
     }
 
     private void OnLeftMouseDown()
