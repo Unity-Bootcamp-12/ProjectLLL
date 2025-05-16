@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CursorUIController : MonoBehaviour
 {
-    public enum CursorType
+    private enum CursorType
     {
         Default,
         Attack,
