@@ -40,6 +40,16 @@ public abstract class UnitController : NetworkBehaviour
         return _unitStatusController.GetAttackSpeed();
     }
 
+    public int GetLevel()
+    {
+        return _unitStatusController.GetLevel();
+    }
+
+    public string GetHeroName()
+    {
+        return _unitStatusController.GetHeroName();
+    }
+
     public abstract void ReceiveDamage(float damage);
     public abstract void Dead();
 

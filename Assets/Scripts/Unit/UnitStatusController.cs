@@ -22,6 +22,8 @@ public class UnitStatusController : MonoBehaviour
         _changeStatus = new UnitStatus();
     }
 
+    public string GetHeroName() => _heroSO.Name;
+
     #region 스탯 관련
     public float GetMaxHP() => _heroSO.HeroStatus.MaxHP + _changeStatus.MaxHP;
     public float GetAttackPower() => _heroSO.HeroStatus.AttackPower + _changeStatus.AttackPower;
