@@ -186,3 +186,6 @@ sysinfo.txt
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,unity,rider
+/Assets/Download/Asset/(P&W)Temple_Edition
+/Assets/Download/Asset/Pure Poly
+/Assets/Download/Asset/RPG Tiny Fantasy Forest PBR
