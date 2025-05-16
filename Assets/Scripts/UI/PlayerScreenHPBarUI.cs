@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerScreenHPBarUI : MonoBehaviour
 {
-    [SerializeField] private Slider _herohpBarSlider;
+    [SerializeField] private Slider _heroTopHpBarSlider;
 
     public void Init(UnityEvent<float, float> onChangeHPEvent)
     {
@@ -13,9 +13,9 @@ public class PlayerScreenHPBarUI : MonoBehaviour
 
     public void UpdateUI(float maxHP, float currentHP)
     {
-        if (_herohpBarSlider != null)
+        if (_heroTopHpBarSlider != null)
         {
-            _herohpBarSlider.value = currentHP / maxHP;
+            _heroTopHpBarSlider.value = currentHP / maxHP;
         }
     }
 }
