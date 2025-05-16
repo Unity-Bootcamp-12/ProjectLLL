@@ -31,6 +31,7 @@ public class PlayerController : UnitController
 
     private void OnLeftMouseDown()
     {
+        IsAttackButtonDown = false;
     }
 
     private void OnRightMouseDown()
