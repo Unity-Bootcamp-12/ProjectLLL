@@ -37,6 +37,20 @@ public class PlayerAction : NetworkBehaviour
 
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
+
+        // TEST
+
+        if (IsLocalPlayer)
+        {
+            if (IsHost)
+            {
+                _attackType = AttackType.Melee;
+            }
+            else
+            {
+                _attackType = AttackType.Ranged;
+            }
+        }
     }
 
     private void Update()
@@ -197,15 +211,44 @@ public class PlayerAction : NetworkBehaviour
 
     [Rpc(SendTo.Server)]
     private void SetMoveDestinationRpc(Vector3 target)
-    { 
+    {
         _navMeshAgent.SetDestination(target);
     }
 
     public void Attack(UnitController unitController)
     {
-        Logger.Info($"unitController is null is {unitController is null}");
-        Logger.Info($"_playerController is null is {_playerController is null}");
+        if (_attackType == AttackType.Melee)
+        {
+            Logger.Info($"Melee Attack: {unitController.name}");
+            unitController.ReceiveDamage(_playerController.GetAttackPower());
+        }
+        else if (_attackType == AttackType.Ranged)
+        {
+            Logger.Info($"Ranged Attack: {unitController.name}");
+            FireTargetProjectileRpc(unitController.NetworkObjectId);
+        }
+    }
 
-        unitController.ReceiveDamage(_playerController.GetAttackPower());
+    // ----------- TEST -------------------------
+    [SerializeField] private GameObject projectilePrefab;
+
+    [Rpc(SendTo.Server)]
+    public void FireTargetProjectileRpc(ulong targetId)
+    {
+        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetId, out var targetNetworkObject))
+        { 
+            return;
+        }
+
+        GameObject projectileObject = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, 10f, 25f);
+    }
+
+    [SerializeField] private AttackType _attackType;
+
+    private enum AttackType
+    {
+        Melee,   // 근거리
+        Ranged   // 원거리
     }
 }
