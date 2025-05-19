@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class PlayerController : UnitController
 {
     [SerializeField] private Transform _respawnAnchor;//나중에 할당으로 수정해야 함
-    [SerializeField] private Text _levelText;
-    [SerializeField] private Text _heroNameText;
 
     private PlayerAction _playerAction;
     /// <summary>
@@ -28,11 +26,13 @@ public class PlayerController : UnitController
     {
         base.Start();
 
-        Logger.Info($"챔피언 이름 : {GetHeroName()}");
-        _heroNameText.text = GetHeroName();
-
+        HeroHpBarUI heroHpBarUI = _unitHPBarUI as HeroHpBarUI;
+        
+        Logger.Info($"영웅 이름 : {GetHeroName()}");
         Logger.Info($"현재 레벨 : {GetLevel()}");
-        _levelText.text = GetLevel().ToString();
+
+        heroHpBarUI.UpdateName(GetHeroName());
+        heroHpBarUI.UpdateLevel(GetLevel());
 
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
@@ -47,6 +47,16 @@ public class PlayerController : UnitController
         if (IsLocalPlayer)
         {
             gameObject.name = "PLAYER";
+            if (IsHost)
+            {
+                SetTeamTypeRpc(UnitTeamType.RedTeam);
+                heroHpBarUI.UpdateName("RED");
+            }
+            else
+            {
+                SetTeamTypeRpc(UnitTeamType.BlueTeam);
+                heroHpBarUI.UpdateName("BLUE");
+            }
         }
         else
         {
@@ -109,6 +119,6 @@ public class PlayerController : UnitController
 
     public override void ReceiveDamage(float damage)
     {
-        _hpController.ChangeHP(-damage);
+        _hpController.ChangeHPRpc(-damage);
     }
 }
