@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : UnitController
 {
@@ -13,7 +11,7 @@ public class PlayerController : UnitController
     /// 레벨에 따른 부활시간 RESAPWN_TIME[현재레벨], 단위는 초
     /// </summary>
     readonly float[] RESPAWN_TIME = { 0.0f, 5.0f, 10.0f, 15.0f, 20.0f, 25.0f, 30.0f, 35.0f, 40.0f, 45.0f };
-    
+
     public bool IsAttackButtonDown { get; private set; }
 
     private new void Awake()
@@ -27,7 +25,7 @@ public class PlayerController : UnitController
         base.Start();
 
         HeroHpBarUI heroHpBarUI = _unitHPBarUI as HeroHpBarUI;
-        
+
         Logger.Info($"영웅 이름 : {GetHeroName()}");
         Logger.Info($"현재 레벨 : {GetLevel()}");
 
@@ -63,9 +61,9 @@ public class PlayerController : UnitController
             gameObject.name = "OTHER";
         }
 
-        UIManager.Instance.UIInit(_hpController.OnChangeHPEvent, TeamType);
+        UIManager.Instance.UIInit(_hpController, TeamType);
         _hpController.Init(_unitStatusController.GetMaxHP());
-        PlayerInputManager.Instance.OnRightClickEvent.AddListener(() => ReceiveDamage(10));
+        //PlayerInputManager.Instance.OnRightClickEvent.AddListener(() => ReceiveDamage(10));
         #endregion
     }
 
