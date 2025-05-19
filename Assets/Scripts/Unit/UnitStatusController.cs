@@ -29,7 +29,12 @@ public class UnitStatusController : MonoBehaviour
     public float GetAttackPower() => _heroSO.HeroStatus.AttackPower + _changeStatus.AttackPower;
     public float GetAttackSpeed() => _heroSO.HeroStatus.AttackSpeed + _changeStatus.AttackSpeed;
     public float GetAttackRange() => _heroSO.HeroStatus.AttackRange + _changeStatus.AttackRange;
-    public float GetMoveSpeed() => _heroSO.HeroStatus.MoveSpeed + _changeStatus.MoveSpeed; 
+    public float GetMoveSpeed() => _heroSO.HeroStatus.MoveSpeed + _changeStatus.MoveSpeed;
+    #endregion
+
+    #region 공격 유형 관련
+    public AttackType GetAttackType() => _heroSO.HeroStatus.AttackType;
+    public GameObject GetProjectilePrefab() => _heroSO.HeroStatus.ProjectilePrefab;
     #endregion
 
     #region 경험치 관련

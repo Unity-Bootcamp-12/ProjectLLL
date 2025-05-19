@@ -197,15 +197,33 @@ public class PlayerAction : NetworkBehaviour
 
     [Rpc(SendTo.Server)]
     private void SetMoveDestinationRpc(Vector3 target)
-    { 
+    {
         _navMeshAgent.SetDestination(target);
     }
 
     public void Attack(UnitController unitController)
     {
-        Logger.Info($"unitController is null is {unitController is null}");
-        Logger.Info($"_playerController is null is {_playerController is null}");
+        if (_playerController.GetAttackType() == AttackType.Melee)
+        {
+            Logger.Info($"Melee Attack: {unitController.name}");
+            unitController.ReceiveDamage(_playerController.GetAttackPower());
+        }
+        else if (_playerController.GetAttackType() == AttackType.Ranged)
+        {
+            Logger.Info($"Ranged Attack: {unitController.name}");
+            FireTargetProjectileRpc(unitController.NetworkObjectId, 2.0f, _playerController.GetAttackPower());
+        }
+    }
 
-        unitController.ReceiveDamage(_playerController.GetAttackPower());
+    [Rpc(SendTo.Server)]
+    public void FireTargetProjectileRpc(ulong targetId, float speed, float damage)
+    {
+        if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetId, out var targetNetworkObject))
+        { 
+            return;
+        }
+
+        GameObject projectileObject = Instantiate(_playerController.GetProjectilePrefab(), transform.position, Quaternion.identity);
+        projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, speed, damage);
     }
 }

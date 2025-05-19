@@ -41,6 +41,28 @@ public abstract class UnitController : NetworkBehaviour
         return _unitStatusController.GetAttackSpeed();
     }
 
+    public AttackType GetAttackType()
+    {
+        if (IsLocalPlayer)
+        {
+            if (IsHost)
+            {
+                return AttackType.Melee;
+            }
+            else
+            {
+                return AttackType.Ranged;
+            }
+        }
+
+        return _unitStatusController.GetAttackType();
+    }
+
+    public GameObject GetProjectilePrefab()
+    {
+        return _unitStatusController.GetProjectilePrefab();
+    }
+
     public int GetLevel()
     {
         return _unitStatusController.GetLevel();
