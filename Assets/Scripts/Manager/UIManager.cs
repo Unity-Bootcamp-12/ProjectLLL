@@ -1,14 +1,14 @@
 using NUnit.Framework.Internal.Commands;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
     private CursorUIController _cursorUIController;
+    private PlayerScreenHPBarUI _playerScreenHPBarUI;
     [SerializeField] private Canvas _hpUICanvas;
-    private GameObject _redTeamHero;
-    private GameObject _blueTeamHero;
 
     private void OnAttackCursor() => _cursorUIController.SetAttackCursor();
     private void OnLeftClick() => _cursorUIController.SetDefaultCursor();
@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         _cursorUIController = GetComponent<CursorUIController>();
+        _playerScreenHPBarUI = GetComponent<PlayerScreenHPBarUI>();
 
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackCursor);
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftClick);
@@ -38,36 +39,15 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// 플레이어 별 UI HP Bar 초기화
     /// </summary>
-    public void UIInit(UnitTeamType teamType)
+    public void UIInit(UnityEvent<float, float> unityEvent, UnitTeamType teamType)
     {
         if (teamType == UnitTeamType.RedTeam)
         {
-            _hpUICanvas.GetComponent<PlayerScreenHPBarUI>().RedTeamInit(_redTeamHero.GetComponent<HPController>().OnChangeHPEvent);
+            _playerScreenHPBarUI.RedTeamInit(unityEvent);
         }
         else if (teamType == UnitTeamType.BlueTeam)
         {
-            _hpUICanvas.GetComponent<PlayerScreenHPBarUI>().BlueTeamInit(_blueTeamHero.GetComponent<HPController>().OnChangeHPEvent);
-        }
-    }
-
-    /// <summary>
-    /// 플레이어 초기화
-    /// </summary>
-    /// <param name="player"></param>
-    /// <param name="teamType"></param>
-    public void ObjectInit(GameObject player, UnitTeamType teamType)
-    {
-        if (teamType == UnitTeamType.RedTeam)
-        {
-            _redTeamHero = player;
-        }
-        else if (teamType == UnitTeamType.BlueTeam)
-        {
-            _blueTeamHero = player;
-        }
-        else
-        {
-            Logger.Error("TeamType 정보가 잘못되었습니다.");
+            _playerScreenHPBarUI.BlueTeamInit(unityEvent);
         }
     }
 }
