@@ -107,12 +107,14 @@ public class PlayerAction : NetworkBehaviour
     {
         _isAttacking = true;
         _isPreAttacking = true;
+
+        UnitController attackTarget = _target;
         Logger.Info("Attack Start");
 
         yield return new WaitForSeconds(preAttackDelayTime);
 
         Logger.Info("Attack");
-        Attack(_target);
+        Attack(attackTarget);
 
         _isPostAttacking = false;
         yield return new WaitForSeconds(postAttackDelayTime);
@@ -201,6 +203,9 @@ public class PlayerAction : NetworkBehaviour
 
     public void Attack(UnitController unitController)
     {
+        Logger.Info($"unitController is null is {unitController is null}");
+        Logger.Info($"_playerController is null is {_playerController is null}");
+
         unitController.ReceiveDamage(_playerController.GetAttackPower());
     }
 }
