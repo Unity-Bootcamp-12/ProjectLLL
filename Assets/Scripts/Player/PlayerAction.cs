@@ -37,20 +37,6 @@ public class PlayerAction : NetworkBehaviour
 
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
-
-        // TEST
-
-        if (IsLocalPlayer)
-        {
-            if (IsHost)
-            {
-                _attackType = AttackType.Melee;
-            }
-            else
-            {
-                _attackType = AttackType.Ranged;
-            }
-        }
     }
 
     private void Update()
@@ -217,38 +203,27 @@ public class PlayerAction : NetworkBehaviour
 
     public void Attack(UnitController unitController)
     {
-        if (_attackType == AttackType.Melee)
+        if (_playerController.GetAttackType() == AttackType.Melee)
         {
             Logger.Info($"Melee Attack: {unitController.name}");
             unitController.ReceiveDamage(_playerController.GetAttackPower());
         }
-        else if (_attackType == AttackType.Ranged)
+        else if (_playerController.GetAttackType() == AttackType.Ranged)
         {
             Logger.Info($"Ranged Attack: {unitController.name}");
-            FireTargetProjectileRpc(unitController.NetworkObjectId);
+            FireTargetProjectileRpc(unitController.NetworkObjectId, 2.0f, _playerController.GetAttackPower());
         }
     }
 
-    // ----------- TEST -------------------------
-    [SerializeField] private GameObject projectilePrefab;
-
     [Rpc(SendTo.Server)]
-    public void FireTargetProjectileRpc(ulong targetId)
+    public void FireTargetProjectileRpc(ulong targetId, float speed, float damage)
     {
         if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetId, out var targetNetworkObject))
         { 
             return;
         }
 
-        GameObject projectileObject = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, 10f, 25f);
-    }
-
-    [SerializeField] private AttackType _attackType;
-
-    private enum AttackType
-    {
-        Melee,   // 근거리
-        Ranged   // 원거리
+        GameObject projectileObject = Instantiate(_playerController.GetProjectilePrefab(), transform.position, Quaternion.identity);
+        projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, speed, damage);
     }
 }
