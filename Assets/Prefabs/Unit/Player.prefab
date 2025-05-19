@@ -148,8 +148,8 @@ GameObject:
   - component: {fileID: 6116639223945057804}
   - component: {fileID: 7043093660977798427}
   - component: {fileID: 2852949215354045434}
-  - component: {fileID: 1010447481264184255}
   - component: {fileID: 2012686837651446814}
+  - component: {fileID: 1010447481264184255}
   - component: {fileID: 7659661673948933269}
   - component: {fileID: 1722070523430525476}
   - component: {fileID: 7876948354529644848}
@@ -297,26 +297,6 @@ MonoBehaviour:
   _experience: 0
   _level: 1
   _usedSkillPoints: 0
---- !u!114 &1010447481264184255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7185691287541363168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d53b55d1458124fbd9fadbd7d87eae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentHP: 0
-  _maxHP: 0
-  OnChangeHPEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeadEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2012686837651446814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +322,34 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &1010447481264184255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185691287541363168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d53b55d1458124fbd9fadbd7d87eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _currentHP:
+    rid: -2
+  _maxHP:
+    rid: -2
+  OnChangeHPEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeadEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!114 &7659661673948933269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +365,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _unitHPBarUI: {fileID: 4774854154783254508}
   _playerScreenHPBarUI: {fileID: 0}
-  _teamType: 0
+  _teamType:
+    m_InternalValue: 0
   _respawnAnchor: {fileID: 0}
 --- !u!114 &1722070523430525476
 MonoBehaviour:
@@ -378,6 +387,8 @@ MonoBehaviour:
   _unitMask:
     serializedVersion: 2
     m_Bits: 128
+  projectilePrefab: {fileID: 3181119103003630140, guid: d489dd670aaffa0479ddff8c68424924, type: 3}
+  _attackType: 0
 --- !u!195 &7876948354529644848
 NavMeshAgent:
   m_ObjectHideFlags: 0
