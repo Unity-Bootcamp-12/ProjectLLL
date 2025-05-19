@@ -1222,9 +1222,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 919939416}
+  - component: {fileID: 919939417}
   - component: {fileID: 919939415}
   - component: {fileID: 919939414}
-  - component: {fileID: 919939417}
   - component: {fileID: 919939418}
   m_Layer: 0
   m_Name: '@GameManager'

@@ -91,6 +91,9 @@ public abstract class UnitController : NetworkBehaviour
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
         //_playerScreenHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
+
+    public abstract void OnTriggerEnterFromChild(Collider other);
+    public abstract void OnTriggerExitFromChild(Collider other);
 }
 
 [Serializable]
