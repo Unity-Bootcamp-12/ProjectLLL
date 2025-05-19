@@ -794,7 +794,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 434502470}
-    PlayerPrefab: {fileID: 7185691287541363168, guid: 3e6f1ae81ced80844af0ba437cda42db, type: 3}
+    PlayerPrefab: {fileID: 7185691287541363168, guid: 502717801ae9780439759f4059980878, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 1adcf4c419dd90142856aeda5c58eabb, type: 2}
@@ -1319,26 +1319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6349f543fc0cf7c48993367a24b2fdf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  <IsLocalPlayer>k__BackingField: 0
-  <IsOwner>k__BackingField: 0
-  <IsServer>k__BackingField: 0
-  <HasAuthority>k__BackingField: 0
-  <ServerIsHost>k__BackingField: 0
-  <IsClient>k__BackingField: 0
-  <IsHost>k__BackingField: 0
-  <IsOwnedByServer>k__BackingField: 0
-  <IsSpawned>k__BackingField: 0
-  m_NetworkObject: {fileID: 0}
-  <NetworkObjectId>k__BackingField: 0
-  <NetworkBehaviourId>k__BackingField: 0
-  NetworkBehaviourIdCache: 0
-  <OwnerClientId>k__BackingField: 0
-  m_VarInit: 0
-  <m_TargetIdBeingSynchronized>k__BackingField: 0
-  _localPlayerType: 0
-  _playerController: {fileID: 0}
-  _cinemachineCamera: {fileID: 1967521961}
 --- !u!1 &929668013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,15 +2090,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2110017982552168508, guid: 3e3d3771da0c3a54e8ca5ac37b28bcd2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2110017982552168508, guid: 3e3d3771da0c3a54e8ca5ac37b28bcd2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2110017982552168508, guid: 3e3d3771da0c3a54e8ca5ac37b28bcd2, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7249325948200802871, guid: 3e3d3771da0c3a54e8ca5ac37b28bcd2, type: 3}
       propertyPath: m_Name

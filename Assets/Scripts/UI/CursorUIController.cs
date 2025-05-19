@@ -58,7 +58,7 @@ public class CursorUIController : MonoBehaviour
         }
     }
 
-    public void SetCursor(CursorType type)
+    private void SetCursor(CursorType type)
     {
         switch (type)
         {

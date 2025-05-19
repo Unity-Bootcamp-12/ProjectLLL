@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class UnitController : NetworkBehaviour
 {
-    [SerializeField] private UnitHPBarUI _unitHPBarUI;
+    [SerializeField] protected UnitHPBarUI _unitHPBarUI;
     [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
 
     protected Collider _collider;
@@ -15,14 +15,15 @@ public abstract class UnitController : NetworkBehaviour
     protected HPController _hpController;
     protected UnitStatusController _unitStatusController;
 
-    public UnitTeamType TeamType => _teamType;
-    [SerializeField] private UnitTeamType _teamType;
+    public UnitTeamType TeamType => _teamType.Value;
+    [SerializeField] private NetworkVariable<UnitTeamType> _teamType;
 
     public bool IsDead { get; protected set; }
 
-    public void SetTeamType(UnitTeamType teamType)
+    [Rpc(SendTo.Server)]
+    public void SetTeamTypeRpc(UnitTeamType teamType)
     {
-        _teamType = teamType;
+        _teamType.Value = teamType;
     }
 
     public float GetAttackPower()
@@ -38,6 +39,28 @@ public abstract class UnitController : NetworkBehaviour
     public float GetAttackSpeed()
     {
         return _unitStatusController.GetAttackSpeed();
+    }
+
+    public AttackType GetAttackType()
+    {
+        if (IsLocalPlayer)
+        {
+            if (IsHost)
+            {
+                return AttackType.Melee;
+            }
+            else
+            {
+                return AttackType.Ranged;
+            }
+        }
+
+        return _unitStatusController.GetAttackType();
+    }
+
+    public GameObject GetProjectilePrefab()
+    {
+        return _unitStatusController.GetProjectilePrefab();
     }
 
     public int GetLevel()
@@ -66,7 +89,7 @@ public abstract class UnitController : NetworkBehaviour
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
-        _playerScreenHPBarUI.Init(_hpController.OnChangeHPEvent);
+        //_playerScreenHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
 }
 
