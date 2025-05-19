@@ -38,7 +38,7 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackButtonDown);
 
-        // TEST
+        #region TEST
         if (IsOwner)
         {
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
@@ -62,6 +62,11 @@ public class PlayerController : UnitController
         {
             gameObject.name = "OTHER";
         }
+        UIManager.Instance.ObjectInit(gameObject, TeamType);
+        UIManager.Instance.UIInit(TeamType);
+        _hpController.Init(_unitStatusController.GetMaxHP());
+        //PlayerInputManager.Instance.OnRightClickEvent.AddListener(() => ReceiveDamage(10));
+        #endregion
     }
 
     private void OnLeftMouseDown()
