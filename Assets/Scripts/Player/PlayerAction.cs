@@ -22,10 +22,15 @@ public class PlayerAction : NetworkBehaviour
     private bool _isPostAttacking = false;
     //private float _nextAttackTime = 0.0f;
 
+    private Animator _animator;
+    private Rigidbody _rigidbody;
+
     private void Awake()
     {
         _playerController = GetComponent<PlayerController>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -37,6 +42,8 @@ public class PlayerAction : NetworkBehaviour
 
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
+
+        _animator.speed = _playerController.GetMoveSpeed();
     }
 
     private void Update()
@@ -70,6 +77,7 @@ public class PlayerAction : NetworkBehaviour
             {
                 if (distanceToTarget < _playerController.GetAttackRange())
                 {
+                    _animator.SetBool("IsWalking", false);
                     _attackCoroutine = StartCoroutine(AttackCoroutine(1.0f, 1.0f));
                 }
                 else
@@ -90,6 +98,7 @@ public class PlayerAction : NetworkBehaviour
         _target = null;
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
+        _animator.SetBool("IsWalking", false);
     }
 
     public void StopAttack()
@@ -191,11 +200,13 @@ public class PlayerAction : NetworkBehaviour
             //_navMeshAgent.SetDestination(groundHit.point);
             SetMoveDestinationRpc(groundHit.point);
         }
+
+        _animator.SetBool("IsWalking", true);
     }
 
     [Rpc(SendTo.Server)]
     private void SetMoveDestinationRpc(Vector3 target)
-    { 
+    {
         _navMeshAgent.SetDestination(target);
     }
 

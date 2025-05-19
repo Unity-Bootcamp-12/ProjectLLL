@@ -1,51 +1,75 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HPController : MonoBehaviour
+public class HPController : NetworkBehaviour
 {
-    [SerializeReference] private float _currentHP;
-    [SerializeReference] private float _maxHP;
+    [SerializeReference] private NetworkVariable<float> _currentHP;
+    [SerializeReference] private NetworkVariable<float> _maxHP;
 
     public UnityEvent<float, float> OnChangeHPEvent = new UnityEvent<float, float>();
     public UnityEvent OnDeadEvent = new UnityEvent();
 
+    private void Awake()
+    {
+        _currentHP = new NetworkVariable<float>(0);
+        _maxHP = new NetworkVariable<float>(0);
+    }
+
     public void Init(float maxHP)
     {
-        _maxHP = maxHP;
-        _currentHP = maxHP;
-        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
+        _currentHP.OnValueChanged += (oldValue, newValue) =>
+        {
+            HPChangeRpc();
+        };
+        _maxHP.OnValueChanged += (oldValue, newValue) =>
+        {
+            HPChangeRpc();
+        };
+
+        SetMaxHPRpc(maxHP);
+        SetCurrentHPRpc(maxHP);
     }
 
     public float GetCurrentHP()
     {
-        return _currentHP;
+        return _currentHP.Value;
     }
 
-    public void SetCurrentHP(float hp)
+    [Rpc(SendTo.Server)]
+    public void SetCurrentHPRpc(float hp)
     {
-        _currentHP = hp;
-        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
+        _currentHP.Value = hp;
+        HPChangeRpc();
     }
 
     public float GetMaxHP()
     {
-        return _maxHP;
+        return _maxHP.Value;
     }
 
-    public void SetMaxHP(float hp)
+    [Rpc(SendTo.Server)]
+    public void SetMaxHPRpc(float hp)
     {
-        _maxHP = hp;
-        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
+        _maxHP.Value = hp;
+        HPChangeRpc();
     }
 
-    public void ChangeHP(float damage)
+    [Rpc(SendTo.Server)]
+    public void ChangeHPRpc(float damage)
     {
-        _currentHP = Mathf.Clamp(_currentHP + damage, 0, _maxHP);
-        OnChangeHPEvent?.Invoke(_maxHP, _currentHP);
+        _currentHP.Value = Mathf.Clamp(_currentHP.Value + damage, 0, _maxHP.Value);
+        HPChangeRpc();
 
-        if (_currentHP <= 0)
+        if (_currentHP.Value <= 0)
         {
             OnDeadEvent?.Invoke();
         }
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void HPChangeRpc()
+    {
+        OnChangeHPEvent?.Invoke(_maxHP.Value, _currentHP.Value);
     }
 }
