@@ -37,33 +37,44 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackButtonDown);
 
         #region TEST
-        if (IsOwner)
-        {
-            FindAnyObjectByType<CinemachineCamera>().Follow = transform;
-        }
-
         if (IsLocalPlayer)
         {
             gameObject.name = "PLAYER";
             if (IsHost)
             {
                 SetTeamTypeRpc(UnitTeamType.RedTeam);
+                UIManager.Instance.Init(_hpController, UnitTeamType.RedTeam);
+
                 heroHpBarUI.UpdateName("RED");
             }
             else
             {
                 SetTeamTypeRpc(UnitTeamType.BlueTeam);
+                UIManager.Instance.Init(_hpController, UnitTeamType.BlueTeam);
+
                 heroHpBarUI.UpdateName("BLUE");
             }
         }
         else
         {
             gameObject.name = "OTHER";
+            if (!IsHost)
+            {
+                UIManager.Instance.Init(_hpController, UnitTeamType.RedTeam);
+                heroHpBarUI.UpdateName("RED");
+            }
+            else
+            {
+                UIManager.Instance.Init(_hpController, UnitTeamType.BlueTeam);
+                heroHpBarUI.UpdateName("BLUE");
+            }
         }
 
         _hpController.Init(_unitStatusController.GetMaxHP());
-        UIManager.Instance.UIInit(_hpController, TeamType);
-        //PlayerInputManager.Instance.OnRightClickEvent.AddListener(() => ReceiveDamage(10));
+        if (IsOwner)
+        {
+            FindAnyObjectByType<CinemachineCamera>().Follow = transform;
+        }
         #endregion
     }
 
@@ -123,5 +134,15 @@ public class PlayerController : UnitController
     public override void ReceiveDamage(float damage)
     {
         _hpController.ChangeHPRpc(-damage);
+    }
+
+    public override void OnTriggerEnterFromChild(Collider other)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnTriggerExitFromChild(Collider other)
+    {
+        throw new NotImplementedException();
     }
 }
