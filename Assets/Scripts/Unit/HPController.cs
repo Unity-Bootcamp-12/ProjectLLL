@@ -7,11 +7,14 @@ public class HPController : NetworkBehaviour
     [SerializeReference] private NetworkVariable<float> _currentHP;
     [SerializeReference] private NetworkVariable<float> _maxHP;
 
-    public UnityEvent<float, float> OnChangeHPEvent = new UnityEvent<float, float>();
+    private UnitController _unitController;
+
+    public UnityEvent<float, float> OnChangeHPEvent = new();
     public UnityEvent OnDeadEvent = new UnityEvent();
 
     private void Awake()
     {
+        _unitController = GetComponent<UnitController>();
         _currentHP = new NetworkVariable<float>(0);
         _maxHP = new NetworkVariable<float>(0);
     }
@@ -36,16 +39,16 @@ public class HPController : NetworkBehaviour
         return _currentHP.Value;
     }
 
+    public float GetMaxHP()
+    {
+        return _maxHP.Value;
+    }
+
     [Rpc(SendTo.Server)]
     public void SetCurrentHPRpc(float hp)
     {
         _currentHP.Value = hp;
         HPChangeRpc();
-    }
-
-    public float GetMaxHP()
-    {
-        return _maxHP.Value;
     }
 
     [Rpc(SendTo.Server)]

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class PlayerAction : NetworkBehaviour
 {
+    [SerializeField] private Animator _modelAnimator;
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private LayerMask _unitMask;
 
@@ -20,7 +21,6 @@ public class PlayerAction : NetworkBehaviour
     private bool _isAttacking = false;
     private bool _isPreAttacking = false;
     private bool _isPostAttacking = false;
-    //private float _nextAttackTime = 0.0f;
 
     private void Awake()
     {
@@ -41,6 +41,11 @@ public class PlayerAction : NetworkBehaviour
 
     private void Update()
     {
+        if (IsHost)
+        {
+            SetAnimatorBoolRpc("IsRun", _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance);
+        }
+
         if (!IsOwner)
         {
             return;
@@ -71,6 +76,7 @@ public class PlayerAction : NetworkBehaviour
                 if (distanceToTarget < _playerController.GetAttackRange())
                 {
                     _attackCoroutine = StartCoroutine(AttackCoroutine(1.0f, 1.0f));
+                    StopMove();
                 }
                 else
                 {
@@ -85,11 +91,18 @@ public class PlayerAction : NetworkBehaviour
         }
     }
 
+    [Rpc(SendTo.Server)]
+    private void SetAnimatorBoolRpc(string name, bool param)
+    {
+        _modelAnimator.SetBool(name, param);
+    }
+
     public void StopMove()
     {
         _target = null;
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
+        SetAnimatorBoolRpc("IsRun", false);
     }
 
     public void StopAttack()
@@ -219,7 +232,7 @@ public class PlayerAction : NetworkBehaviour
     public void FireTargetProjectileRpc(ulong targetId, float speed, float damage)
     {
         if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetId, out var targetNetworkObject))
-        { 
+        {
             return;
         }
 

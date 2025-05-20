@@ -13,7 +13,7 @@ public class UnitHPBarUI : MonoBehaviour
 
     public void UpdateUI(float maxHP, float currentHP)
     {
-        if (_hpBarSlider != null)
+        if (_hpBarSlider != null && currentHP >= 0 && maxHP != 0)
         {
             _hpBarSlider.value = currentHP / maxHP;
         }

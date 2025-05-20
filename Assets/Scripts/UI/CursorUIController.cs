@@ -20,9 +20,6 @@ public class CursorUIController : MonoBehaviour
 
     private void Start()
     {
-        PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(SetAttackCursor);
-        PlayerInputManager.Instance.OnLeftClickEvent.AddListener(SetDefaultCursor);
-        PlayerInputManager.Instance.OnRightClickEvent.AddListener(SetDefaultCursor);
         SetCursor(CursorType.Default);
     }
 
@@ -31,7 +28,7 @@ public class CursorUIController : MonoBehaviour
         CheckHoverTarget();
     }
 
-    private void SetDefaultCursor()
+    public void SetDefaultCursor()
     {
         if (_currentState != CursorType.Default)
         {
@@ -40,7 +37,7 @@ public class CursorUIController : MonoBehaviour
         }
     }
 
-    private void SetAttackCursor()
+    public void SetAttackCursor()
     {
         if (_currentState != CursorType.Attack)
         {
@@ -49,7 +46,7 @@ public class CursorUIController : MonoBehaviour
         }
     }
 
-    private void SetHoverCursor()
+    public void SetHoverCursor()
     {
         if (_currentState != CursorType.Hover)
         {

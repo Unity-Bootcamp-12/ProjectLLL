@@ -1,21 +1,26 @@
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerScreenHPBarUI : MonoBehaviour
 {
-    [SerializeField] private Slider _heroTopHpBarSlider;
+    [SerializeField] private Slider _redTeamHPBar;
+    [SerializeField] private Slider _blueTeamHPBar;
 
-    public void Init(UnityEvent<float, float> onChangeHPEvent)
+    public void UpdateRedTeamHPBar(float maxHP, float currentHP)
     {
-        onChangeHPEvent.AddListener(UpdateUI);
+        UpdateUI(_redTeamHPBar, maxHP, currentHP);
     }
 
-    public void UpdateUI(float maxHP, float currentHP)
+    public void UpdateBlueTeamHPBar(float maxHP, float currentHP)
     {
-        if (_heroTopHpBarSlider != null)
-        {
-            _heroTopHpBarSlider.value = currentHP / maxHP;
+        UpdateUI(_blueTeamHPBar, maxHP, currentHP);
+    }
+
+    private void UpdateUI(Slider targetBar, float maxHP, float currentHP)
+    {
+        if (currentHP >= 0 && maxHP > 0)
+        { 
+            targetBar.value = currentHP / maxHP;
         }
     }
 }

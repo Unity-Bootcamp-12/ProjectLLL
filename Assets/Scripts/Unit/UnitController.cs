@@ -8,10 +8,9 @@ using UnityEngine;
 public abstract class UnitController : NetworkBehaviour
 {
     [SerializeField] protected UnitHPBarUI _unitHPBarUI;
-    [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
+    //[SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
 
     protected Collider _collider;
-
     protected HPController _hpController;
     protected UnitStatusController _unitStatusController;
 
