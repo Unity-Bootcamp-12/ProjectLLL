@@ -4,22 +4,21 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
     private CursorUIController _cursorUIController;
-    private PlayerScreenHPBarUI _playerScreenHPBarUI;
-    [SerializeField] private Canvas _hpUICanvas;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            _cursorUIController = GetComponent<CursorUIController>();
-            _playerScreenHPBarUI = _hpUICanvas.GetComponent<PlayerScreenHPBarUI>();
         }
         else
         {
             Destroy(gameObject);
         }
+
+        _cursorUIController = GetComponent<CursorUIController>();
     }
 
     private void Start()
@@ -33,15 +32,24 @@ public class UIManager : MonoBehaviour
     private void OnLeftClick() => _cursorUIController.SetDefaultCursor();
     private void OnRightClick() => _cursorUIController.SetDefaultCursor();
 
-    public void UIInit(HPController hpContorller, UnitTeamType teamType)
+    public void Init(HPController hpContorller, UnitTeamType teamType)
     {
-        hpContorller.OnChangeUIHPEvent.AddListener(UpdateTeamHPBar);
-        UpdateTeamHPBar(teamType, hpContorller.GetMaxHP(), hpContorller.GetCurrentHP());
-    }
+        if (teamType == UnitTeamType.RedTeam)
+        {
+            hpContorller.OnChangeHPEvent.AddListener(
+                (float maxHp, float currentHP) =>
+                _playerScreenHPBarUI.UpdateRedTeamHPBar(maxHp, currentHP)
+            );
+        }
+        else if (teamType == UnitTeamType.BlueTeam)
+        {
+            hpContorller.OnChangeHPEvent.AddListener(
+                (float maxHp, float currentHP) =>
+                _playerScreenHPBarUI.UpdateBlueTeamHPBar(maxHp, currentHP)
+            );
+        }
 
-    private void UpdateTeamHPBar(UnitTeamType teamType, float maxHP, float currentHP)
-    {
-        _playerScreenHPBarUI.UpdateTeamHP(teamType, maxHP, currentHP);
+        hpContorller.HPChangeRpc();
     }
 }
 
