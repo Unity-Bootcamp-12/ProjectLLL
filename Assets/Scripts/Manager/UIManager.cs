@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
 
     public void UIInit(HPController hpContorller, UnitTeamType teamType)
     {
-        hpContorller.OnChangeHPEvent.AddListener(UpdateTeamHPBar);
+        hpContorller.OnChangeUIHPEvent.AddListener(UpdateTeamHPBar);
         UpdateTeamHPBar(teamType, hpContorller.GetMaxHP(), hpContorller.GetCurrentHP());
     }
 

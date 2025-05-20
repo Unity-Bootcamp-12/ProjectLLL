@@ -61,8 +61,8 @@ public class PlayerController : UnitController
             gameObject.name = "OTHER";
         }
 
-        UIManager.Instance.UIInit(_hpController, TeamType);
         _hpController.Init(_unitStatusController.GetMaxHP());
+        UIManager.Instance.UIInit(_hpController, TeamType);
         //PlayerInputManager.Instance.OnRightClickEvent.AddListener(() => ReceiveDamage(10));
         #endregion
     }

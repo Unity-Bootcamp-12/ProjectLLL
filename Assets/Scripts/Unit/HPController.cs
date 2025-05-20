@@ -9,7 +9,8 @@ public class HPController : NetworkBehaviour
 
     private UnitController _unitController;
 
-    public UnityEvent<UnitTeamType, float, float> OnChangeHPEvent = new();
+    public UnityEvent<float, float> OnChangeHPEvent = new();
+    public UnityEvent<UnitTeamType, float, float> OnChangeUIHPEvent = new();
     public UnityEvent OnDeadEvent = new UnityEvent();
 
     private void Awake()
@@ -73,6 +74,7 @@ public class HPController : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     public void HPChangeRpc()
     {
-        OnChangeHPEvent?.Invoke(_unitController.TeamType, _maxHP.Value, _currentHP.Value);
+        OnChangeHPEvent?.Invoke(_maxHP.Value, _currentHP.Value);
+        OnChangeUIHPEvent?.Invoke(_unitController.TeamType, _maxHP.Value, _currentHP.Value);
     }
 }

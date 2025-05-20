@@ -6,12 +6,12 @@ public class UnitHPBarUI : MonoBehaviour
 {
     [SerializeField] private Slider _hpBarSlider;
 
-    public void Init(UnityEvent<UnitTeamType, float, float> onChangeHPEvent)
+    public void Init(UnityEvent<float, float> onChangeHPEvent)
     {
         onChangeHPEvent.AddListener(UpdateUI);
     }
 
-    public void UpdateUI(UnitTeamType teamType, float maxHP, float currentHP)
+    public void UpdateUI(float maxHP, float currentHP)
     {
         if (_hpBarSlider != null)
         {
