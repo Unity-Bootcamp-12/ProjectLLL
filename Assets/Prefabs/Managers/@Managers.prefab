@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3589201474
+  GlobalObjectIdHash: 4169699407
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -138,7 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1614bc60e23d90f46b057381c73101fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hpUICanvas: {fileID: 0}
+  _playerScreenHPBarUI: {fileID: 0}
+  _playerScreenHUDUI: {fileID: 0}
 --- !u!114 &7467840159017316025
 MonoBehaviour:
   m_ObjectHideFlags: 0

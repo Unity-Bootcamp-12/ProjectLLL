@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
+    [SerializeField] private PlayerScreenHUDUI _playerScreenHUDUI;
     private CursorUIController _cursorUIController;
 
     private void Awake()
