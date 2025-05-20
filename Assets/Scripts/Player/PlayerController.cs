@@ -135,4 +135,14 @@ public class PlayerController : UnitController
     {
         _hpController.ChangeHPRpc(-damage);
     }
+
+    public override void OnTriggerEnterFromChild(Collider other)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void OnTriggerExitFromChild(Collider other)
+    {
+        throw new NotImplementedException();
+    }
 }
