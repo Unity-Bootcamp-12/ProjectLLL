@@ -1755,6 +1755,7 @@ GameObject:
   - component: {fileID: 7876948354529644848}
   - component: {fileID: 5812727747591030039}
   - component: {fileID: 2199256564562698754}
+  - component: {fileID: 917451648772638883}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1857,7 +1858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 650379037
+  GlobalObjectIdHash: 182130965
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1912,7 +1913,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   _unitHPBarUI: {fileID: 4774854154783254508}
-  _playerScreenHPBarUI: {fileID: 0}
   _teamType:
     m_InternalValue: 0
   _respawnAnchor: {fileID: 0}
@@ -2019,6 +2019,20 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   TransitionStateInfoList: []
   m_Animator: {fileID: 8813903570419018170}
+--- !u!114 &917451648772638883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185691287541363168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91bc62f487a39a4e874bc0274afd094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rayDistance: 10
+  _rayCamera: {fileID: 0}
 --- !u!1 &7243615059841712899
 GameObject:
   m_ObjectHideFlags: 0

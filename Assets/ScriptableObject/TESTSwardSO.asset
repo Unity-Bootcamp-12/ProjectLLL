@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8d21805f1662f4d93195fc20c52840, type: 3}
+  m_Name: TESTSwardSO
+  m_EditorClassIdentifier: 
+  _itemID: 0
+  _itemType: 1
+  _itemPrefab: {fileID: 2311267577476116883, guid: 6bcfc1e7de811d842a3959df8e369c64, type: 3}
