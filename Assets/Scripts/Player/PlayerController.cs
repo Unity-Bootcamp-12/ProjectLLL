@@ -121,7 +121,7 @@ public class PlayerController : UnitController
         {
             yield return new WaitForSeconds(1.0f);
             elapsedTime += 1f;
-            UIManager.Instance.SetRespawnCount(waitTime - elapsedTime);
+            UIManager.Instance.UpdateRespawnTimer(waitTime - elapsedTime);
 
             Logger.Info($"Logger.Info: {logCounter}초 경과");
             logCounter++;
