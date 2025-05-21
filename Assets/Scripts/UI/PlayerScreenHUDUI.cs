@@ -15,10 +15,6 @@ public class PlayerScreenHUDUI : MonoBehaviour
     [SerializeField] private Button _wSkillButton;
     [SerializeField] private Button _eSkillButton;
 
-    [SerializeField] private GameObject _respawnWaitPanel;
-    [SerializeField] private TMP_Text _respawnTimerText;
-
-
     private void Awake()
     {
         _qSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnQSkillEvent?.Invoke());
@@ -63,21 +59,5 @@ public class PlayerScreenHUDUI : MonoBehaviour
     public void SetLevel(int level)
     {
         _levelText.text = level.ToString();
-    }
-
-    public void EnableRespawnPanel(float respawnTime)
-    {
-        _respawnWaitPanel.SetActive(true);
-        _respawnTimerText.text = Mathf.CeilToInt(respawnTime).ToString();
-    }
-
-    public void UpdateRespawnTimer(float remainingSeconds)
-    {
-        _respawnTimerText.text = Mathf.CeilToInt(remainingSeconds).ToString();
-    }
-
-    public void DisableRespawnPanel()
-    {
-        _respawnWaitPanel.SetActive(false);
     }
 }

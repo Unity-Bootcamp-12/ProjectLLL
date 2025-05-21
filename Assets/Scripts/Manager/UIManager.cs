@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -6,6 +7,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
     [SerializeField] private PlayerScreenHUDUI _playerScreenHUDUI;
+    [SerializeField] private GameObject _respawnWaitPanel;
+    [SerializeField] private TMP_Text _respawnTimerText;
+
     private CursorUIController _cursorUIController;
 
     private void Awake()
@@ -62,9 +66,6 @@ public class UIManager : MonoBehaviour
     }
 
     public void SetHUDLevel(int level) => _playerScreenHUDUI.SetLevel(level);
-    public void EnableRespawnPanel(float respawnTime) => _playerScreenHUDUI.EnableRespawnPanel(respawnTime);
-    public void SetRespawnCount(float respawnTime) => _playerScreenHUDUI.UpdateRespawnTimer(respawnTime);
-    public void DisableRespawnPanel() => _playerScreenHUDUI.DisableRespawnPanel();
     public void SetHeroPortrait(Sprite image) => _playerScreenHUDUI.SetHeroPortraitImage(image);
     public void SetItemImage(ButtonType button, Sprite sprite) => _playerScreenHUDUI.SetButtonImage(button, sprite);
 
@@ -81,6 +82,21 @@ public class UIManager : MonoBehaviour
         Logger.Info("E");
     }
 
+    public void EnableRespawnPanel(float respawnTime)
+    {
+        _respawnWaitPanel.SetActive(true);
+        _respawnTimerText.text = Mathf.CeilToInt(respawnTime).ToString();
+    }
+
+    public void UpdateRespawnTimer(float remainingSeconds)
+    {
+        _respawnTimerText.text = Mathf.CeilToInt(remainingSeconds).ToString();
+    }
+
+    public void DisableRespawnPanel()
+    {
+        _respawnWaitPanel.SetActive(false);
+    }
 }
 
 
