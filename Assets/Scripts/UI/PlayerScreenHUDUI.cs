@@ -1,40 +1,53 @@
-using System.Collections;
+using NUnit.Framework.Constraints;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
+
+public enum ButtonType { Q, W, E }
 
 public class PlayerScreenHUDUI : MonoBehaviour
 {
     [SerializeField] private GameObject _heroPortrait;
-    [SerializeField] private TextMeshPro _levelText;
+    [SerializeField] private TMP_Text _levelText;
     [SerializeField] private Slider _hpBar;
     [SerializeField] private Slider _xpBar;
     [SerializeField] private Button _qSkillButton;
     [SerializeField] private Button _wSkillButton;
     [SerializeField] private Button _eSkillButton;
-    [SerializeField] private Image _qCooldownOverlay;
-    [SerializeField] private Image _wCooldownOverlay;
-    [SerializeField] private Image _eCooldownOverlay;
 
     [SerializeField] private GameObject _respawnWaitPanel;
-    [SerializeField] private TextMeshPro _respawnTimerText;
+    [SerializeField] private TMP_Text _respawnTimerText;
 
-    public UnityEvent OnQSkillEvent = new();
-    public UnityEvent OnWSkillEvent = new();
-    public UnityEvent OnESkillEvent = new();
 
     private void Awake()
     {
-        _qSkillButton.onClick.AddListener(() => OnQSkillEvent.Invoke());
-        _wSkillButton.onClick.AddListener(() => OnWSkillEvent.Invoke());
-        _eSkillButton.onClick.AddListener(() => OnESkillEvent.Invoke());
+        _qSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnQSkillEvent?.Invoke());
+        _wSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnWSkillEvent?.Invoke());
+        _eSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnESkillEvent?.Invoke());
     }
 
     public void SetHeroPortraitImage(Sprite sprite)
     {
         if (_heroPortrait.TryGetComponent(out Image img))
+        {
             img.sprite = sprite;
+        }
+    }
+
+    public void SetButtonImage(ButtonType button, Sprite sprite)
+    {
+        switch (button)
+        {
+            case ButtonType.Q:
+                _qSkillButton.image.sprite = sprite;
+                break;
+            case ButtonType.W:
+                _wSkillButton.image.sprite = sprite;
+                break;
+            case ButtonType.E:
+                _eSkillButton.image.sprite = sprite;
+                break;
+        }
     }
 
     public void UpdateHpBar(float maxHP, float currentHP)
@@ -47,48 +60,24 @@ public class PlayerScreenHUDUI : MonoBehaviour
         _xpBar.value = Mathf.Clamp01(currentXP / Mathf.Max(1, maxXP));
     }
 
-    public void SetSkillCooldown(SkillType type, float cooldown, float maxCooldown)
-    {
-        float fill = Mathf.Clamp01(cooldown / Mathf.Max(1, maxCooldown));
-        switch (type)
-        {
-            case SkillType.Q: _qCooldownOverlay.fillAmount = fill; break;
-            case SkillType.W: _wCooldownOverlay.fillAmount = fill; break;
-            case SkillType.E: _eCooldownOverlay.fillAmount = fill; break;
-        }
-    }
-    public enum SkillType { Q, W, E }
-
     public void SetLevel(int level)
     {
         _levelText.text = level.ToString();
     }
 
-    public void ShowRespawnWaitPanel(int respawnTime)
+    public void EnableRespawnPanel(float respawnTime)
     {
-        Canvas rootCanvas = _respawnWaitPanel.GetComponentInParent<Canvas>().rootCanvas;
-        RectTransform canvasRect = rootCanvas.GetComponent<RectTransform>();
-        RectTransform panelRect = _respawnWaitPanel.GetComponent<RectTransform>();
-
-        panelRect.anchorMin = Vector2.zero;
-        panelRect.anchorMax = Vector2.one;
-        panelRect.offsetMin = Vector2.zero;
-        panelRect.offsetMax = Vector2.zero;
-        panelRect.sizeDelta = canvasRect.sizeDelta;
-        panelRect.anchoredPosition = Vector2.zero;
-
         _respawnWaitPanel.SetActive(true);
-        _respawnTimerText.text = respawnTime.ToString();
+        _respawnTimerText.text = Mathf.CeilToInt(respawnTime).ToString();
     }
 
-    public void UpdateRespawnTimer(int remainingSeconds)
+    public void UpdateRespawnTimer(float remainingSeconds)
     {
-        _respawnTimerText.text = remainingSeconds.ToString();
+        _respawnTimerText.text = Mathf.CeilToInt(remainingSeconds).ToString();
     }
 
-    public void HideRespawnPanel()
+    public void DisableRespawnPanel()
     {
         _respawnWaitPanel.SetActive(false);
     }
-
 }
