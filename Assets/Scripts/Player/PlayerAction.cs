@@ -37,10 +37,15 @@ public class PlayerAction : NetworkBehaviour
 
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
+        
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetAnimatorBoolRpc("IsDead", false);
+        }
         if (IsHost)
         {
             SetAnimatorBoolRpc("IsRun", _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance);
@@ -75,11 +80,15 @@ public class PlayerAction : NetworkBehaviour
             {
                 if (distanceToTarget < _playerController.GetAttackRange())
                 {
+                    SetAnimatorBoolRpc("IsRun", false);
+                    SetAnimatorBoolRpc("IsAttack", true);
                     _attackCoroutine = StartCoroutine(AttackCoroutine(1.0f, 1.0f));
                     StopMove();
                 }
                 else
                 {
+                    SetAnimatorBoolRpc("IsRun", true);
+                    SetAnimatorBoolRpc("IsAttack", false);
                     SetMoveDestinationRpc(_target.transform.position);
                 }
             }
@@ -105,6 +114,11 @@ public class PlayerAction : NetworkBehaviour
         SetAnimatorBoolRpc("IsRun", false);
     }
 
+    public void Dead()
+    {
+        SetAnimatorBoolRpc("IsDead", true);
+    }
+
     public void StopAttack()
     {
         if (_attackCoroutine != null)
@@ -114,6 +128,7 @@ public class PlayerAction : NetworkBehaviour
         _isAttacking = false;
         _isPreAttacking = false;
         _isPostAttacking = false;
+        SetAnimatorBoolRpc("IsAttack", false);
     }
 
     private IEnumerator AttackCoroutine(float preAttackDelayTime, float postAttackDelayTime)
@@ -220,11 +235,13 @@ public class PlayerAction : NetworkBehaviour
         {
             Logger.Info($"Melee Attack: {unitController.name}");
             unitController.ReceiveDamage(_playerController.GetAttackPower());
+            
         }
         else if (_playerController.GetAttackType() == AttackType.Ranged)
         {
             Logger.Info($"Ranged Attack: {unitController.name}");
             FireTargetProjectileRpc(unitController.NetworkObjectId, 2.0f, _playerController.GetAttackPower());
+
         }
     }
 

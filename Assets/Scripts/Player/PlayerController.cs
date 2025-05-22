@@ -97,6 +97,7 @@ public class PlayerController : UnitController
     {
         IsDead = true;
         _playerAction.StopMove();
+        _playerAction.Dead();
         _collider.enabled = false;
 
         StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME[_unitStatusController.GetLevel()]));
