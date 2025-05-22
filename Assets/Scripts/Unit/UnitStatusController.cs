@@ -114,5 +114,7 @@ public class UnitStatusController : MonoBehaviour
         _usedSkillPoints = Mathf.Min(_level, ++_usedSkillPoints);
         return true;
     }
+
+    public Sprite GetHeroPortrait() => _heroSO.HeroImage;
     #endregion
 }

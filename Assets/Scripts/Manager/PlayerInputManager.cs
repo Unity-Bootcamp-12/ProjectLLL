@@ -20,6 +20,10 @@ public class PlayerInputManager : MonoBehaviour
     public UnityEvent OnRightClickEvent;
     public UnityEvent OnAttackButtonEvent;
 
+    public UnityEvent OnQSkillEvent;
+    public UnityEvent OnWSkillEvent;
+    public UnityEvent OnESkillEvent;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -33,6 +37,18 @@ public class PlayerInputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             OnAttackButtonEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OnQSkillEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            OnWSkillEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnESkillEvent?.Invoke();
         }
     }
 }
