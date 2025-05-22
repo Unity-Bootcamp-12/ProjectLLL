@@ -138,11 +138,11 @@ public class PlayerController : UnitController
 
     public override void OnTriggerEnterFromChild(Collider other)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 
     public override void OnTriggerExitFromChild(Collider other)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
