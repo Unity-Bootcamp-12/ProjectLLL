@@ -60,16 +60,6 @@ public class PlayerController : UnitController
         UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
     }
 
-    private void OnLeftMouseDown()
-    {
-        IsAttackButtonDown = false;
-    }
-
-    private void OnRightMouseDown()
-    {
-        IsAttackButtonDown = false;
-    }
-
     private void OnAttackButtonDown()
     {
         IsAttackButtonDown = true;

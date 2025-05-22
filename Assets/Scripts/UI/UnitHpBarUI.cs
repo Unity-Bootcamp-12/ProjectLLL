@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class UnitHPBarUI : MonoBehaviour
 {
     [SerializeField] private Slider _hpBarSlider;
-    private Color _allyColor = Color.green;
-    private Color _enemyColor = Color.red;
+    private Color _redColor = Color.red;
+    private Color _blueColor = Color.blue;
 
     public void Init(UnityEvent<float, float> onChangeHPEvent)
     {
@@ -26,8 +26,8 @@ public class UnitHPBarUI : MonoBehaviour
         transform.forward = Camera.main.transform.forward;
     }
 
-    public void SetHpBarColor(bool isAlly)
+    public void SetHpBarColor(bool isRed)
     {
-        _hpBarSlider.fillRect.GetComponent<Image>().color = isAlly ? _allyColor : _enemyColor;
+        _hpBarSlider.fillRect.GetComponent<Image>().color = isRed ? _redColor : _blueColor;
     }
 }
