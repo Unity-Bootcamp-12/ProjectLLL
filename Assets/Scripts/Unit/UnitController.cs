@@ -99,6 +99,18 @@ public abstract class UnitController : NetworkBehaviour
     {
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
+
+        bool isAlly = false;
+
+        if (IsHost)
+        {
+            isAlly = (_teamType.Value == UnitTeamType.RedTeam);
+        }
+        else if (IsClient)
+        {
+            isAlly = (_teamType.Value == UnitTeamType.BlueTeam);
+        }
+        _unitHPBarUI.SetHpBarColor(isAlly);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
     }
 
