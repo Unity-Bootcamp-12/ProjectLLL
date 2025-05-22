@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Cinemachine;
 
@@ -7,32 +5,34 @@ public class CameraZoomSetting : MonoBehaviour
 {
     private CinemachineCamera _camera;
 
-    private float _scrollSpeed = 3000.0f;
-	private float _minFov = 60.0f;
-	private float _maxFov = 100.0f;
+    private float _scrollSpeed = 100.0f;
 
-	private void Awake()
+    [Header("Camera Settings")]
+    [SerializeField] private float _minOffsetY = 0.0f;
+    [SerializeField] private float _maxOffsetY = 7.0f;
+    [SerializeField] private float _minOffsetZ = -7.0f;
+    [SerializeField] private float _maxOffsetZ = 0.0f;
+
+    private CinemachineOrbitalFollow _orbitalFollow;
+
+    private void Awake()
     {
         _camera = this.GetComponent<CinemachineCamera>();
+        _orbitalFollow = _camera.GetComponent<CinemachineOrbitalFollow>();
     }
 
-	private void Update()
-	{
-		// 마우스 휠 값 얻기
-		float scroll = Input.GetAxis("Mouse ScrollWheel");
-		if(Mathf.Abs(scroll) > 0.001f)
-		{
-			// 현재 렌즈 세팅 복사
-			var lens = _camera.Lens;
+    private void Update()
+    {
+        // 마우스 휠 값 얻기
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (Mathf.Abs(scroll) > 0.001f)
+        {
+            Vector3 offset = _orbitalFollow.TargetOffset;
 
-			// FOV 조정(스크롤 앞/뒤 민감도, 델타타임, 클램프로 범위 제한)
-			lens.FieldOfView = Mathf.Clamp(
-				lens.FieldOfView - scroll * _scrollSpeed * Time.deltaTime,
-				_minFov, _maxFov
-			);
+            offset.y = Mathf.Clamp(offset.y - scroll * _scrollSpeed * Time.deltaTime, _minOffsetY, _maxOffsetY);
+            offset.z = -offset.y;
 
-			// 변경된 렌즈 세팅 적용
-			_camera.Lens = lens;
-		}
-	}
+            _orbitalFollow.TargetOffset = offset;
+        }
+    }
 }
