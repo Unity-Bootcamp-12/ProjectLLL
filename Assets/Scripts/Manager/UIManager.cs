@@ -7,8 +7,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
     [SerializeField] private PlayerScreenHUDUI _playerScreenHUDUI;
-    [SerializeField] private GameObject _respawnWaitPanel;
-    [SerializeField] private TMP_Text _respawnTimerText;
+    [SerializeField] private PlayerScreenRespawnUI _playerScreenRespawnUI;
 
     private CursorUIController _cursorUIController;
 
@@ -82,21 +81,11 @@ public class UIManager : MonoBehaviour
         Logger.Info("E");
     }
 
-    public void EnableRespawnPanel(float respawnTime)
-    {
-        _respawnWaitPanel.SetActive(true);
-        _respawnTimerText.text = Mathf.CeilToInt(respawnTime).ToString();
-    }
-
-    public void UpdateRespawnTimer(float remainingSeconds)
-    {
-        _respawnTimerText.text = Mathf.CeilToInt(remainingSeconds).ToString();
-    }
-
-    public void DisableRespawnPanel()
-    {
-        _respawnWaitPanel.SetActive(false);
-    }
+    #region RespawnPanel 관련
+    public void EnableRespawnPanel(float respawnTime) => _playerScreenRespawnUI.EnableRespawnPanel(respawnTime);
+    public void UpdateRespawnTimer(float remainingSeconds) => _playerScreenRespawnUI.UpdateRespawnTimer(remainingSeconds);
+    public void DisableRespawnPanel() => _playerScreenRespawnUI.DisableRespawnPanel(); 
+    #endregion
 }
 
 
