@@ -1751,11 +1751,9 @@ GameObject:
   - component: {fileID: 2012686837651446814}
   - component: {fileID: 1010447481264184255}
   - component: {fileID: 7659661673948933269}
-  - component: {fileID: 1722070523430525476}
   - component: {fileID: 7876948354529644848}
   - component: {fileID: 5812727747591030039}
   - component: {fileID: 2199256564562698754}
-  - component: {fileID: 917451648772638883}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1858,7 +1856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 182130965
+  GlobalObjectIdHash: 650379037
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1888,10 +1886,21 @@ MonoBehaviour:
     rid: -2
   _maxHP:
     rid: -2
+  _attackPower:
+    rid: -2
+  _attackSpeed:
+    rid: -2
+  _attackRange:
+    rid: -2
+  _moveSpeed:
+    rid: -2
   OnChangeHPEvent:
     m_PersistentCalls:
       m_Calls: []
   OnDeadEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnChangeStatsEvent:
     m_PersistentCalls:
       m_Calls: []
   references:
@@ -1912,30 +1921,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  _unitLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _unitHPBarUI: {fileID: 4774854154783254508}
   _teamType:
     m_InternalValue: 0
-  _respawnAnchor: {fileID: 0}
---- !u!114 &1722070523430525476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7185691287541363168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e87734464af4d48a0fab203a812326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  _modelAnimator: {fileID: 8813903570419018170}
+  _target: {fileID: 0}
+  _modelAnimator: {fileID: 1754080249339732137}
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
-  _unitMask:
-    serializedVersion: 2
-    m_Bits: 128
+  _respawnAnchor: {fileID: 0}
+  _maxItemSlots: 3
 --- !u!195 &7876948354529644848
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2019,20 +2017,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   TransitionStateInfoList: []
   m_Animator: {fileID: 8813903570419018170}
---- !u!114 &917451648772638883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7185691287541363168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e91bc62f487a39a4e874bc0274afd094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rayDistance: 10
-  _rayCamera: {fileID: 0}
 --- !u!1 &7243615059841712899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,6 +2890,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73ffbc06802a247cfb1b26f4ee67eba8, type: 3}
+--- !u!95 &1754080249339732137 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 73ffbc06802a247cfb1b26f4ee67eba8, type: 3}
+  m_PrefabInstance: {fileID: 5277421722619665720}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5672163222414801619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73ffbc06802a247cfb1b26f4ee67eba8, type: 3}

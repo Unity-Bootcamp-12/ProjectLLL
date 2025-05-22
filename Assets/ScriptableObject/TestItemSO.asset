@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d8d21805f1662f4d93195fc20c52840, type: 3}
-  m_Name: TESTSwardSO
+  m_Name: TestItemSO
   m_EditorClassIdentifier: 
   _itemID: 0
-  _itemType: 1
-  _itemPrefab: {fileID: 2311267577476116883, guid: 6bcfc1e7de811d842a3959df8e369c64, type: 3}
+  _itemType: 0
+  _itemSprite: {fileID: 21300000, guid: d48db632667cf644f9b577df05db007a, type: 3}
+  _upgradeValue: 5
