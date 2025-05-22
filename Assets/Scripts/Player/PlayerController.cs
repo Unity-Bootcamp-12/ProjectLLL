@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Cinemachine;
 using Unity.Netcode;
@@ -55,6 +56,18 @@ public class PlayerController : UnitController
         {
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
         }
+
+        UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
+    }
+
+    private void OnLeftMouseDown()
+    {
+        IsAttackButtonDown = false;
+    }
+
+    private void OnRightMouseDown()
+    {
+        IsAttackButtonDown = false;
     }
 
     private void OnAttackButtonDown()
@@ -67,6 +80,8 @@ public class PlayerController : UnitController
         IsDead = true;
         StopMove();
         _collider.enabled = false;
+
+        UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME[_unitStatusController.GetLevel()]);
 
         StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME[_unitStatusController.GetLevel()]));
     }
@@ -85,6 +100,8 @@ public class PlayerController : UnitController
         {
             yield return new WaitForSeconds(1.0f);
             elapsedTime += 1f;
+            UIManager.Instance.UpdateRespawnTimer(waitTime - elapsedTime);
+
             Logger.Info($"Logger.Info: {logCounter}초 경과");
             logCounter++;
         }
@@ -94,6 +111,7 @@ public class PlayerController : UnitController
     public void Respawn()
     {
         Logger.Info("Respawn");
+        UIManager.Instance.DisableRespawnPanel();
         IsDead = false;
         _collider.enabled = true;
         transform.position = _respawnAnchor.position;
