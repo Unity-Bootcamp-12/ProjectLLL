@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Minion
   - Tower
+  - Item
   layers:
   - Default
   - TransparentFX

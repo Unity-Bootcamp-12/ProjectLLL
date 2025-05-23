@@ -14,6 +14,12 @@ public class HeroScriptableObject : ScriptableObject
     public string Name => _name;
     [SerializeField] private string _name;
 
+    public AttackType AttackType => _attackType;
+    [SerializeField] private AttackType _attackType;
+
+    public GameObject ProjectilePrefab => _projectilePrefab;
+    [SerializeField] private GameObject _projectilePrefab;
+
     public int[] GetAmountOfExperience() => _amountOfExperience;
     [SerializeField] private int[] _amountOfExperience = { 0, 100, 200, 400, 600, 800, 1000, 1200, 1400 };
 

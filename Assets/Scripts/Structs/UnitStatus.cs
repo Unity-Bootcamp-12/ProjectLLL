@@ -20,11 +20,17 @@ public struct UnitStatus
     public float MoveSpeed => _moveSpeed;
     [SerializeField] private float _moveSpeed;
 
-    public AttackType AttackType => _attackType;
-    [SerializeField] private AttackType _attackType;
-
-    public GameObject ProjectilePrefab => _projectilePrefab;
-    [SerializeField] private GameObject _projectilePrefab;
+    public static UnitStatus operator +(UnitStatus a, UnitStatus b)
+    {
+        return new UnitStatus
+        {
+            _maxHP = a._maxHP + b._maxHP,
+            _attackPower = a._attackPower + b._attackPower,
+            _attackSpeed = a._attackSpeed + b._attackSpeed,
+            _attackRange = a._attackRange + b._attackRange,
+            _moveSpeed = a._moveSpeed + b._moveSpeed,
+        };
+    }
 }
 
 public enum AttackType
