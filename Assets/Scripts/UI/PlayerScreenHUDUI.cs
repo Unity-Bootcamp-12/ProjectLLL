@@ -14,6 +14,7 @@ public class PlayerScreenHUDUI : MonoBehaviour
     [SerializeField] private Button _qSkillButton;
     [SerializeField] private Button _wSkillButton;
     [SerializeField] private Button _eSkillButton;
+    [SerializeField] private TMP_Text _HPText;
 
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class PlayerScreenHUDUI : MonoBehaviour
     public void UpdateHpBar(float maxHP, float currentHP)
     {
         _hpBar.value = Mathf.Clamp01(currentHP / Mathf.Max(1, maxHP));
+        _HPText.text = $"{currentHP}/{maxHP}";
     }
 
     public void UpdateXPBar(float maxXP, float currentXP)
