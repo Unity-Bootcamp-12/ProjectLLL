@@ -100,6 +100,23 @@ public abstract class UnitController : NetworkBehaviour
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
+        SetUnitHPBarUIClientRpc(TeamType);
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        _teamType.OnValueChanged += OnTeamTypeChanged;
+    }
+
+    private void OnTeamTypeChanged(UnitTeamType previousValue, UnitTeamType newValue)
+    {
+        SetUnitHPBarUIClientRpc(newValue);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void SetUnitHPBarUIClientRpc(UnitTeamType teamType)
+    {
+        _unitHPBarUI.SetHpBarColor(teamType == UnitTeamType.RedTeam);
     }
 
     [Rpc(SendTo.Server)]
