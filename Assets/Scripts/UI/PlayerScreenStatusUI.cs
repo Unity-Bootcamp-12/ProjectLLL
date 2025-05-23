@@ -15,10 +15,10 @@ public class PlayerScreenStatusUI : MonoBehaviour
 
     public void Init(UnitStatusController playerStatus)
     {
-        _attackPowerCurrentValue.text = $"{playerStatus.GetAttackPower().ToString()}";
-        _attackSpeedCurrentValue.text = $"{playerStatus.GetAttackSpeed().ToString()}";
-        _attackRangeCurrentValue.text = $"{playerStatus.GetAttackRange().ToString()}";
-        _MoveSpeedCurrentValue.text = $"{playerStatus.GetMoveSpeed().ToString()}";
+        _attackPowerCurrentValue.text = $"{playerStatus.GetAttackPower()}";
+        _attackSpeedCurrentValue.text = $"{playerStatus.GetAttackSpeed()}";
+        _attackRangeCurrentValue.text = $"{playerStatus.GetAttackRange()}";
+        _MoveSpeedCurrentValue.text = $"{playerStatus.GetMoveSpeed()}";
 
         _attackPowerIncreaseValue.text = $"(+{playerStatus.ChangeStatus.AttackPower})";
         _attackSpeedIncreaseValue.text = $"(+{playerStatus.ChangeStatus.AttackSpeed})";

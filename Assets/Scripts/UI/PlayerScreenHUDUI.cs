@@ -18,9 +18,9 @@ public class PlayerScreenHUDUI : MonoBehaviour
 
     private void Awake()
     {
-        _qSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnQSkillEvent?.Invoke());
-        _wSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnWSkillEvent?.Invoke());
-        _eSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnESkillEvent?.Invoke());
+        _qSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnSkillButtonEvent?.Invoke(ButtonType.Q));
+        _wSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnSkillButtonEvent?.Invoke(ButtonType.W));
+        _eSkillButton.onClick.AddListener(() => PlayerInputManager.Instance.OnSkillButtonEvent?.Invoke(ButtonType.E));
     }
 
     public void SetHeroPortraitImage(Sprite sprite)
