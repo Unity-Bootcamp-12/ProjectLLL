@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
@@ -22,6 +23,8 @@ public class GameManager : NetworkBehaviour
 
     const float MINION_SPAWN_TIME = 10.0f;
 
+    private UnitTeamType _localPlayerTeamType;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -39,11 +42,15 @@ public class GameManager : NetworkBehaviour
         if (IsHost)
         {
             Logger.Info("Server started");
+            _localPlayerTeamType = UnitTeamType.RedTeam;
         }
         else if (IsClient)
         {
             Logger.Info("Client started");
+            _localPlayerTeamType = UnitTeamType.BlueTeam;
         }
+
+        Logger.Info("LocalPlayerTeamType : " + _localPlayerTeamType);
 
         if (IsServer)
         {
@@ -111,6 +118,13 @@ public class GameManager : NetworkBehaviour
             GameObject minionObject = Instantiate(_minionPrefab, _blueTeamMinionSpawnPoint.position, Quaternion.identity);
             minionObject.GetComponent<MinionController>().Init(UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
         }
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void GameOverRpc(UnitTeamType destroyedTeam)
+    {
+        bool isWin = destroyedTeam != _localPlayerTeamType;
+        UIManager.Instance.SetGameOverUI(isWin);
     }
 
     public void PlayAfterCoroutine(Action action, float time) => StartCoroutine(PlayCoroutine(action, time));
