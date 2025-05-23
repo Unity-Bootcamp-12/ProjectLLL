@@ -10,6 +10,7 @@ public class UnitStatusController : MonoBehaviour
     /// <summary>
     /// 변경 스탯치
     /// </summary>
+    public UnitStatus ChangeStatus => _changeStatus;
     private UnitStatus _changeStatus;
     private ItemScriptableObject[] _itemList;
 
@@ -165,6 +166,7 @@ public class UnitStatusController : MonoBehaviour
         }
 
         _changeStatus = changeStatus;
+        UIManager.Instance.InitializePlayerStatus(this);
     }
     #endregion
 }

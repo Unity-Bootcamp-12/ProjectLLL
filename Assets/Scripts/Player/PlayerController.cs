@@ -38,7 +38,6 @@ public class PlayerController : UnitController
     {
         NetworkObject.SpawnAsPlayerObject(clientId);
         SetTeamTypeRpc(team);
-
         UIInitRpc(team);
     }
 
@@ -57,6 +56,7 @@ public class PlayerController : UnitController
         }
 
         UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
+        UIManager.Instance.InitializePlayerStatus(_unitStatusController);
     }
 
     private void OnAttackButtonDown()

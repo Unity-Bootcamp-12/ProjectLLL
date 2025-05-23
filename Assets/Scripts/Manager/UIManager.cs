@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
     [SerializeField] private PlayerScreenHUDUI _playerScreenHUDUI;
     [SerializeField] private PlayerScreenRespawnUI _playerScreenRespawnUI;
+    [SerializeField] private PlayerScreenStatusUI _playerScreenStatusUI;
     [SerializeField] private GameOverUI _gameOverUI;
 
     private CursorUIController _cursorUIController;
@@ -68,6 +69,7 @@ public class UIManager : MonoBehaviour
     public void SetHUDLevel(int level) => _playerScreenHUDUI.SetLevel(level);
     public void SetHeroPortrait(Sprite image) => _playerScreenHUDUI.SetHeroPortraitImage(image);
     public void SetItemImage(ButtonType button, Sprite sprite) => _playerScreenHUDUI.SetButtonImage(button, sprite);
+    public void InitializePlayerStatus(UnitStatusController playerStatus) => _playerScreenStatusUI.Init(playerStatus);
 
     public void SetGameOverUI(bool isWin)
     {
@@ -97,7 +99,7 @@ public class UIManager : MonoBehaviour
     #region RespawnPanel 관련
     public void EnableRespawnPanel(float respawnTime) => _playerScreenRespawnUI.EnableRespawnPanel(respawnTime);
     public void UpdateRespawnTimer(float remainingSeconds) => _playerScreenRespawnUI.UpdateRespawnTimer(remainingSeconds);
-    public void DisableRespawnPanel() => _playerScreenRespawnUI.DisableRespawnPanel(); 
+    public void DisableRespawnPanel() => _playerScreenRespawnUI.DisableRespawnPanel();
     #endregion
 }
 
