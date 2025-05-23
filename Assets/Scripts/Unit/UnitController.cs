@@ -19,7 +19,7 @@ public abstract class UnitController : NetworkBehaviour
     protected NavMeshAgent _navMeshAgent;
 
     public UnitTeamType TeamType => _teamType.Value;
-    [SerializeField] private NetworkVariable<UnitTeamType> _teamType;
+    [SerializeField] protected NetworkVariable<UnitTeamType> _teamType;
 
     public bool IsDead { get; protected set; }
     [SerializeField] protected UnitController _target;
@@ -100,6 +100,23 @@ public abstract class UnitController : NetworkBehaviour
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
+        SetUnitHPBarUIClientRpc(TeamType);
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        _teamType.OnValueChanged += OnTeamTypeChanged;
+    }
+
+    private void OnTeamTypeChanged(UnitTeamType previousValue, UnitTeamType newValue)
+    {
+        SetUnitHPBarUIClientRpc(newValue);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void SetUnitHPBarUIClientRpc(UnitTeamType teamType)
+    {
+        _unitHPBarUI.SetHpBarColor(teamType == UnitTeamType.RedTeam);
     }
 
     [Rpc(SendTo.Server)]
@@ -158,6 +175,7 @@ public abstract class UnitController : NetworkBehaviour
         {
             StopCoroutine(_attackCoroutine);
         }
+
         _isAttacking = false;
         _isPreAttacking = false;
         _isPostAttacking = false;
@@ -165,7 +183,6 @@ public abstract class UnitController : NetworkBehaviour
 
     protected void StopMove()
     {
-        _target = null;
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
     }
@@ -202,6 +219,7 @@ public abstract class UnitController : NetworkBehaviour
 [Serializable]
 public enum UnitTeamType
 {
+    None,
     RedTeam,
     BlueTeam,
 }

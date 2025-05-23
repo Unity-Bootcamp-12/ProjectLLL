@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerScreenHPBarUI _playerScreenHPBarUI;
     [SerializeField] private PlayerScreenHUDUI _playerScreenHUDUI;
     [SerializeField] private PlayerScreenRespawnUI _playerScreenRespawnUI;
+    [SerializeField] private GameOverUI _gameOverUI;
 
     private CursorUIController _cursorUIController;
 
@@ -67,6 +68,18 @@ public class UIManager : MonoBehaviour
     public void SetHUDLevel(int level) => _playerScreenHUDUI.SetLevel(level);
     public void SetHeroPortrait(Sprite image) => _playerScreenHUDUI.SetHeroPortraitImage(image);
     public void SetItemImage(ButtonType button, Sprite sprite) => _playerScreenHUDUI.SetButtonImage(button, sprite);
+
+    public void SetGameOverUI(bool isWin)
+    {
+        if (isWin)
+        {
+            _gameOverUI.ShowGameWinPanel();
+        }
+        else
+        {
+            _gameOverUI.ShowGameLosePanel();
+        }
+    }
 
     public void QSkill()
     {

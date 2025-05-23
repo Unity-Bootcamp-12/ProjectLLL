@@ -68,6 +68,7 @@ public class PlayerController : UnitController
     {
         IsDead = true;
         StopMove();
+        _target = null;
         _collider.enabled = false;
 
         UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME[_unitStatusController.GetLevel()]);
