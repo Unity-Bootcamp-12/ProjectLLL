@@ -1,13 +1,14 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class ItemObject : MonoBehaviour
+public class ItemObject : NetworkBehaviour
 {
     [SerializeField] private ItemScriptableObject _item;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    private void Start()
-    {
-        _spriteRenderer.sprite = _item.ItemSprite;
+    public void Init()
+    { 
+        NetworkObject.Spawn();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,11 +17,8 @@ public class ItemObject : MonoBehaviour
         {
             if (other.TryGetComponent<PlayerController>(out var player))
             {
-                if (!player.IsItemFull())
-                {
-                    player.AddItem(_item);
-                    Destroy(gameObject);
-                }
+                player.AddItem(_item);
+                NetworkObject.Despawn();
             }
         }
     }

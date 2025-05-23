@@ -3,9 +3,8 @@ using UnityEngine;
 public enum ItemType
 {
     AttackPower,
-    AttackSpeed,
-    AttackRange,
-    MoveSpeed,
+    HpRegeneration,
+    Teleport,
 }
 
 [CreateAssetMenu(fileName = "ItemSO", menuName = "Scriptable Object/ItemSO")]

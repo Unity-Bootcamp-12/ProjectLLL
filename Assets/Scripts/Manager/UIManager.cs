@@ -32,9 +32,6 @@ public class UIManager : MonoBehaviour
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackCursor);
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftClick);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightClick);
-        PlayerInputManager.Instance.OnQSkillEvent.AddListener(QSkill);
-        PlayerInputManager.Instance.OnWSkillEvent.AddListener(WSkill);
-        PlayerInputManager.Instance.OnESkillEvent.AddListener(ESkill);
     }
 
     private void OnAttackCursor() => _cursorUIController.SetAttackCursor();
@@ -81,19 +78,6 @@ public class UIManager : MonoBehaviour
         {
             _gameOverUI.ShowGameLosePanel();
         }
-    }
-
-    public void QSkill()
-    {
-        Logger.Info("Q");
-    }
-    public void WSkill()
-    {
-        Logger.Info("W");
-    }
-    public void ESkill()
-    {
-        Logger.Info("E");
     }
 
     #region RespawnPanel 관련

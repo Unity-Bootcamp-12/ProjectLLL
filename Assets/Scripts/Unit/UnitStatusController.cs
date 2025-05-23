@@ -126,7 +126,25 @@ public class UnitStatusController : MonoBehaviour
 
     public ItemScriptableObject[] GetItemList() => _itemList;
     public ItemScriptableObject GetItem(int index) =>_itemList[index];
-    public void RemoveItem(int index) => _itemList[index] = null;
+    
+    public void RemoveItem(ButtonType buttonType)
+    {
+        if (buttonType == ButtonType.Q)
+        {
+            _itemList[0] = null;
+        }
+        else if (buttonType == ButtonType.W)
+        {
+            _itemList[1] = null;
+        }
+        else if (buttonType == ButtonType.E)
+        {
+            _itemList[2] = null;
+        }
+
+        UpdateChangeStatus();
+    }
+
     public bool IsItemListFull()
     {
         for (int i = 0; i < _itemList.Length; i++)
@@ -139,18 +157,40 @@ public class UnitStatusController : MonoBehaviour
         return true;
     }
 
-    public void AddItem(ItemScriptableObject item)
+    public bool IsItemSlotEmpty(ButtonType buttonType)
     {
-        for (int i = 0; i < _itemList.Length; i++)
-        {
-            if (_itemList[i] == null)
-            {
-                _itemList[i] = item;
-
-                UpdateChangeStatus();
-                return;
-            }
+        if (buttonType == ButtonType.Q)
+        { 
+            return (_itemList[0] == null);
         }
+        else if (buttonType == ButtonType.W)
+        {
+            return (_itemList[1] == null);
+        }
+        else if (buttonType == ButtonType.E)
+        {
+            return (_itemList[2] == null);
+        }
+
+        return false;
+    }
+
+    public void AddItem(ItemScriptableObject item, ButtonType buttonType)
+    {
+        if (buttonType == ButtonType.Q)
+        {
+            _itemList[0] = item;
+        }
+        else if (buttonType == ButtonType.W)
+        {
+            _itemList[1] = item;
+        }
+        else if (buttonType == ButtonType.E)
+        {
+            _itemList[2] = item;
+        }
+
+        UpdateChangeStatus();
     }
 
     private void UpdateChangeStatus()

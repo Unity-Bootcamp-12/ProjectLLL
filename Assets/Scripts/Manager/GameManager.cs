@@ -21,6 +21,8 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject _towerPrefab;
     [SerializeField] private GameObject _playerPrefab;
 
+    [SerializeField] private GameObject[] _itemPrefabList;
+
     const float MINION_SPAWN_TIME = 10.0f;
 
     private UnitTeamType _localPlayerTeamType;
@@ -66,6 +68,11 @@ public class GameManager : NetworkBehaviour
             PlayerSpawn(clientId);
             MinionSpawnWave();
             TowerSpawn();
+
+            // TEST
+            SpawnItem(_redTeamMinionSpawnPoint.position + Vector3.right * 2);
+            SpawnItem(_redTeamMinionSpawnPoint.position + Vector3.right * 3);
+            SpawnItem(_redTeamMinionSpawnPoint.position + Vector3.right * 4);
         }
     }
 
@@ -118,6 +125,13 @@ public class GameManager : NetworkBehaviour
             GameObject minionObject = Instantiate(_minionPrefab, _blueTeamMinionSpawnPoint.position, Quaternion.identity);
             minionObject.GetComponent<MinionController>().Init(UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
         }
+    }
+
+    public void SpawnItem(Vector3 position)
+    {
+        GameObject itemObject = Instantiate(_itemPrefabList[UnityEngine.Random.Range(0, 
+            _itemPrefabList.Length)], position, Quaternion.identity);
+        itemObject.GetComponent<ItemObject>().Init();
     }
 
     [Rpc(SendTo.ClientsAndHost)]

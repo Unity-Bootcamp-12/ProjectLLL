@@ -32,6 +32,8 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnLeftClickEvent.AddListener(OnLeftMouseDown);
         PlayerInputManager.Instance.OnRightClickEvent.AddListener(OnRightMouseDown);
         PlayerInputManager.Instance.OnAttackButtonEvent.AddListener(OnAttackButtonDown);
+
+        PlayerInputManager.Instance.OnSkillButtonEvent.AddListener(OnSkillButtonDown);
     }
 
     public void Init(UnitTeamType team, ulong clientId)
@@ -232,7 +234,10 @@ public class PlayerController : UnitController
             if (hitObject.TryGetComponent<UnitController>(out var unit))
             {
                 Logger.Info($"Mouse Hit Unit: {unit.name}");
-                _target = unit;
+                if (unit.TeamType != TeamType)
+                { 
+                    _target = unit;
+                }
             }
         }
         else if (Physics.Raycast(ray, out RaycastHit groundHit, 100f, _groundMask))
@@ -241,10 +246,36 @@ public class PlayerController : UnitController
         }
     }
 
-    public bool IsItemFull() => _unitStatusController.IsItemListFull();
+    public void OnSkillButtonDown(ButtonType buttonType)
+    {
+        _unitStatusController.RemoveItem(buttonType);
+        UIManager.Instance.SetItemImage(buttonType, null);
+        Logger.Info($"아이템 슬롯 {buttonType} 사용");
+
+    }
 
     public void AddItem(ItemScriptableObject item)
     {
-        _unitStatusController.AddItem(item);
+        if (!_unitStatusController.IsItemListFull())
+        {
+            if (_unitStatusController.IsItemSlotEmpty(ButtonType.Q))
+            { 
+                _unitStatusController.AddItem(item, ButtonType.Q);
+                UIManager.Instance.SetItemImage(ButtonType.Q, item.ItemSprite);
+            }
+            else if (_unitStatusController.IsItemSlotEmpty(ButtonType.W))
+            {
+                _unitStatusController.AddItem(item, ButtonType.W);
+                UIManager.Instance.SetItemImage(ButtonType.W, item.ItemSprite);
+
+            }
+            else if (_unitStatusController.IsItemSlotEmpty(ButtonType.E))
+            {
+                _unitStatusController.AddItem(item, ButtonType.E);
+                UIManager.Instance.SetItemImage(ButtonType.E, item.ItemSprite);
+            }
+        }
     }
+
+
 }
