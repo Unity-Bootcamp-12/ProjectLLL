@@ -11,15 +11,18 @@ public class UnitStatusController : MonoBehaviour
     /// 변경 스탯치
     /// </summary>
     private UnitStatus _changeStatus;
+    private ItemScriptableObject[] _itemList;
 
     [SerializeField] private int _experience = 0;
     [SerializeField] private int _level = 1;
     [SerializeField] private int _usedSkillPoints = 0;
     const int MAX_LEVEL = 9;
+    const int MAX_ITEM = 3;
 
     private void Start()
     {
         _changeStatus = new UnitStatus();
+        _itemList = new ItemScriptableObject[MAX_ITEM];
     }
 
     public string GetHeroName() => _heroSO.Name;
@@ -33,8 +36,8 @@ public class UnitStatusController : MonoBehaviour
     #endregion
 
     #region 공격 유형 관련
-    public AttackType GetAttackType() => _heroSO.HeroStatus.AttackType;
-    public GameObject GetProjectilePrefab() => _heroSO.HeroStatus.ProjectilePrefab;
+    public AttackType GetAttackType() => _heroSO.AttackType;
+    public GameObject GetProjectilePrefab() => _heroSO.ProjectilePrefab;
     #endregion
 
     #region 경험치 관련
@@ -116,5 +119,52 @@ public class UnitStatusController : MonoBehaviour
     }
 
     public Sprite GetHeroPortrait() => _heroSO.HeroImage;
+    #endregion
+
+    #region 아이템 관련
+
+    public ItemScriptableObject[] GetItemList() => _itemList;
+    public ItemScriptableObject GetItem(int index) =>_itemList[index];
+    public void RemoveItem(int index) => _itemList[index] = null;
+    public bool IsItemListFull()
+    {
+        for (int i = 0; i < _itemList.Length; i++)
+        {
+            if (_itemList[i] == null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void AddItem(ItemScriptableObject item)
+    {
+        for (int i = 0; i < _itemList.Length; i++)
+        {
+            if (_itemList[i] == null)
+            {
+                _itemList[i] = item;
+
+                UpdateChangeStatus();
+                return;
+            }
+        }
+    }
+
+    private void UpdateChangeStatus()
+    {
+        UnitStatus changeStatus = new UnitStatus();
+
+        for (int i = 0; i < MAX_ITEM; i++)
+        {
+            if (_itemList[i] != null)
+            {
+                changeStatus += _itemList[i].UpgradeStatus;
+            }
+        }
+
+        _changeStatus = changeStatus;
+    }
     #endregion
 }
