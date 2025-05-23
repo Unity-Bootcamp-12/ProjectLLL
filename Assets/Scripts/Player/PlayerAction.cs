@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Cinemachine;
 using Unity.Netcode;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -42,10 +43,28 @@ public class PlayerAction : NetworkBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetAnimatorBoolRpc("IsDead", false);
-        }
+        TestRpc();
+
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    SetAnimatorBoolRpc("IsDead", false);
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    _navMeshAgent.isStopped = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    SetAnimatorBoolRpc("IsRun", true);
+        //    SetAnimatorBoolRpc("IsAttack", false);
+        //    _navMeshAgent.isStopped = false;
+        //}
+
+
+
+
+
         if (IsHost)
         {
             SetAnimatorBoolRpc("IsRun", _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance);
@@ -78,12 +97,15 @@ public class PlayerAction : NetworkBehaviour
             }
             else
             {
+                AnimatorStateInfo stateInfo = _modelAnimator.GetCurrentAnimatorStateInfo(0);
                 if (distanceToTarget < _playerController.GetAttackRange())
                 {
                     SetAnimatorBoolRpc("IsRun", false);
                     SetAnimatorBoolRpc("IsAttack", true);
-                    _attackCoroutine = StartCoroutine(AttackCoroutine(1.0f, 1.0f));
+                    if (stateInfo.IsName("IsAttack")) { _navMeshAgent.isStopped = true; }
                     StopMove();
+                    _attackCoroutine = StartCoroutine(AttackCoroutine(1.0f, 1.0f));
+                    
                 }
                 else
                 {
@@ -96,9 +118,40 @@ public class PlayerAction : NetworkBehaviour
 
         if (distanceToTarget > MOVE_STOPPING_DISTANCE)
         {
+            SetAnimatorBoolRpc("IsRun", true);
+            SetAnimatorBoolRpc("IsAttack", false);
             SetMoveDestinationRpc(_target.transform.position);
+            
+            //if (stateInfo.IsName("IsAttack")) { _navMeshAgent.isStopped = true; }
         }
     }
+
+    [Rpc(SendTo.Server)]
+    private void TestRpc()
+    {
+        TestTestRpc();
+    }
+
+    [Rpc(SendTo.Everyone)]
+    private void TestTestRpc()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetAnimatorBoolRpc("IsDead", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            _navMeshAgent.isStopped = true;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SetAnimatorBoolRpc("IsRun", true);
+            SetAnimatorBoolRpc("IsAttack", false);
+            _navMeshAgent.isStopped = false;
+        }
+    }
+
 
     [Rpc(SendTo.Server)]
     private void SetAnimatorBoolRpc(string name, bool param)
@@ -185,6 +238,7 @@ public class PlayerAction : NetworkBehaviour
             else if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
             {
                 SetMoveDestinationRpc(hit.point);
+                transform.LookAt(hit.transform.position);
             }
         }
     }
