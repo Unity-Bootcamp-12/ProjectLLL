@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4169699407
+  GlobalObjectIdHash: 3579430478
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -72,6 +72,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  _redTeamSpawnPoint: {fileID: 0}
+  _blueTeamSpawnPoint: {fileID: 0}
+  _redTeamMinionSpawnPoint: {fileID: 0}
+  _blueTeamMinionSpawnPoint: {fileID: 0}
+  _redTeamTowerSpawnPoint: {fileID: 0}
+  _blueTeamTowerSpawnPoint: {fileID: 0}
+  _minionPrefab: {fileID: 0}
+  _towerPrefab: {fileID: 0}
+  _playerPrefab: {fileID: 0}
 --- !u!114 &696436513701735076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +100,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnAttackButtonEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnQSkillEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWSkillEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnESkillEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6519377821441098135
@@ -140,6 +158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerScreenHPBarUI: {fileID: 0}
   _playerScreenHUDUI: {fileID: 0}
+  _playerScreenRespawnUI: {fileID: 0}
+  _gameOverUI: {fileID: 0}
 --- !u!114 &7467840159017316025
 MonoBehaviour:
   m_ObjectHideFlags: 0
