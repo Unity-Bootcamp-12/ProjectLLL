@@ -5,6 +5,7 @@ public class TowerController : UnitController
     public override void Dead()
     {
         StopAttack();
+        GameManager.Instance.GameOverRpc(_teamType.Value);
         NetworkObject.Despawn();
     }
 
