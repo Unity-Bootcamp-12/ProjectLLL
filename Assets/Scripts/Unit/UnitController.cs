@@ -19,7 +19,7 @@ public abstract class UnitController : NetworkBehaviour
     protected NavMeshAgent _navMeshAgent;
 
     public UnitTeamType TeamType => _teamType.Value;
-    [SerializeField] private NetworkVariable<UnitTeamType> _teamType;
+    [SerializeField] protected NetworkVariable<UnitTeamType> _teamType;
 
     public bool IsDead { get; protected set; }
     [SerializeField] protected UnitController _target;
@@ -158,6 +158,7 @@ public abstract class UnitController : NetworkBehaviour
         {
             StopCoroutine(_attackCoroutine);
         }
+
         _isAttacking = false;
         _isPreAttacking = false;
         _isPostAttacking = false;
@@ -165,7 +166,6 @@ public abstract class UnitController : NetworkBehaviour
 
     protected void StopMove()
     {
-        _target = null;
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
     }
@@ -202,6 +202,7 @@ public abstract class UnitController : NetworkBehaviour
 [Serializable]
 public enum UnitTeamType
 {
+    None,
     RedTeam,
     BlueTeam,
 }

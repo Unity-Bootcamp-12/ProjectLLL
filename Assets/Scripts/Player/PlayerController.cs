@@ -60,16 +60,6 @@ public class PlayerController : UnitController
         UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
     }
 
-    private void OnLeftMouseDown()
-    {
-        IsAttackButtonDown = false;
-    }
-
-    private void OnRightMouseDown()
-    {
-        IsAttackButtonDown = false;
-    }
-
     private void OnAttackButtonDown()
     {
         IsAttackButtonDown = true;
@@ -79,6 +69,7 @@ public class PlayerController : UnitController
     {
         IsDead = true;
         StopMove();
+        _target = null;
         _collider.enabled = false;
 
         UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME[_unitStatusController.GetLevel()]);
