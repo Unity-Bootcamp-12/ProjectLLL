@@ -17,10 +17,21 @@ public class ItemObject : NetworkBehaviour
         {
             if (other.TryGetComponent<PlayerController>(out var player))
             {
-                player.AddItem(_item);
-                NetworkObject.Despawn();
+                if (!player.IsOwner)
+                {
+                    return;
+                }
+
+                player.AddItem(new ItemData(_item, GetComponent<IUsableItem>()));
+                RemoveItemRpc();
             }
         }
+    }
+
+    [Rpc(SendTo.Server)]
+    private void RemoveItemRpc()
+    {
+        NetworkObject.Despawn();
     }
 
     private void LateUpdate()

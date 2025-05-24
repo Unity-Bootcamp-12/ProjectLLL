@@ -1978,12 +1978,12 @@ MonoBehaviour:
   _teamType:
     m_InternalValue: 0
   _target: {fileID: 0}
+  _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: eca4bc733d8dd704592ca5ca78a7598b, type: 3}
   _modelAnimator: {fileID: 8813903570419018170}
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
   _respawnAnchor: {fileID: 0}
-  nontargetTEST: {fileID: 3181119103003630140, guid: eca4bc733d8dd704592ca5ca78a7598b, type: 3}
 --- !u!195 &7876948354529644848
 NavMeshAgent:
   m_ObjectHideFlags: 0
