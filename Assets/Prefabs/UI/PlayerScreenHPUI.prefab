@@ -190,6 +190,8 @@ MonoBehaviour:
   _blueTeamHPBar: {fileID: 1714720939554801267}
   _redTeamHPText: {fileID: 4774022855130718608}
   _blueTeamHPText: {fileID: 7657832991466955358}
+  _redTeamPortrait: {fileID: 3268428228223568367}
+  _blueTeamPortrait: {fileID: 4725012353267815391}
 --- !u!1 &1968149828085957563
 GameObject:
   m_ObjectHideFlags: 0
