@@ -1426,6 +1426,8 @@ MonoBehaviour:
   _playerPrefab: {fileID: 7185691287541363168, guid: 502717801ae9780439759f4059980878, type: 3}
   _itemPrefabList:
   - {fileID: 5356041263117964463, guid: 24ac4a8e2e46aac40bdb49468f8fa75c, type: 3}
+  - {fileID: 5356041263117964463, guid: 4380f338398f49348a62fcc72b8636f3, type: 3}
+  - {fileID: 5356041263117964463, guid: 3aa9a45528d0c7644805d4be49645dcc, type: 3}
 --- !u!114 &1137775270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1985,15 +1987,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1681282557947397009, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_Name
@@ -2001,15 +2003,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4474401744627763263, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_Pivot.x

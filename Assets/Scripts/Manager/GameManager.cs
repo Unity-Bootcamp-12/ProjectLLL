@@ -70,9 +70,13 @@ public class GameManager : NetworkBehaviour
             TowerSpawn();
 
             // TEST
-            SpawnItem(_redTeamMinionSpawnPoint.position + Vector3.right * 2);
-            SpawnItem(_redTeamMinionSpawnPoint.position + Vector3.right * 3);
-            SpawnItem(_redTeamMinionSpawnPoint.position + Vector3.right * 4);
+            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 2);
+            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 3);
+            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 4);
+            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 5);
+            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 6);
+            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 7);
+
         }
     }
 
