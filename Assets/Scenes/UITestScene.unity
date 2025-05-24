@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &129908493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3268428228223568367, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+  m_PrefabInstance: {fileID: 6429107855129999976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &162070396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,6 +2402,7 @@ MonoBehaviour:
   _minionPrefab: {fileID: 0}
   _towerPrefab: {fileID: 0}
   _playerPrefab: {fileID: 0}
+  _itemPrefabList: []
 --- !u!114 &1628246650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,13 +2424,7 @@ MonoBehaviour:
   OnAttackButtonEvent:
     m_PersistentCalls:
       m_Calls: []
-  OnQSkillEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnWSkillEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnESkillEvent:
+  OnSkillButtonEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1628246651
@@ -2467,6 +2467,11 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!1 &1665772891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4725012353267815391, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+  m_PrefabInstance: {fileID: 6429107855129999976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1679603008
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,27 +3070,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 160
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3105,15 +3110,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3121,7 +3126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -460
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6316230328139252521, guid: c391e9306bbf0b149bf5ad40626b60f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3172,6 +3177,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1543337515749728060, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: _redTeamPortrait
+      value: 
+      objectReference: {fileID: 129908493}
+    - target: {fileID: 1543337515749728060, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: _blueTeamPortrait
+      value: 
+      objectReference: {fileID: 1665772891}
     - target: {fileID: 1681282557947397009, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_Name
       value: PlayerScreenHPUI
