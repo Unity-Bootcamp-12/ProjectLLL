@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     private void OnLeftClick() => _cursorUIController.SetDefaultCursor();
     private void OnRightClick() => _cursorUIController.SetDefaultCursor();
 
-    public void Init(HPController hpContorller, UnitTeamType teamType)
+    public void Init(HPController hpContorller, UnitTeamType teamType, Sprite heroPortrait = null)
     {
         if (teamType == UnitTeamType.RedTeam)
         {
@@ -59,6 +59,8 @@ public class UIManager : MonoBehaviour
             (float maxHp, float currentHP) =>
             _playerScreenHUDUI.UpdateHpBar(maxHp, currentHP)
             );
+
+        _playerScreenHPBarUI.SetHeroPortrait(teamType, heroPortrait);
 
         hpContorller.HPChangeRpc();
     }

@@ -2181,6 +2181,7 @@ GameObject:
   - component: {fileID: 2921684128408910964}
   - component: {fileID: 4777955650182670325}
   - component: {fileID: 990234404942696759}
+  - component: {fileID: 6870528806743735231}
   m_Layer: 5
   m_Name: PlayerStatusPanel
   m_TagString: Untagged
@@ -2276,6 +2277,26 @@ MonoBehaviour:
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!114 &990234404942696759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5579009603724462110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09606cb1d848834499071a2fe2fd0d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPowerCurrentValue: {fileID: 7942806027444887407}
+  _attackPowerIncreaseValue: {fileID: 2415675791552421439}
+  _attackSpeedCurrentValue: {fileID: 393158061490358671}
+  _attackSpeedIncreaseValue: {fileID: 7735471362480797863}
+  _attackRangeCurrentValue: {fileID: 6126057483515637779}
+  _attackRangeIncreaseValue: {fileID: 1244547674445299572}
+  _MoveSpeedCurrentValue: {fileID: 4569107230033839636}
+  _MoveSpeedIncreaseValue: {fileID: 3528830718578858936}
+--- !u!114 &6870528806743735231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
