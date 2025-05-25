@@ -12,7 +12,7 @@ public class UnitStatusController : MonoBehaviour
     /// </summary>
     public UnitStatus ChangeStatus => _changeStatus;
     private UnitStatus _changeStatus;
-    private ItemScriptableObject[] _itemList;
+    private ItemData[] _itemList;
 
     [SerializeField] private int _experience = 0;
     [SerializeField] private int _level = 1;
@@ -23,7 +23,7 @@ public class UnitStatusController : MonoBehaviour
     private void Start()
     {
         _changeStatus = new UnitStatus();
-        _itemList = new ItemScriptableObject[MAX_ITEM];
+        _itemList = new ItemData[MAX_ITEM];
     }
 
     public string GetHeroName() => _heroSO.Name;
@@ -124,25 +124,29 @@ public class UnitStatusController : MonoBehaviour
 
     #region 아이템 관련
 
-    public ItemScriptableObject[] GetItemList() => _itemList;
-    public ItemScriptableObject GetItem(int index) =>_itemList[index];
-    
-    public void RemoveItem(ButtonType buttonType)
+    public ItemData RemoveAndGetItem(ButtonType buttonType)
     {
+        ItemData returnItem = null;
+
         if (buttonType == ButtonType.Q)
         {
+            returnItem = _itemList[0];
             _itemList[0] = null;
         }
         else if (buttonType == ButtonType.W)
         {
+            returnItem = _itemList[1];
             _itemList[1] = null;
         }
         else if (buttonType == ButtonType.E)
         {
+            returnItem = _itemList[2];
             _itemList[2] = null;
         }
 
         UpdateChangeStatus();
+
+        return returnItem;
     }
 
     public bool IsItemListFull()
@@ -175,7 +179,7 @@ public class UnitStatusController : MonoBehaviour
         return false;
     }
 
-    public void AddItem(ItemScriptableObject item, ButtonType buttonType)
+    public void AddItem(ItemData item, ButtonType buttonType)
     {
         if (buttonType == ButtonType.Q)
         {
@@ -201,7 +205,7 @@ public class UnitStatusController : MonoBehaviour
         {
             if (_itemList[i] != null)
             {
-                changeStatus += _itemList[i].UpgradeStatus;
+                changeStatus += _itemList[i].ItemSO.UpgradeStatus;
             }
         }
 

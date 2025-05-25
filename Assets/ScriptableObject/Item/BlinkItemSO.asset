@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8d21805f1662f4d93195fc20c52840, type: 3}
+  m_Name: BlinkItemSO
+  m_EditorClassIdentifier: 
+  _itemType: 2
+  _itemSprite: {fileID: 21300000, guid: 866efb49c98989143a5095871ba2191f, type: 3}
+  _upgradeStatus:
+    _maxHP: 0
+    _attackPower: 0
+    _attackSpeed: 0
+    _attackRange: 0
+    _moveSpeed: 2

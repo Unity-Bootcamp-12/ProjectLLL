@@ -11,6 +11,10 @@ public abstract class UnitController : NetworkBehaviour
 {
     [SerializeField] protected LayerMask _unitLayerMask;
 
+    //여기에 있으면 안되긴함...
+    [SerializeField] private GameObject _nonTargetProjectilePrefab;
+
+
     [SerializeField] protected UnitHPBarUI _unitHPBarUI;
 
     protected Collider _collider;
@@ -147,6 +151,14 @@ public abstract class UnitController : NetworkBehaviour
 
         GameObject projectileObject = Instantiate(GetProjectilePrefab(), transform.position, Quaternion.identity);
         projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, speed, damage);
+    }
+
+
+    [Rpc(SendTo.Server)]
+    public void FireNonTargetProjectileRpc(Vector3 destination, float speed, float damage, float lifeTime)
+    {
+        GameObject projectileObject = Instantiate(_nonTargetProjectilePrefab, transform.position, Quaternion.identity);
+        projectileObject.GetComponent<NonTargetProjectile>().Init(destination, speed, damage, lifeTime, TeamType);
     }
 
     protected IEnumerator AttackCoroutine(UnitController attackTarget, float preAttackDelayTime, float postAttackDelayTime)
