@@ -95,7 +95,7 @@ public class GameManager : NetworkBehaviour
     }
 
     private void PlayerSpawn(ulong clientId)
-    { 
+    {
         if (IsHost)
         {
             GameObject redTeamPlayer = Instantiate(_playerPrefab, _redTeamSpawnPoint.position, Quaternion.identity);
@@ -133,7 +133,7 @@ public class GameManager : NetworkBehaviour
 
     public void SpawnItem(Vector3 position)
     {
-        GameObject itemObject = Instantiate(_itemPrefabList[UnityEngine.Random.Range(0, 
+        GameObject itemObject = Instantiate(_itemPrefabList[UnityEngine.Random.Range(0,
             _itemPrefabList.Length)], position, Quaternion.identity);
         itemObject.GetComponent<ItemObject>().Init();
     }
@@ -143,6 +143,20 @@ public class GameManager : NetworkBehaviour
     {
         bool isWin = destroyedTeam != _localPlayerTeamType;
         UIManager.Instance.SetGameOverUI(isWin);
+    }
+
+    public Vector3 GetRespawnPoint(UnitTeamType teamType)
+    {
+        if (teamType == UnitTeamType.RedTeam)
+        {
+            return _redTeamSpawnPoint.position;
+        }
+        else if (teamType == UnitTeamType.BlueTeam)
+        {
+            return _blueTeamSpawnPoint.position;
+        }
+
+        return Vector3.zero;
     }
 
     public void PlayAfterCoroutine(Action action, float time) => StartCoroutine(PlayCoroutine(action, time));
