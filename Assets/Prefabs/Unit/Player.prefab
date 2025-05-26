@@ -1983,7 +1983,6 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
-  _respawnAnchor: {fileID: 0}
 --- !u!195 &7876948354529644848
 NavMeshAgent:
   m_ObjectHideFlags: 0

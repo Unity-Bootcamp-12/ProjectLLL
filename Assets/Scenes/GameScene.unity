@@ -1423,7 +1423,8 @@ MonoBehaviour:
   _blueTeamTowerSpawnPoint: {fileID: 1394495725}
   _minionPrefab: {fileID: 8729553332809008028, guid: 3e3d3771da0c3a54e8ca5ac37b28bcd2, type: 3}
   _towerPrefab: {fileID: 187918, guid: 30dedff2d11adc542be6a43b0ffcd851, type: 3}
-  _playerPrefab: {fileID: 7185691287541363168, guid: 502717801ae9780439759f4059980878, type: 3}
+  _meleePlayerPrefab: {fileID: 0}
+  _rangedPlayerPrefab: {fileID: 0}
   _itemPrefabList:
   - {fileID: 5356041263117964463, guid: 24ac4a8e2e46aac40bdb49468f8fa75c, type: 3}
   - {fileID: 5356041263117964463, guid: 4380f338398f49348a62fcc72b8636f3, type: 3}

@@ -641,9 +641,11 @@ MonoBehaviour:
   _unitLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  _nonTargetProjectilePrefab: {fileID: 0}
   _unitHPBarUI: {fileID: 1043053568508451952}
   _teamType:
     m_InternalValue: 0
+  _target: {fileID: 0}
 --- !u!114 &5836640208663098407
 MonoBehaviour:
   m_ObjectHideFlags: 0

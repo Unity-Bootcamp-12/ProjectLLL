@@ -926,10 +926,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7f3a4b1cf5a104f80a141557f1fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _unitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _nonTargetProjectilePrefab: {fileID: 0}
   _unitHPBarUI: {fileID: 0}
-  _playerScreenHPBarUI: {fileID: 0}
-  _teamType: 0
-  _respawnAnchor: {fileID: 0}
+  _teamType:
+    m_InternalValue: 0
+  _target: {fileID: 0}
+  _modelAnimator: {fileID: 0}
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &633718034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1309,7 +1318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c1014a70a95c14ab36f73260a7bb30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroTopHpBarSlider: {fileID: 1672589538}
+  _redTeamHPBar: {fileID: 0}
+  _blueTeamHPBar: {fileID: 0}
+  _redTeamHPText: {fileID: 0}
+  _blueTeamHPText: {fileID: 0}
 --- !u!1 &1869309124
 GameObject:
   m_ObjectHideFlags: 0

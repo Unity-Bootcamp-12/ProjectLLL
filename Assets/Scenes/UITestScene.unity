@@ -316,7 +316,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1691,6 +1692,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1989633293}
     m_Modifications:
+    - target: {fileID: 380097331129558779, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 380097331129558779, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 380097331129558779, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 414171293331293172, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1759,18 +1772,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2707444258346624857, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
-      propertyPath: m_Color.b
-      value: 0.10034709
-      objectReference: {fileID: 0}
-    - target: {fileID: 2707444258346624857, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
-      propertyPath: m_Color.g
-      value: 0.10034709
-      objectReference: {fileID: 0}
-    - target: {fileID: 2707444258346624857, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
-      propertyPath: m_Color.r
-      value: 0.5188679
-      objectReference: {fileID: 0}
     - target: {fileID: 2813459358901025722, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1822,22 +1823,6 @@ PrefabInstance:
     - target: {fileID: 3645072692757508184, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4076903092900656331, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4101248657158416305, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
-      propertyPath: m_Color.b
-      value: 0.24528301
-      objectReference: {fileID: 0}
-    - target: {fileID: 4101248657158416305, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
-      propertyPath: m_Color.g
-      value: 0.18627624
-      objectReference: {fileID: 0}
-    - target: {fileID: 4101248657158416305, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
-      propertyPath: m_Color.r
-      value: 0.22280425
       objectReference: {fileID: 0}
     - target: {fileID: 4113186630231286487, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2169,6 +2154,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7185691287541363168, guid: 502717801ae9780439759f4059980878, type: 3}
     - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
+      propertyPath: _meleePlayerPrefab
+      value: 
+      objectReference: {fileID: 7185691287541363168, guid: 75aa7e59df6b83147ad87dcf6cb06364, type: 3}
+    - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
       propertyPath: _redTeamSpawnPoint
       value: 
       objectReference: {fileID: 724882914}
@@ -2176,6 +2165,10 @@ PrefabInstance:
       propertyPath: _blueTeamSpawnPoint
       value: 
       objectReference: {fileID: 192065989}
+    - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
+      propertyPath: _rangedPlayerPrefab
+      value: 
+      objectReference: {fileID: 7185691287541363168, guid: 95032f96e93b5df4c9e2d1f5f18830f9, type: 3}
     - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
       propertyPath: _redTeamTowerSpawnPoint
       value: 
@@ -2192,6 +2185,22 @@ PrefabInstance:
       propertyPath: _blueTeamMinionSpawnPoint
       value: 
       objectReference: {fileID: 192065989}
+    - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
+      propertyPath: _itemPrefabList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
+      propertyPath: '_itemPrefabList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5356041263117964463, guid: 4380f338398f49348a62fcc72b8636f3, type: 3}
+    - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
+      propertyPath: '_itemPrefabList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 5356041263117964463, guid: 24ac4a8e2e46aac40bdb49468f8fa75c, type: 3}
+    - target: {fileID: 1905013692545738721, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
+      propertyPath: '_itemPrefabList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5356041263117964463, guid: 3aa9a45528d0c7644805d4be49645dcc, type: 3}
     - target: {fileID: 4301178181587136279, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 4169699407
@@ -2305,7 +2314,8 @@ MonoBehaviour:
   _blueTeamTowerSpawnPoint: {fileID: 0}
   _minionPrefab: {fileID: 0}
   _towerPrefab: {fileID: 0}
-  _playerPrefab: {fileID: 0}
+  _meleePlayerPrefab: {fileID: 0}
+  _rangedPlayerPrefab: {fileID: 0}
   _itemPrefabList: []
 --- !u!114 &1628246650
 MonoBehaviour:
@@ -2563,7 +2573,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -3043,9 +3054,33 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1681282557947397009, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_Name
       value: PlayerScreenHPUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4474401744627763263, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_Pivot.x
