@@ -68,15 +68,6 @@ public class GameManager : NetworkBehaviour
             PlayerSpawn(clientId);
             MinionSpawnWave();
             TowerSpawn();
-
-            // TEST
-            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 2);
-            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 3);
-            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 4);
-            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 5);
-            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 6);
-            SpawnItem(_blueTeamMinionSpawnPoint.position - Vector3.right * 7);
-
         }
     }
 
@@ -131,7 +122,8 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void SpawnItem(Vector3 position)
+    [Rpc(SendTo.Server)]
+    public void SpawnItemRpc(Vector3 position)
     {
         GameObject itemObject = Instantiate(_itemPrefabList[UnityEngine.Random.Range(0, 
             _itemPrefabList.Length)], position, Quaternion.identity);
