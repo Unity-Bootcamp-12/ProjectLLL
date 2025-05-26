@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerController : UnitController
 {
-    [SerializeField] private Animator _modelAnimator;
+
     [SerializeField] private LayerMask _groundMask;
 
     /// <summary>
@@ -177,17 +177,7 @@ public class PlayerController : UnitController
         }
     }
 
-    [Rpc(SendTo.Server)]
-    private void SetAnimatorBoolRpc(string name, bool param)
-    {
-        _modelAnimator.SetBool(name, param);
-    }
 
-    [Rpc(SendTo.Server)]
-    private void SetAnimatorTriggerRpc(string name)
-    {
-        _modelAnimator.SetTrigger(name);
-    }
 
     public void OnLeftMouseDown()
     {
