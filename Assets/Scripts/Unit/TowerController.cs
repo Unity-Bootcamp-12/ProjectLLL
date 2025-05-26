@@ -1,4 +1,4 @@
-using UnityEngine;
+using Unity.Netcode;
 
 public class TowerController : UnitController
 {
@@ -18,6 +18,13 @@ public class TowerController : UnitController
     {
         NetworkObject.Spawn();
         SetTeamTypeRpc(team);
+        UIInitRpc(team);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void UIInitRpc(UnitTeamType team)
+    {
+        UIManager.Instance.TowerInit(_hpController, team);
     }
 
     private void Update()

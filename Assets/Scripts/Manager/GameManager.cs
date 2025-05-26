@@ -19,7 +19,9 @@ public class GameManager : NetworkBehaviour
 
     [SerializeField] private GameObject _minionPrefab;
     [SerializeField] private GameObject _towerPrefab;
-    [SerializeField] private GameObject _playerPrefab;
+
+    [SerializeField] private GameObject _meleePlayerPrefab;
+    [SerializeField] private GameObject _rangedPlayerPrefab;
 
     [SerializeField] private GameObject[] _itemPrefabList;
 
@@ -89,10 +91,10 @@ public class GameManager : NetworkBehaviour
     {
         if (IsHost)
         {
-            GameObject redTeamPlayer = Instantiate(_playerPrefab, _redTeamSpawnPoint.position, Quaternion.identity);
+            GameObject redTeamPlayer = Instantiate(_meleePlayerPrefab, _redTeamSpawnPoint.position, Quaternion.identity);
             redTeamPlayer.GetComponent<PlayerController>().Init(UnitTeamType.RedTeam, NetworkManager.Singleton.LocalClientId);
 
-            GameObject blueTeamPlayer = Instantiate(_playerPrefab, _blueTeamSpawnPoint.position, Quaternion.identity);
+            GameObject blueTeamPlayer = Instantiate(_rangedPlayerPrefab, _blueTeamSpawnPoint.position, Quaternion.identity);
             blueTeamPlayer.GetComponent<PlayerController>().Init(UnitTeamType.BlueTeam, clientId);
         }
     }
