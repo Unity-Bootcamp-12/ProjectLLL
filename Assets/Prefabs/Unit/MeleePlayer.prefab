@@ -1755,7 +1755,7 @@ GameObject:
   - component: {fileID: 7659661673948933269}
   - component: {fileID: 7876948354529644848}
   m_Layer: 7
-  m_Name: Player
+  m_Name: MeleePlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
