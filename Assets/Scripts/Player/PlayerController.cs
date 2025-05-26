@@ -76,6 +76,7 @@ public class PlayerController : UnitController
         StopMove();
         _target = null;
         _collider.enabled = false;
+        SetAnimatorTriggerRpc("IsDead");
 
         StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME));
         UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME);
@@ -109,6 +110,7 @@ public class PlayerController : UnitController
         UIManager.Instance.DisableRespawnPanel();
         IsDead.Value = false;
         _collider.enabled = true;
+        SetAnimatorTriggerRpc("IsRespawn");
         transform.position = GameManager.Instance.GetRespawnPoint(TeamType);
         _hpController.Init(_unitStatusController.GetMaxHP());
     }
@@ -179,6 +181,12 @@ public class PlayerController : UnitController
     private void SetAnimatorBoolRpc(string name, bool param)
     {
         _modelAnimator.SetBool(name, param);
+    }
+
+    [Rpc(SendTo.Server)]
+    private void SetAnimatorTriggerRpc(string name)
+    {
+        _modelAnimator.SetTrigger(name);
     }
 
     public void OnLeftMouseDown()
