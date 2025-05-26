@@ -25,6 +25,11 @@ public class MinionController : UnitController
     public override void Dead()
     {
         NetworkObject.Despawn();
+
+        if (Random.value < 0.33f)
+        {
+            GameManager.Instance.SpawnItemRpc(transform.position + Vector3.up);
+        }
     }
 
     private void Update()
