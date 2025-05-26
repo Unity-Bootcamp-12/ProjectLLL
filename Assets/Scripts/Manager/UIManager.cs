@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
     private void OnLeftClick() => _cursorUIController.SetDefaultCursor();
     private void OnRightClick() => _cursorUIController.SetDefaultCursor();
 
-    public void Init(HPController hpContorller, UnitTeamType teamType)
+    public void Init(HPController hpContorller, UnitTeamType teamType, Sprite heroPortrait = null)
     {
         if (teamType == UnitTeamType.RedTeam)
         {
@@ -60,7 +60,26 @@ public class UIManager : MonoBehaviour
             _playerScreenHUDUI.UpdateHpBar(maxHp, currentHP)
             );
 
+
         hpContorller.HPChangeRpc();
+    }
+
+    public void TowerInit(HPController hpContorller, UnitTeamType teamType)
+    {
+        if (teamType == UnitTeamType.RedTeam)
+        {
+            hpContorller.OnChangeHPEvent.AddListener(
+                (float maxHp, float currentHP) =>
+                _playerScreenHPBarUI.UpdateRedTeamHPBar(maxHp, currentHP)
+            );
+        }
+        else if (teamType == UnitTeamType.BlueTeam)
+        {
+            hpContorller.OnChangeHPEvent.AddListener(
+                (float maxHp, float currentHP) =>
+                _playerScreenHPBarUI.UpdateBlueTeamHPBar(maxHp, currentHP)
+            );
+        }
     }
 
     public void SetHUDLevel(int level) => _playerScreenHUDUI.SetLevel(level);
