@@ -10,12 +10,10 @@ public class PlayerController : UnitController
     [SerializeField] private Animator _modelAnimator;
     [SerializeField] private LayerMask _groundMask;
 
-    [SerializeField] private Transform _respawnAnchor;//나중에 할당으로 수정해야 함
-
     /// <summary>
     /// 레벨에 따른 부활시간 RESAPWN_TIME[현재레벨], 단위는 초
     /// </summary>
-    readonly float[] RESPAWN_TIME = { 0.0f, 5.0f, 10.0f, 15.0f, 20.0f, 25.0f, 30.0f, 35.0f, 40.0f, 45.0f };
+    const float RESPAWN_TIME = 8.0f;
     const float MOVE_STOPPING_DISTANCE = 3.0f;
 
     public bool IsAttackButtonDown { get; private set; }
@@ -73,14 +71,13 @@ public class PlayerController : UnitController
 
     public override void Dead()
     {
-        IsDead = true;
+        IsDead.Value = true;
         StopMove();
         _target = null;
         _collider.enabled = false;
 
-        UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME[_unitStatusController.GetLevel()]);
-
-        StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME[_unitStatusController.GetLevel()]));
+        StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME));
+        UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME);
     }
 
     /// <summary>
@@ -109,15 +106,18 @@ public class PlayerController : UnitController
     {
         Logger.Info("Respawn");
         UIManager.Instance.DisableRespawnPanel();
-        IsDead = false;
+        IsDead.Value = false;
         _collider.enabled = true;
-        transform.position = _respawnAnchor.position;
+        transform.position = GameManager.Instance.GetRespawnPoint(TeamType);
         _hpController.Init(_unitStatusController.GetMaxHP());
     }
 
     public override void ReceiveDamage(float damage)
     {
-        _hpController.ChangeHPRpc(-damage);
+        if (!IsDead.Value)
+        { 
+            _hpController.ChangeHPRpc(-damage);
+        }
     }
 
     public void ReceiveHeal(float heal)
@@ -142,7 +142,7 @@ public class PlayerController : UnitController
             return;
         }
 
-        if (_target.IsDead)
+        if (_target.IsDead.Value)
         {
             _target = null;
             return;
@@ -189,7 +189,7 @@ public class PlayerController : UnitController
 
         IsAttackButtonDown = false;
 
-        if (IsDead)
+        if (IsDead.Value)
         {
             Logger.Info("IsDead 켜져있음");
             return;
@@ -227,7 +227,7 @@ public class PlayerController : UnitController
 
         IsAttackButtonDown = false;
 
-        if (IsDead)
+        if (IsDead.Value)
         {
             Logger.Info("Is Dead");
             return;

@@ -25,7 +25,7 @@ public abstract class UnitController : NetworkBehaviour
     public UnitTeamType TeamType => _teamType.Value;
     [SerializeField] protected NetworkVariable<UnitTeamType> _teamType;
 
-    public bool IsDead { get; protected set; }
+    public NetworkVariable<bool> IsDead { get; protected set; }
     [SerializeField] protected UnitController _target;
     protected Coroutine _attackCoroutine = null;
 
@@ -97,6 +97,8 @@ public abstract class UnitController : NetworkBehaviour
         _unitStatusController = GetComponent<UnitStatusController>();
         _collider = GetComponent<Collider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        IsDead = new NetworkVariable<bool>(false);
     }
 
     protected virtual void Start()
