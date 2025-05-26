@@ -60,9 +60,26 @@ public class UIManager : MonoBehaviour
             _playerScreenHUDUI.UpdateHpBar(maxHp, currentHP)
             );
 
-        _playerScreenHPBarUI.SetHeroPortrait(teamType, heroPortrait);
 
         hpContorller.HPChangeRpc();
+    }
+
+    public void TowerInit(HPController hpContorller, UnitTeamType teamType)
+    {
+        if (teamType == UnitTeamType.RedTeam)
+        {
+            hpContorller.OnChangeHPEvent.AddListener(
+                (float maxHp, float currentHP) =>
+                _playerScreenHPBarUI.UpdateRedTeamHPBar(maxHp, currentHP)
+            );
+        }
+        else if (teamType == UnitTeamType.BlueTeam)
+        {
+            hpContorller.OnChangeHPEvent.AddListener(
+                (float maxHp, float currentHP) =>
+                _playerScreenHPBarUI.UpdateBlueTeamHPBar(maxHp, currentHP)
+            );
+        }
     }
 
     public void SetHUDLevel(int level) => _playerScreenHUDUI.SetLevel(level);

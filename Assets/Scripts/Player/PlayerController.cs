@@ -49,7 +49,7 @@ public class PlayerController : UnitController
     [Rpc(SendTo.ClientsAndHost)]
     private void UIInitRpc(UnitTeamType team)
     {
-        UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
+        //UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
         HeroHpBarUI heroHpBarUI = _unitHPBarUI as HeroHpBarUI;
 
         heroHpBarUI.UpdateName(GetHeroName());
