@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 7659661673948933269}
   - component: {fileID: 7876948354529644848}
   m_Layer: 7
-  m_Name: MeleePlayer
+  m_Name: RangedPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -299,10 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3117dd89b21ab284182aa4dd87188963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroSO: {fileID: 11400000, guid: e2309e5c4fa40784d902c2d763a79f65, type: 2}
-  _experience: 0
-  _level: 1
-  _usedSkillPoints: 0
+  _heroSO: {fileID: 11400000, guid: 0d3b539040d211b45b5a4896f2b898c8, type: 2}
 --- !u!114 &1010447481264184255
 MonoBehaviour:
   m_ObjectHideFlags: 0
