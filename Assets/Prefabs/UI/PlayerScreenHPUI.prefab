@@ -265,8 +265,6 @@ MonoBehaviour:
   _blueTeamHPBar: {fileID: 1714720939554801267}
   _redTeamHPText: {fileID: 4774022855130718608}
   _blueTeamHPText: {fileID: 7657832991466955358}
-  _redTeamPortrait: {fileID: 3268428228223568367}
-  _blueTeamPortrait: {fileID: 4725012353267815391}
 --- !u!1 &1776083008696897382
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +502,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -729,7 +727,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 40, y: -10}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3092530997713496909
 CanvasRenderer:
@@ -759,7 +757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 10d0695b57bfd1e42aa5980756a8db71, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2192554481f3c144f87d2a54382f97b6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -917,7 +915,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -40, y: -10}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6328323100782451674
 CanvasRenderer:
@@ -947,7 +945,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4117670d68bbbf14eaca984f1dc9c02e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e130ff2fb2efbef43b5a1c7fc5929f24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1401,7 +1399,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
