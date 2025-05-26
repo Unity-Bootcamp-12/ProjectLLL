@@ -34,7 +34,7 @@ public class TowerController : UnitController
             return;
         }
 
-        if (_target.IsDead || !IsTargetInAttackDetectRange())
+        if (_target.IsDead.Value || !IsTargetInAttackDetectRange())
         {
             _target = null;
             return;

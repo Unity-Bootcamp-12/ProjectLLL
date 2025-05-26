@@ -25,6 +25,11 @@ public class MinionController : UnitController
     public override void Dead()
     {
         NetworkObject.Despawn();
+
+        if (Random.value < 0.33f)
+        {
+            GameManager.Instance.SpawnItemRpc(transform.position + Vector3.up);
+        }
     }
 
     private void Update()
@@ -44,7 +49,7 @@ public class MinionController : UnitController
             return;
         }
 
-        if (_target.IsDead || !IsTargetInAttackDetectRange())
+        if (_target.IsDead.Value || !IsTargetInAttackDetectRange())
         {
             _target = null;
             return;
