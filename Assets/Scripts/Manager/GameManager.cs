@@ -33,6 +33,7 @@ public class GameManager : NetworkBehaviour
 
     const float MINION_SPAWN_TIME = 20.0f;
 
+    public UnitTeamType LocalPlayerTeamType => _localPlayerTeamType;
     private UnitTeamType _localPlayerTeamType;
 
     private void Awake()

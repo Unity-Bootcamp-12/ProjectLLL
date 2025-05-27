@@ -40,21 +40,6 @@ public class UIManager : MonoBehaviour
 
     public void Init(HPController hpContorller, UnitTeamType teamType, Sprite heroPortrait = null)
     {
-        //if (teamType == UnitTeamType.RedTeam)
-        //{
-        //    hpContorller.OnChangeHPEvent.AddListener(
-        //        (float maxHp, float currentHP) =>
-        //        _playerScreenHPBarUI.UpdateRedTeamHPBar(maxHp, currentHP)
-        //    );
-        //}
-        //else if (teamType == UnitTeamType.BlueTeam)
-        //{
-        //    hpContorller.OnChangeHPEvent.AddListener(
-        //        (float maxHp, float currentHP) =>
-        //        _playerScreenHPBarUI.UpdateBlueTeamHPBar(maxHp, currentHP)
-        //    );
-        //}
-
         hpContorller.OnChangeHPEvent.AddListener(
             (float maxHp, float currentHP) =>
             _playerScreenHUDUI.UpdateHpBar(maxHp, currentHP)

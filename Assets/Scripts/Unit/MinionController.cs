@@ -4,8 +4,6 @@ using UnityEngine.AI;
 
 public class MinionController : UnitController
 {
-    const float MOVE_STOPPING_DISTANCE = 3.0f;
-
     private Vector3 _moveDestination;
 
     protected override void Awake()
@@ -20,6 +18,8 @@ public class MinionController : UnitController
         SetTeamTypeRpc(team);
         _moveDestination = destination;
         SetMoveDestinationRpc(destination);
+
+        _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
     }
 
     public override void Dead()
@@ -45,7 +45,7 @@ public class MinionController : UnitController
             if (!_isAttacking)
             {
                 SetMoveDestinationRpc(_moveDestination);
-                FindUnitInRange();
+                FindUnitInRangeRpc();
             }
             return;
         }
@@ -60,12 +60,13 @@ public class MinionController : UnitController
         {
             if (_isAttacking)
             {
+                LookAtRpc(_target.transform.position);
                 return;
             }
             else
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
-                StopMove();
+                StopMoveRpc();
             }
         }
     }

@@ -7,16 +7,12 @@ using UnityEngine;
 
 public class PlayerController : UnitController
 {
-
     [SerializeField] private LayerMask _groundMask;
 
-    /// <summary>
-    /// 레벨에 따른 부활시간 RESAPWN_TIME[현재레벨], 단위는 초
-    /// </summary>
     const float RESPAWN_TIME = 8.0f;
-    const float MOVE_STOPPING_DISTANCE = 3.0f;
 
-    public bool IsAttackButtonDown { get; private set; }
+    private bool _isAttackButtonDown;
+    private bool _isAttackSearching;
 
     protected override void Awake()
     {
@@ -44,6 +40,8 @@ public class PlayerController : UnitController
         NetworkObject.SpawnAsPlayerObject(clientId);
         SetTeamTypeRpc(team);
         UIInitRpc(team);
+
+        _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -53,7 +51,6 @@ public class PlayerController : UnitController
         HeroHpBarUI heroHpBarUI = _unitHPBarUI as HeroHpBarUI;
 
         heroHpBarUI.UpdateName(GetHeroName());
-        //heroHpBarUI.UpdateLevel(GetLevel());
         heroHpBarUI.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
 
         if (IsOwner)
@@ -67,15 +64,21 @@ public class PlayerController : UnitController
 
     private void OnAttackButtonDown()
     {
-        IsAttackButtonDown = true;
+        _isAttackButtonDown = true;
     }
 
     public override void Dead()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         IsDead.Value = true;
-        StopMove();
         _target = null;
         _collider.enabled = false;
+
+        StopMoveRpc();
         SetAnimatorTriggerRpc("IsDead");
 
         StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME));
@@ -142,6 +145,10 @@ public class PlayerController : UnitController
 
         if (_target == null)
         {
+            if (_isAttackSearching)
+            {
+                FindUnitInRangeRpc();
+            }
             return;
         }
 
@@ -155,24 +162,34 @@ public class PlayerController : UnitController
         {
             if (_isAttacking)
             {
+                LookAtRpc(_target.transform.position);
+
                 return;
             }
             else
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
-                StopMove();
+                StopMoveRpc();
+
+                Logger.Info($"&& : StopMove");
             }
         }
         else
         {
-            float distanceToTarget = Vector3.Distance(transform.position, _target.transform.position);
+            Vector3 selfPos = transform.position;
+            Vector3 targetPos = _target.transform.position;
+
+            selfPos.y = 0;
+            targetPos.y = 0;
+
+            float distanceToTarget = Vector3.Distance(selfPos, targetPos);
             if (distanceToTarget > MOVE_STOPPING_DISTANCE)
             {
                 SetMoveDestinationRpc(_target.transform.position);
             }
             else
             {
-                StopMove();
+                StopMoveRpc();
             }
         }
     }
@@ -186,15 +203,13 @@ public class PlayerController : UnitController
             return;
         }
 
-        IsAttackButtonDown = false;
-
         if (IsDead.Value)
         {
             Logger.Info("IsDead 켜져있음");
             return;
         }
 
-        if (IsAttackButtonDown)
+        if (_isAttackButtonDown)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -215,6 +230,9 @@ public class PlayerController : UnitController
                 SetMoveDestinationRpc(hit.point);
             }
         }
+
+        _isAttackButtonDown = false;
+        _isAttackSearching = true;
     }
 
     public void OnRightMouseDown()
@@ -224,7 +242,7 @@ public class PlayerController : UnitController
             return;
         }
 
-        IsAttackButtonDown = false;
+        _isAttackButtonDown = false;
 
         if (IsDead.Value)
         {
@@ -233,6 +251,7 @@ public class PlayerController : UnitController
         }
 
         _target = null;
+        _isAttackSearching = false;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -246,6 +265,7 @@ public class PlayerController : UnitController
                 if (unit.TeamType != TeamType)
                 { 
                     _target = unit;
+                    _isAttackSearching = true;
                 }
             }
         }
