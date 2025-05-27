@@ -194,13 +194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe76d2841973cd4f9fe6ee26cf68683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 3181119103003630140, guid: eca4bc733d8dd704592ca5ca78a7598b, type: 3}
+  _projectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
   _speed: 8
-  _damage: 20
-  _lifeTime: 3
+  _damage: 60
+  _lifeTime: 4.5
 --- !u!1 &6659805244532146110
 GameObject:
   m_ObjectHideFlags: 0

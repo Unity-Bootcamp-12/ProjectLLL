@@ -4379,6 +4379,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3152902950789199887}
+  - {fileID: 6908313742010489230}
   - {fileID: 3026564815916391011}
   - {fileID: 3034865293268634733}
   - {fileID: 3026603432479210325}
@@ -6805,7 +6806,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7455705074364356472
 Canvas:
@@ -7106,6 +7107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _modelAnimator: {fileID: 3124390134628165133}
+  _projectileSpawnPoint: {fileID: 6908313742010489230}
   _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
   _unitHPBarUI: {fileID: 4774854154783254508}
   _teamType:
@@ -7136,6 +7138,37 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1 &8022549323712864043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6908313742010489230}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6908313742010489230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022549323712864043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.00114, z: -0.00014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3034994316767887679}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1981045284111520843
 PrefabInstance:
   m_ObjectHideFlags: 0

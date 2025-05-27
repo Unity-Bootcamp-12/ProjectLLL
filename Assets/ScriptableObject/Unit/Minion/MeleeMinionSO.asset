@@ -16,7 +16,7 @@ MonoBehaviour:
     _maxHP: 60
     _attackPower: 8
     _attackSpeed: 1
-    _attackRange: 2
+    _attackRange: 2.2
     _moveSpeed: 3.5
   _id: 0
   _name: Minion

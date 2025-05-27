@@ -19,6 +19,8 @@ public class TowerController : UnitController
         NetworkObject.Spawn();
         SetTeamTypeRpc(team);
         UIInitRpc(team);
+
+        _attackDetectRange = GetAttackRange();
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -36,7 +38,7 @@ public class TowerController : UnitController
 
         if (_target == null)
         {
-            FindUnitInRange();
+            FindUnitInRangeRpc();
 
             return;
         }
