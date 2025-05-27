@@ -59,10 +59,9 @@ public class PlayerController : UnitController
         if (IsOwner)
         {
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
+            UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
+            UIManager.Instance.InitializePlayerStatus(_unitStatusController);
         }
-
-        UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
-        UIManager.Instance.InitializePlayerStatus(_unitStatusController);
     }
 
     private void OnAttackButtonDown()
@@ -118,7 +117,7 @@ public class PlayerController : UnitController
     public override void ReceiveDamage(float damage)
     {
         if (!IsDead.Value)
-        { 
+        {
             _hpController.ChangeHPRpc(-damage);
         }
     }
@@ -244,7 +243,7 @@ public class PlayerController : UnitController
             {
                 Logger.Info($"Mouse Hit Unit: {unit.name}");
                 if (unit.TeamType != TeamType)
-                { 
+                {
                     _target = unit;
                 }
             }
@@ -279,7 +278,7 @@ public class PlayerController : UnitController
         if (!_unitStatusController.IsItemListFull())
         {
             if (_unitStatusController.IsItemSlotEmpty(ButtonType.Q))
-            { 
+            {
                 _unitStatusController.AddItem(item, ButtonType.Q);
                 UIManager.Instance.SetItemImage(ButtonType.Q, item.ItemSO.ItemSprite);
             }
