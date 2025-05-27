@@ -10,6 +10,8 @@ using UnityEngine.AI;
 public abstract class UnitController : NetworkBehaviour
 {
     [SerializeField] protected LayerMask _unitLayerMask;
+    [SerializeField] private Animator _modelAnimator;
+
 
     //여기에 있으면 안되긴함...
     [SerializeField] private GameObject _nonTargetProjectilePrefab;
@@ -78,10 +80,6 @@ public abstract class UnitController : NetworkBehaviour
         return _unitStatusController.GetProjectilePrefab();
     }
 
-    public int GetLevel()
-    {
-        return _unitStatusController.GetLevel();
-    }
 
     public string GetHeroName()
     {
@@ -129,6 +127,7 @@ public abstract class UnitController : NetworkBehaviour
     protected void SetMoveDestinationRpc(Vector3 target)
     {
         _navMeshAgent.SetDestination(target);
+        SetAnimatorBoolRpc("IsRun", true);
     }
 
     protected void Attack(UnitController unitController)
@@ -165,6 +164,7 @@ public abstract class UnitController : NetworkBehaviour
 
     protected IEnumerator AttackCoroutine(UnitController attackTarget, float preAttackDelayTime, float postAttackDelayTime)
     {
+        SetAnimatorBoolRpc("IsAttack", true);
         _isAttacking = true;
         _isPreAttacking = true;
 
@@ -181,6 +181,7 @@ public abstract class UnitController : NetworkBehaviour
         _isAttacking = false;
         _isPreAttacking = false;
         _isPostAttacking = false;
+        SetAnimatorBoolRpc("IsAttack", false);
     }
 
     protected void StopAttack()
@@ -193,12 +194,16 @@ public abstract class UnitController : NetworkBehaviour
         _isAttacking = false;
         _isPreAttacking = false;
         _isPostAttacking = false;
+
+        SetAnimatorBoolRpc("IsAttack", false);
     }
 
     protected void StopMove()
     {
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
+
+        SetAnimatorBoolRpc("IsMove", false);
     }
 
     protected void FindUnitInRange()
@@ -227,6 +232,18 @@ public abstract class UnitController : NetworkBehaviour
     protected bool IsTargetInAttackRange()
     {
         return Vector3.Distance(transform.position, _target.transform.position) < GetAttackRange();
+    }
+
+    [Rpc(SendTo.Server)]
+    protected void SetAnimatorBoolRpc(string name, bool param)
+    {
+        _modelAnimator.SetBool(name, param);
+    }
+
+    [Rpc(SendTo.Server)]
+    protected void SetAnimatorTriggerRpc(string name)
+    {
+        _modelAnimator.SetTrigger(name);
     }
 }
 

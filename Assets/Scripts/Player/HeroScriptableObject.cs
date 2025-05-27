@@ -20,9 +20,6 @@ public class HeroScriptableObject : ScriptableObject
     public GameObject ProjectilePrefab => _projectilePrefab;
     [SerializeField] private GameObject _projectilePrefab;
 
-    public int[] GetAmountOfExperience() => _amountOfExperience;
-    [SerializeField] private int[] _amountOfExperience = { 0, 100, 200, 400, 600, 800, 1000, 1200, 1400 };
-
     public Sprite HeroImage => _heroImage;
     [SerializeField] private Sprite _heroImage;
 }
