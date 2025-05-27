@@ -4,7 +4,6 @@ using UnityEngine;
 public class ItemObject : NetworkBehaviour
 {
     [SerializeField] private ItemScriptableObject _item;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     public void Init()
     { 

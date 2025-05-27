@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89c27b4ac640588499dc6437a63737ec, type: 3}
-  m_Name: RangedMinionSO
+  m_Name: RedRangedMinionSO
   m_EditorClassIdentifier: 
   _heroStatus:
     _maxHP: 50
@@ -21,5 +21,5 @@ MonoBehaviour:
   _id: 0
   _name: Minion
   _attackType: 1
-  _projectilePrefab: {fileID: 3181119103003630140, guid: d489dd670aaffa0479ddff8c68424924, type: 3}
+  _projectilePrefab: {fileID: 3181119103003630140, guid: e24640ec94ec3dd43bc7375d4554298a, type: 3}
   _heroImage: {fileID: 21300000, guid: 4117670d68bbbf14eaca984f1dc9c02e, type: 3}

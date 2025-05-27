@@ -3140,7 +3140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3117dd89b21ab284182aa4dd87188963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroSO: {fileID: 11400000, guid: af834360db00a55489ca65832b44d0db, type: 2}
+  _heroSO: {fileID: 11400000, guid: 113b64d76ac6c7f4c9137f9a763dbbc7, type: 2}
 --- !u!114 &86729734739534053
 MonoBehaviour:
   m_ObjectHideFlags: 0
