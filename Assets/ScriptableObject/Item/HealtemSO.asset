@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealtemSO
   m_EditorClassIdentifier: 
   _itemType: 0
-  _itemSprite: {fileID: 21300000, guid: 866efb49c98989143a5095871ba2191f, type: 3}
+  _itemSprite: {fileID: 21300000, guid: c82617d64d081074299d8a5f504f4fa7, type: 3}
   _upgradeStatus:
     _maxHP: 20
     _attackPower: 0

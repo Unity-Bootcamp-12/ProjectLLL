@@ -344,12 +344,12 @@ MonoBehaviour:
   _unitLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: eca4bc733d8dd704592ca5ca78a7598b, type: 3}
+  _modelAnimator: {fileID: 8477257798367981844}
+  _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
   _unitHPBarUI: {fileID: 4774854154783254508}
   _teamType:
     m_InternalValue: 0
   _target: {fileID: 0}
-  _modelAnimator: {fileID: 8477257798367981844}
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
