@@ -4972,8 +4972,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6930231049036801581}
-  - component: {fileID: 6930231049042743269}
-  - component: {fileID: 7041415416823116779}
   m_Layer: 0
   m_Name: DarkBall
   m_TagString: Untagged
@@ -4997,28 +4995,3 @@ Transform:
   - {fileID: 6930231049036801569}
   m_Father: {fileID: 908000875335414259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6930231049042743269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930231049037232653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11d497e14c8a38f49ac502a303de982d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
---- !u!114 &7041415416823116779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6930231049037232653}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db08735561a38424182823d8d175333b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

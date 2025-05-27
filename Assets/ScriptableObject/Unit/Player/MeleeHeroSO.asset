@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: MeleeHeroSO
   m_EditorClassIdentifier: 
   _heroStatus:
-    _maxHP: 100
-    _attackPower: 10
+    _maxHP: 250
+    _attackPower: 25
     _attackSpeed: 1
-    _attackRange: 3
+    _attackRange: 2.5
     _moveSpeed: 3.5
   _id: 0
-  _name: TEST
+  _name: Barbarian
   _attackType: 0
   _projectilePrefab: {fileID: 3181119103003630140, guid: d55453f3faf6d64489cd90e76b23ac08, type: 3}
-  _amountOfExperience: 0000000064000000c8000000900100005802000020030000e8030000b004000078050000
   _heroImage: {fileID: 21300000, guid: 4117670d68bbbf14eaca984f1dc9c02e, type: 3}
