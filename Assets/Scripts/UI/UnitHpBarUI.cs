@@ -6,7 +6,7 @@ public class UnitHPBarUI : MonoBehaviour
 {
     [SerializeField] private Slider _hpBarSlider;
     private Color _redColor = new Color(161 / 255f, 46 / 255f, 46 / 255f, 1f);   // #A12E2E
-    private Color _blueColor = new Color(85 / 255f, 89 / 255f, 159 / 255f, 1f);  // #55599F
+    private Color _blueColor = new Color(39 / 255f, 45 / 255f, 161 / 255f, 1f); // #272DA1
 
     public void Init(UnityEvent<float, float> onChangeHPEvent)
     {
