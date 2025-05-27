@@ -19,10 +19,8 @@ public class PlayerController : UnitController
         base.Awake();
     }
 
-    private new void Start()
+    private void Start()
     {
-        base.Start();
-
         if (!IsOwner)
         {
             return;
@@ -35,19 +33,21 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnSkillButtonEvent.AddListener(OnSkillButtonDown);
     }
 
-    public void Init(UnitTeamType team, ulong clientId)
+    public override void Init(UnitTeamType team, ulong clientId)
     {
         NetworkObject.SpawnAsPlayerObject(clientId);
+
+        base.Init(team, clientId);
+
         SetTeamTypeRpc(team);
-        UIInitRpc(team);
+        InitPlayerUIRpc(team);
 
         _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void UIInitRpc(UnitTeamType team)
+    private void InitPlayerUIRpc(UnitTeamType team)
     {
-        UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
         HeroHpBarUI heroHpBarUI = _unitHPBarUI as HeroHpBarUI;
 
         heroHpBarUI.UpdateName(GetHeroName());
@@ -55,11 +55,12 @@ public class PlayerController : UnitController
 
         if (IsOwner)
         {
+            UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
+            UIManager.Instance.SetHUDHeroPortrait(_unitStatusController.GetHeroPortrait());
+            UIManager.Instance.UpdatePlayerStatus(_unitStatusController);
+
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
         }
-
-        UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
-        UIManager.Instance.InitializePlayerStatus(_unitStatusController);
     }
 
     private void OnAttackButtonDown()

@@ -128,7 +128,7 @@ public class UnitStatusController : MonoBehaviour
         }
 
         _changeStatus = changeStatus;
-        UIManager.Instance.InitializePlayerStatus(this);
+        UIManager.Instance.UpdatePlayerStatus(this);
     }
     #endregion
 }

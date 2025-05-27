@@ -2,29 +2,20 @@ using Unity.Netcode;
 
 public class TowerController : UnitController
 {
-    public override void Dead()
-    {
-        StopAttack();
-        GameManager.Instance.GameOverRpc(_teamType.Value);
-        NetworkObject.Despawn();
-    }
-
-    public override void ReceiveDamage(float damage)
-    {
-        _hpController.ChangeHPRpc(-damage);
-    }
-
-    public void Init(UnitTeamType team)
+    public override void Init(UnitTeamType team, ulong clientId)
     {
         NetworkObject.Spawn();
+        
+        base.Init(team, clientId);
+
         SetTeamTypeRpc(team);
-        UIInitRpc(team);
+        InitTowerUIRpc(team);
 
         _attackDetectRange = GetAttackRange();
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void UIInitRpc(UnitTeamType team)
+    private void InitTowerUIRpc(UnitTeamType team)
     {
         UIManager.Instance.TowerInit(_hpController, team);
     }
@@ -60,5 +51,16 @@ public class TowerController : UnitController
                 _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
             }
         }
+    }
+    public override void Dead()
+    {
+        StopAttack();
+        GameManager.Instance.GameOverRpc(_teamType.Value);
+        NetworkObject.Despawn();
+    }
+
+    public override void ReceiveDamage(float damage)
+    {
+        _hpController.ChangeHPRpc(-damage);
     }
 }

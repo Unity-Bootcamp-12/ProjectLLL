@@ -67,9 +67,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void SetHUDLevel(int level) => _playerScreenHUDUI.SetLevel(level);
-    public void SetHeroPortrait(Sprite image) => _playerScreenHUDUI.SetHeroPortraitImage(image);
+    public void SetHUDHeroPortrait(Sprite image) => _playerScreenHUDUI.SetHeroPortraitImage(image);
     public void SetItemImage(ButtonType button, Sprite sprite) => _playerScreenHUDUI.SetButtonImage(button, sprite);
-    public void InitializePlayerStatus(UnitStatusController playerStatus) => _playerScreenStatusUI.Init(playerStatus);
+    public void UpdatePlayerStatus(UnitStatusController playerStatus) => _playerScreenStatusUI.UpdateUI(playerStatus);
 
     public void SetGameOverUI(bool isWin)
     {

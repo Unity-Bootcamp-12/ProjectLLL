@@ -100,28 +100,18 @@ public abstract class UnitController : NetworkBehaviour
         IsDead = new NetworkVariable<bool>(false);
     }
 
-    protected virtual void Start()
+    public virtual void Init(UnitTeamType team, ulong clientId)
+    {
+        InitUnitUIRpc(team);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void InitUnitUIRpc(UnitTeamType teamType)
     {
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
-        SetUnitHPBarUIClientRpc(TeamType);
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        _teamType.OnValueChanged += OnTeamTypeChanged;
-    }
-
-    private void OnTeamTypeChanged(UnitTeamType previousValue, UnitTeamType newValue)
-    {
-        SetUnitHPBarUIClientRpc(newValue);
-    }
-
-    [Rpc(SendTo.ClientsAndHost)]
-    public void SetUnitHPBarUIClientRpc(UnitTeamType teamType)
-    {
-        _unitHPBarUI.SetHpBarColor(teamType == UnitTeamType.RedTeam);
+        _unitHPBarUI.SetTeam(teamType);
     }
 
     [Rpc(SendTo.Server)]
