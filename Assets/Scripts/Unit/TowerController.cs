@@ -54,6 +54,11 @@ public class TowerController : UnitController
     }
     public override void Dead()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         StopAttack();
         GameManager.Instance.GameOverRpc(_teamType.Value);
         NetworkObject.Despawn();

@@ -97,7 +97,7 @@ public abstract class UnitController : NetworkBehaviour
         _collider = GetComponent<Collider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
-        IsDead = new NetworkVariable<bool>(false);
+        IsDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
 
     public virtual void Init(UnitTeamType team, ulong clientId)
@@ -110,6 +110,7 @@ public abstract class UnitController : NetworkBehaviour
     {
         _hpController.Init(_unitStatusController.GetMaxHP());
         _hpController.OnDeadEvent.AddListener(Dead);
+
         _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
         _unitHPBarUI.SetTeam(teamType);
     }
@@ -144,7 +145,6 @@ public abstract class UnitController : NetworkBehaviour
         GameObject projectileObject = Instantiate(GetProjectilePrefab(), _projectileSpawnPoint.position, Quaternion.identity);
         projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, speed, damage);
     }
-
 
     [Rpc(SendTo.Server)]
     public void FireNonTargetProjectileRpc(Vector3 destination, float speed, float damage, float lifeTime)
@@ -212,10 +212,6 @@ public abstract class UnitController : NetworkBehaviour
 
         foreach (var collider in colliders)
         {
-            if (IsClient)
-            {
-                Logger.Info(collider.name);
-            }
             if (collider.TryGetComponent<UnitController>(out var unit))
             {
                 if (unit.TeamType == TeamType)

@@ -23,11 +23,11 @@ public class HPController : NetworkBehaviour
     {
         _currentHP.OnValueChanged += (oldValue, newValue) =>
         {
-            HPChangeRpc();
+            HPChangeEventRpc();
         };
         _maxHP.OnValueChanged += (oldValue, newValue) =>
         {
-            HPChangeRpc();
+            HPChangeEventRpc();
         };
 
         SetMaxHPRpc(maxHP);
@@ -48,31 +48,37 @@ public class HPController : NetworkBehaviour
     public void SetCurrentHPRpc(float hp)
     {
         _currentHP.Value = hp;
-        HPChangeRpc();
+        HPChangeEventRpc();
     }
 
     [Rpc(SendTo.Server)]
     public void SetMaxHPRpc(float hp)
     {
         _maxHP.Value = hp;
-        HPChangeRpc();
+        HPChangeEventRpc();
     }
 
     [Rpc(SendTo.Server)]
     public void ChangeHPRpc(float damage)
     {
         _currentHP.Value = Mathf.Clamp(_currentHP.Value + damage, 0, _maxHP.Value);
-        HPChangeRpc();
+        HPChangeEventRpc();
 
         if (_currentHP.Value <= 0)
         {
-            OnDeadEvent?.Invoke();
+            DeadEventRpc();
         }
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    public void HPChangeRpc()
+    public void HPChangeEventRpc()
     {
         OnChangeHPEvent?.Invoke(_maxHP.Value, _currentHP.Value);
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    public void DeadEventRpc()
+    {
+        OnDeadEvent?.Invoke();
     }
 }

@@ -31,6 +31,11 @@ public class MinionController : UnitController
 
     public override void Dead()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         NetworkObject.Despawn();
         IsDead.Value = true;
 

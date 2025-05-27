@@ -75,10 +75,11 @@ public class PlayerController : UnitController
             return;
         }
 
-        IsDead.Value = true;
+        Logger.Info("Player Dead");
+
         _target = null;
         _collider.enabled = false;
-
+        IsDead.Value = true;
         StopMoveRpc();
         SetAnimatorTriggerRpc("IsDead");
 
@@ -115,7 +116,7 @@ public class PlayerController : UnitController
         IsDead.Value = false;
         _collider.enabled = true;
         SetAnimatorTriggerRpc("IsRespawn");
-        transform.position = GameManager.Instance.GetRespawnPoint(TeamType);
+        BlinkToRpc(GameManager.Instance.GetRespawnPoint(TeamType));
         _hpController.Init(_unitStatusController.GetMaxHP());
     }
 
@@ -171,8 +172,6 @@ public class PlayerController : UnitController
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
                 StopMoveRpc();
-
-                Logger.Info($"&& : StopMove");
             }
         }
         else

@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
             _playerScreenHUDUI.UpdateHpBar(maxHp, currentHP)
             );
 
-        hpContorller.HPChangeRpc();
+        hpContorller.HPChangeEventRpc();
     }
 
     public void TowerInit(HPController hpContorller, UnitTeamType teamType)
