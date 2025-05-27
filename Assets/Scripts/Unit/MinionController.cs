@@ -25,6 +25,7 @@ public class MinionController : UnitController
     public override void Dead()
     {
         NetworkObject.Despawn();
+        IsDead.Value = true;
 
         if (Random.value < 0.33f)
         {
