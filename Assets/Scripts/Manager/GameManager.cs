@@ -77,6 +77,14 @@ public class GameManager : NetworkBehaviour
             PlayerSpawn(clientId);
             StartCoroutine(SpawnMinionWaveCoroutine());
             TowerSpawn();
+
+            SpawnItemRpc(_redTeamSpawnPoint.position + Vector3.right * 2.0f + Vector3.up);
+            SpawnItemRpc(_redTeamSpawnPoint.position + Vector3.back * 2.0f + Vector3.up);
+            SpawnItemRpc(_redTeamSpawnPoint.position + Vector3.forward * 2.0f + Vector3.up);
+
+            SpawnItemRpc(_blueTeamSpawnPoint.position + Vector3.left * 2.0f + Vector3.up);
+            SpawnItemRpc(_blueTeamSpawnPoint.position + Vector3.forward * 2.0f + Vector3.up);
+            SpawnItemRpc(_blueTeamSpawnPoint.position + Vector3.back * 2.0f + Vector3.up);
         }
     }
 

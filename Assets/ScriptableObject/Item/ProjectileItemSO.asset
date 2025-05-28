@@ -16,7 +16,7 @@ MonoBehaviour:
   _itemSprite: {fileID: 21300000, guid: cbe7effbe7a72a74186d27ddb9324cbd, type: 3}
   _upgradeStatus:
     _maxHP: 0
-    _attackPower: 10
+    _attackPower: 6
     _attackSpeed: 0
     _attackRange: 0
     _moveSpeed: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RangedHeroSO
   m_EditorClassIdentifier: 
   _heroStatus:
-    _maxHP: 200
-    _attackPower: 16
+    _maxHP: 180
+    _attackPower: 22
     _attackSpeed: 1
     _attackRange: 6
     _moveSpeed: 3.5
