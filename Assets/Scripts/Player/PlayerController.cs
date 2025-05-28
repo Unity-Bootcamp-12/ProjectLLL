@@ -82,6 +82,7 @@ public class PlayerController : UnitController
         UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME);
     }
 
+
     /// <summary>
     /// 리스폰 대기시간 (임시)
     /// </summary>
@@ -201,6 +202,7 @@ public class PlayerController : UnitController
             if (Physics.Raycast(ray, out RaycastHit unitHit, 100f, _unitLayerMask))
             {
                 GameObject hitObject = unitHit.collider.gameObject;
+                transform.LookAt(unitHit.point);
 
                 if (hitObject.TryGetComponent<UnitController>(out var unit))
                 {
@@ -213,6 +215,7 @@ public class PlayerController : UnitController
             else if (Physics.Raycast(ray, out RaycastHit hit, 100f, _groundMask))
             {
                 SetMoveDestinationRpc(hit.point);
+                transform.LookAt(hit.point);
             }
         }
     }
@@ -239,7 +242,7 @@ public class PlayerController : UnitController
         if (Physics.Raycast(ray, out RaycastHit unitHit, 100f, _unitLayerMask))
         {
             GameObject hitObject = unitHit.collider.gameObject;
-
+            transform.LookAt(unitHit.point);
             if (hitObject.TryGetComponent<UnitController>(out var unit))
             {
                 Logger.Info($"Mouse Hit Unit: {unit.name}");
@@ -252,6 +255,7 @@ public class PlayerController : UnitController
         else if (Physics.Raycast(ray, out RaycastHit groundHit, 100f, _groundMask))
         {
             SetMoveDestinationRpc(groundHit.point);
+            transform.LookAt(groundHit.point);
         }
     }
 
