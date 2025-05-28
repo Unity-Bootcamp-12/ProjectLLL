@@ -1938,7 +1938,7 @@ Animator:
   m_GameObject: {fileID: 3028948840565860337}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e53c0edb812c5344698949e4671d1a2c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 6e5f331a1d55a934b82948961480d6a2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 445622010574aa345adff84c9c3605af, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7001,7 +7001,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1293411866
+    DestinationState: 2081823275
+    TransitionDuration: 0
+    TriggerNameHash: 213412108
+    TransitionIndex: 0
   m_Animator: {fileID: 3124390134628165133}
 --- !u!114 &5812727747591030039
 MonoBehaviour:
