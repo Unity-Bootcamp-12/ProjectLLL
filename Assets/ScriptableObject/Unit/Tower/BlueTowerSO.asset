@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlueTowerSO
   m_EditorClassIdentifier: 
   _heroStatus:
-    _maxHP: 500
+    _maxHP: 300
     _attackPower: 20
     _attackSpeed: 1
     _attackRange: 8

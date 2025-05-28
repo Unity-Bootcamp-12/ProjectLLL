@@ -43,6 +43,7 @@ public class PlayerController : UnitController
         InitPlayerUIRpc(team);
 
         _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
+        StartCoroutine(AutoRegenerationCoroutine());
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -88,11 +89,6 @@ public class PlayerController : UnitController
         UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME);
     }
 
-    /// <summary>
-    /// 리스폰 대기시간 (임시)
-    /// </summary>
-    /// <param name="waitTime"></param>
-    /// <returns></returns>
     private IEnumerator WaitRespawnCoroutine(float waitTime)
     {
         float elapsedTime = 0.0f;
@@ -196,7 +192,17 @@ public class PlayerController : UnitController
         }
     }
 
-
+    private IEnumerator AutoRegenerationCoroutine()
+    { 
+        while (true)
+        {
+            yield return new WaitForSeconds(0.3f);
+            if (!IsDead.Value)
+            { 
+                ReceiveHeal(1.0f);
+            }
+        }
+    }
 
     public void OnLeftMouseDown()
     {
@@ -293,6 +299,9 @@ public class PlayerController : UnitController
         useItem?.Use(this);
         UIManager.Instance.SetItemImage(buttonType, null);
         Logger.Info($"아이템 슬롯 {buttonType} 사용");
+
+        //변경된 스탯 반영
+        ApplyChangedStatus();
     }
 
     public void AddItem(ItemData item)
@@ -315,6 +324,8 @@ public class PlayerController : UnitController
                 _unitStatusController.AddItem(item, ButtonType.E);
                 UIManager.Instance.SetItemImage(ButtonType.E, item.ItemSO.ItemSprite);
             }
+
+            ApplyChangedStatus();
         }
     }
 }

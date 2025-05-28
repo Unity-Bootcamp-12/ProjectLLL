@@ -103,6 +103,7 @@ public abstract class UnitController : NetworkBehaviour
     public virtual void Init(UnitTeamType team, ulong clientId)
     {
         InitUnitUIRpc(team);
+        ApplyChangedStatus();
     }
 
     [Rpc(SendTo.ClientsAndHost)]
@@ -273,6 +274,21 @@ public abstract class UnitController : NetworkBehaviour
     protected void SetAnimatorTriggerRpc(string name)
     {
         _modelAnimator.SetTrigger(name);
+    }
+
+    [Rpc(SendTo.Server)]
+    private void SetMoveSpeedRpc(float moveSpeed)
+    {
+        if (_navMeshAgent != null)
+        {
+            _navMeshAgent.speed = moveSpeed;
+        }
+    }
+
+    protected void ApplyChangedStatus()
+    {
+        _hpController.SetMaxHPRpc(_unitStatusController.GetMaxHP());
+        SetMoveSpeedRpc(_unitStatusController.GetMoveSpeed());
     }
 
     // 에디터 전용 Gizmo 코드

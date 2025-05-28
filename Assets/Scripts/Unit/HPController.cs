@@ -55,6 +55,10 @@ public class HPController : NetworkBehaviour
     public void SetMaxHPRpc(float hp)
     {
         _maxHP.Value = hp;
+        if (_currentHP.Value > hp)
+        { 
+            _currentHP.Value = hp;
+        }
         HPChangeEventRpc();
     }
 
