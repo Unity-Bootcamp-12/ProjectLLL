@@ -120,6 +120,7 @@ public class PlayerController : UnitController
         SetAnimatorTriggerRpc("IsRespawn");
         BlinkToRpc(GameManager.Instance.GetRespawnPoint(TeamType));
         _hpController.Init(_unitStatusController.GetMaxHP());
+        ParticleManager.Instance.ParticlePlay(ParticleType.PlayerResurrection, transform.position);
     }
 
     public override void ReceiveDamage(float damage)

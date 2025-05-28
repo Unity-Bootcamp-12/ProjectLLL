@@ -127,6 +127,7 @@ public abstract class UnitController : NetworkBehaviour
         if (GetAttackType() == AttackType.Melee)
         {
             unitController.ReceiveDamage(GetAttackPower());
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerHit, unitController.transform.position);
         }
         else if (GetAttackType() == AttackType.Ranged)
         {

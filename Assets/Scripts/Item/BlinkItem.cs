@@ -19,6 +19,7 @@ public class BlinkItem : MonoBehaviour, IUsableItem
             Vector3 targetPosition = playerPosition + direction * _moveDistance;
 
             player.BlinkToRpc(targetPosition);
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerBlink, targetPosition);
         }
     }
 }

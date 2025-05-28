@@ -53,6 +53,7 @@ public class NonTargetProjectile : NetworkBehaviour
                 if (unit.TeamType != _teamType)
                 {
                     unit.ReceiveDamage(_damage);
+                    ParticleManager.Instance.ParticlePlay(ParticleType.PlayerHit, other.transform.position);
                     NetworkObject.Despawn();
                 }
             }
