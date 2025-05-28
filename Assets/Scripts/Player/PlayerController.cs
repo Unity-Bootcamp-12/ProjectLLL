@@ -168,7 +168,7 @@ public class PlayerController : UnitController
             }
             else
             {
-                _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
+                _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f / GetAttackSpeed(), 0.5f));
                 StopMoveRpc();
             }
         }

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroStatus:
     _maxHP: 180
-    _attackPower: 22
-    _attackSpeed: 1
+    _attackPower: 18
+    _attackSpeed: 1.5
     _attackRange: 6
     _moveSpeed: 6
   _id: 0
