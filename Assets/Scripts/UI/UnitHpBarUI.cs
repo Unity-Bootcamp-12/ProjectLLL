@@ -26,8 +26,9 @@ public class UnitHPBarUI : MonoBehaviour
         transform.forward = Camera.main.transform.forward;
     }
 
-    public void SetHpBarColor(bool isRed)
+    public void SetTeam(UnitTeamType teamType)
     {
+        bool isRed = teamType == UnitTeamType.RedTeam;
         _hpBarSlider.fillRect.GetComponent<Image>().color = isRed ? _redColor : _blueColor;
     }
 }

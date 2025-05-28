@@ -35,7 +35,7 @@ public class TargetProjectile : NetworkBehaviour
         transform.LookAt(_target);
 
         float distance = Vector3.Distance(transform.position, _target.position);
-        if (distance < 0.5f)
+        if (distance < 0.2f)
         {
             if (_target.TryGetComponent<UnitController>(out var unit))
             {

@@ -33,6 +33,7 @@ public class GameManager : NetworkBehaviour
 
     const float MINION_SPAWN_TIME = 20.0f;
 
+    public UnitTeamType LocalPlayerTeamType => _localPlayerTeamType;
     private UnitTeamType _localPlayerTeamType;
 
     private void Awake()
@@ -96,36 +97,37 @@ public class GameManager : NetworkBehaviour
         if (IsHost)
         {
             GameObject redTeamTower = Instantiate(_redTowerPrefab, _redTeamTowerSpawnPoint.position, Quaternion.identity);
-            redTeamTower.GetComponent<TowerController>().Init(UnitTeamType.RedTeam);
+            redTeamTower.GetComponent<TowerController>().Init(UnitTeamType.RedTeam, OwnerClientId);
             GameObject blueTeamTower = Instantiate(_blueTowerPrefab, _blueTeamTowerSpawnPoint.position, Quaternion.identity);
-            blueTeamTower.GetComponent<TowerController>().Init(UnitTeamType.BlueTeam);
+            blueTeamTower.GetComponent<TowerController>().Init(UnitTeamType.BlueTeam, OwnerClientId);
         }
     }
 
     private IEnumerator SpawnMinionWaveCoroutine()
     {
-        Instantiate(_redMeleeMinionPrefab, _redTeamMinionSpawnPoint.position, Quaternion.identity).
-            GetComponent<MinionController>().Init(UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
-        Instantiate(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, Quaternion.identity).
-            GetComponent<MinionController>().Init(UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
+        SpawnMinion(_redMeleeMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
+        SpawnMinion(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
 
         yield return new WaitForSeconds(0.5f);
 
-        Instantiate(_redMeleeMinionPrefab, _redTeamMinionSpawnPoint.position, Quaternion.identity).
-            GetComponent<MinionController>().Init(UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
-        Instantiate(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, Quaternion.identity).
-           GetComponent<MinionController>().Init(UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
+        SpawnMinion(_redMeleeMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
+        SpawnMinion(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
 
         yield return new WaitForSeconds(0.5f);
 
-        Instantiate(_redRangedMinionPrefab, _redTeamMinionSpawnPoint.position, Quaternion.identity).
-            GetComponent<MinionController>().Init(UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
-        Instantiate(_blueRangedMinionPrefab, _blueTeamMinionSpawnPoint.position, Quaternion.identity).
-            GetComponent<MinionController>().Init(UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
+        SpawnMinion(_redRangedMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
+        SpawnMinion(_blueRangedMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
 
         yield return new WaitForSeconds(MINION_SPAWN_TIME);
 
         StartCoroutine(SpawnMinionWaveCoroutine());
+    }
+
+    void SpawnMinion(GameObject prefab, Vector3 spawnPos, UnitTeamType team, Vector3 targetPos)
+    {
+        var minion = Instantiate(prefab, spawnPos, Quaternion.identity).GetComponent<MinionController>();
+        minion.Init(team, OwnerClientId);
+        minion.SetDestination(targetPos);
     }
 
     [Rpc(SendTo.Server)]

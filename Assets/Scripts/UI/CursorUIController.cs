@@ -74,15 +74,22 @@ public class CursorUIController : MonoBehaviour
     private void CheckHoverTarget()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        _isHovering = Physics.Raycast(ray, out RaycastHit unitHit, 100.0f, _unitLayer) && unitHit.transform.tag != "Player"; // 같은 팀은 호버상태 안키도록 수정 필요
+        _isHovering = Physics.Raycast(ray, out RaycastHit unitHit, 100.0f, _unitLayer);
 
-        if (_isHovering && _currentState != CursorType.Attack)
+        if (_isHovering)
         {
-            SetHoverCursor();
+            UnitTeamType teamType = unitHit.collider.GetComponent<UnitController>().TeamType;
+            if (_currentState != CursorType.Attack && teamType != GameManager.Instance.LocalPlayerTeamType)
+            {
+                SetHoverCursor();
+            }
         }
-        else if (!_isHovering && _currentState != CursorType.Attack)
+        else
         {
-            SetDefaultCursor();
+            if (_currentState != CursorType.Attack)
+            {
+                SetDefaultCursor();
+            }
         }
     }
 }

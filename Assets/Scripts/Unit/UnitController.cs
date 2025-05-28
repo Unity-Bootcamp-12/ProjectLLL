@@ -11,13 +11,14 @@ public abstract class UnitController : NetworkBehaviour
 {
     [SerializeField] protected LayerMask _unitLayerMask;
     [SerializeField] private Animator _modelAnimator;
-
+    [SerializeField] private Transform _projectileSpawnPoint;
 
     //여기에 있으면 안되긴함...
     [SerializeField] private GameObject _nonTargetProjectilePrefab;
 
-
     [SerializeField] protected UnitHPBarUI _unitHPBarUI;
+
+    protected const float MOVE_STOPPING_DISTANCE = 1.5f;
 
     protected Collider _collider;
     protected HPController _hpController;
@@ -35,7 +36,7 @@ public abstract class UnitController : NetworkBehaviour
     protected bool _isPreAttacking = false;
     protected bool _isPostAttacking = false;
 
-    protected float _attackDetectRange => GetAttackRange() * 2.0f;
+    protected float _attackDetectRange;
 
     [Rpc(SendTo.Server)]
     public void SetTeamTypeRpc(UnitTeamType teamType)
@@ -96,31 +97,22 @@ public abstract class UnitController : NetworkBehaviour
         _collider = GetComponent<Collider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
-        IsDead = new NetworkVariable<bool>(false);
+        IsDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
 
-    protected virtual void Start()
+    public virtual void Init(UnitTeamType team, ulong clientId)
     {
-        _hpController.Init(_unitStatusController.GetMaxHP());
-        _hpController.OnDeadEvent.AddListener(Dead);
-        _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
-        SetUnitHPBarUIClientRpc(TeamType);
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        _teamType.OnValueChanged += OnTeamTypeChanged;
-    }
-
-    private void OnTeamTypeChanged(UnitTeamType previousValue, UnitTeamType newValue)
-    {
-        SetUnitHPBarUIClientRpc(newValue);
+        InitUnitUIRpc(team);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    public void SetUnitHPBarUIClientRpc(UnitTeamType teamType)
+    public void InitUnitUIRpc(UnitTeamType teamType)
     {
-        _unitHPBarUI.SetHpBarColor(teamType == UnitTeamType.RedTeam);
+        _hpController.Init(_unitStatusController.GetMaxHP());
+        _hpController.OnDeadEvent.AddListener(Dead);
+
+        _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
+        _unitHPBarUI.SetTeam(teamType);
     }
 
     [Rpc(SendTo.Server)]
@@ -138,7 +130,7 @@ public abstract class UnitController : NetworkBehaviour
         }
         else if (GetAttackType() == AttackType.Ranged)
         {
-            FireTargetProjectileRpc(unitController.NetworkObjectId, 2.0f, GetAttackPower());
+            FireTargetProjectileRpc(unitController.NetworkObjectId, 12.0f, GetAttackPower());
         }
     }
 
@@ -150,15 +142,14 @@ public abstract class UnitController : NetworkBehaviour
             return;
         }
 
-        GameObject projectileObject = Instantiate(GetProjectilePrefab(), transform.position, Quaternion.identity);
+        GameObject projectileObject = Instantiate(GetProjectilePrefab(), _projectileSpawnPoint.position, Quaternion.identity);
         projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, speed, damage);
     }
-
 
     [Rpc(SendTo.Server)]
     public void FireNonTargetProjectileRpc(Vector3 destination, float speed, float damage, float lifeTime)
     {
-        GameObject projectileObject = Instantiate(_nonTargetProjectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectileObject = Instantiate(_nonTargetProjectilePrefab, _projectileSpawnPoint.position, Quaternion.identity);
         projectileObject.GetComponent<NonTargetProjectile>().Init(destination, speed, damage, lifeTime, TeamType);
     }
 
@@ -198,7 +189,8 @@ public abstract class UnitController : NetworkBehaviour
         SetAnimatorBoolRpc("IsAttack", false);
     }
 
-    protected void StopMove()
+    [Rpc(SendTo.Server)]
+    protected void StopMoveRpc()
     {
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
@@ -206,7 +198,15 @@ public abstract class UnitController : NetworkBehaviour
         SetAnimatorBoolRpc("IsMove", false);
     }
 
-    protected void FindUnitInRange()
+    [Rpc(SendTo.Server)]
+    protected void LookAtRpc(Vector3 targetPosition)
+    {
+        targetPosition.y = transform.position.y;
+        transform.LookAt(targetPosition);
+    }
+    
+    [Rpc(SendTo.Server)]
+    protected void FindUnitInRangeRpc()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _attackDetectRange, _unitLayerMask);
 
@@ -219,6 +219,23 @@ public abstract class UnitController : NetworkBehaviour
                     continue;
                 }
 
+                SetTargetByIdRpc(unit.NetworkObjectId);
+            }
+        }
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    protected void SetTargetByIdRpc(ulong targetNetworkObjectId)
+    {
+        if (!IsOwner)
+        {
+            return;
+        }
+
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(targetNetworkObjectId, out var netObject))
+        {
+            if (netObject.TryGetComponent<UnitController>(out var unit))
+            {
                 _target = unit;
             }
         }
@@ -226,12 +243,24 @@ public abstract class UnitController : NetworkBehaviour
 
     protected bool IsTargetInAttackDetectRange()
     {
-        return Vector3.Distance(transform.position, _target.transform.position) < _attackDetectRange;
+        Vector3 selfPos = transform.position;
+        Vector3 targetPos = _target.transform.position;
+
+        selfPos.y = 0;
+        targetPos.y = 0;
+
+        return Vector3.Distance(selfPos, targetPos) < _attackDetectRange;
     }
 
     protected bool IsTargetInAttackRange()
     {
-        return Vector3.Distance(transform.position, _target.transform.position) < GetAttackRange();
+        Vector3 selfPos = transform.position;
+        Vector3 targetPos = _target.transform.position;
+
+        selfPos.y = 0;
+        targetPos.y = 0;
+
+        return Vector3.Distance(selfPos, targetPos) < GetAttackRange();
     }
 
     [Rpc(SendTo.Server)]
@@ -244,6 +273,13 @@ public abstract class UnitController : NetworkBehaviour
     protected void SetAnimatorTriggerRpc(string name)
     {
         _modelAnimator.SetTrigger(name);
+    }
+
+    // 에디터 전용 Gizmo 코드
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, GetAttackRange());
     }
 }
 

@@ -13,7 +13,7 @@ public class PlayerScreenStatusUI : MonoBehaviour
     [SerializeField] private TMP_Text _MoveSpeedCurrentValue; 
     [SerializeField] private TMP_Text _MoveSpeedIncreaseValue;
 
-    public void Init(UnitStatusController playerStatus)
+    public void UpdateUI(UnitStatusController playerStatus)
     {
         _attackPowerCurrentValue.text = $"{playerStatus.GetAttackPower()}";
         _attackSpeedCurrentValue.text = $"{playerStatus.GetAttackSpeed()}";

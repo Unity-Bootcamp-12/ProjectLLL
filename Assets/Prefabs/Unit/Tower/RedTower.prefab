@@ -460,7 +460,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5.9986496, y: 5.998649, z: 18.737053}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4105573755494899555}
   m_Father: {fileID: 1872251382935212444}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3380440
@@ -640,10 +641,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _unitLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  _modelAnimator: {fileID: 9566220}
+  _projectileSpawnPoint: {fileID: 4105573755494899555}
+  _nonTargetProjectilePrefab: {fileID: 0}
   _unitHPBarUI: {fileID: 1043053568508451952}
   _teamType:
     m_InternalValue: 0
+  _target: {fileID: 0}
 --- !u!114 &5836640208663098407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,10 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3117dd89b21ab284182aa4dd87188963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroSO: {fileID: 11400000, guid: 0d3b539040d211b45b5a4896f2b898c8, type: 2}
-  _experience: 0
-  _level: 1
-  _usedSkillPoints: 0
+  _heroSO: {fileID: 11400000, guid: aa6c5d4dfb1187245bf6fe242297f6a6, type: 2}
 --- !u!1 &341750552576865398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,6 +1024,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5840426338000963959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4105573755494899555}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4105573755494899555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5840426338000963959}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.065}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 440698}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6671052046108646964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1167,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 3.5}
-  m_SizeDelta: {x: 30, y: 30}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &995803985701633064
 Canvas:
