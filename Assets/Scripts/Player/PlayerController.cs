@@ -81,6 +81,7 @@ public class PlayerController : UnitController
         _collider.enabled = false;
         IsDead.Value = true;
         StopMoveRpc();
+        StopAttack();
         SetAnimatorTriggerRpc("IsDead");
 
         StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME));
@@ -115,6 +116,7 @@ public class PlayerController : UnitController
         UIManager.Instance.DisableRespawnPanel();
         IsDead.Value = false;
         _collider.enabled = true;
+        _target = null;
         SetAnimatorTriggerRpc("IsRespawn");
         BlinkToRpc(GameManager.Instance.GetRespawnPoint(TeamType));
         _hpController.Init(_unitStatusController.GetMaxHP());
@@ -140,7 +142,7 @@ public class PlayerController : UnitController
             SetAnimatorBoolRpc("IsRun", _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance);
         }
 
-        if (!IsOwner)
+        if (!IsOwner || IsDead.Value)
         {
             return;
         }
@@ -205,7 +207,6 @@ public class PlayerController : UnitController
 
         if (IsDead.Value)
         {
-            Logger.Info("IsDead 켜져있음");
             return;
         }
 
