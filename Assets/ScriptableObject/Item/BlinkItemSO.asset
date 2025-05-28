@@ -19,4 +19,4 @@ MonoBehaviour:
     _attackPower: 0
     _attackSpeed: 0
     _attackRange: 0
-    _moveSpeed: 2
+    _moveSpeed: 0.5

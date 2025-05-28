@@ -17,7 +17,7 @@ MonoBehaviour:
     _attackPower: 30
     _attackSpeed: 1
     _attackRange: 2.5
-    _moveSpeed: 3.5
+    _moveSpeed: 6
   _id: 0
   _name: Barbarian
   _attackType: 0

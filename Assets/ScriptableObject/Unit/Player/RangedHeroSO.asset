@@ -17,7 +17,7 @@ MonoBehaviour:
     _attackPower: 22
     _attackSpeed: 1
     _attackRange: 6
-    _moveSpeed: 3.5
+    _moveSpeed: 6
   _id: 0
   _name: Wolverine
   _attackType: 1
