@@ -42,9 +42,9 @@ public class TargetProjectile : NetworkBehaviour
             if (_target.TryGetComponent<UnitController>(out var unit))
             {
                 unit.ReceiveDamage(_damage);
-                if (_isPlayer)
+                if (_isPlayer == true)
                 {
-                    ParticleManager.Instance.ParticlePlay(ParticleType.PlayerHit, _target.position);
+                    ParticleManager.Instance.PlayParticleServerRpc(ParticleType.PlayerHit, _target.position);
                 }
             }
 
