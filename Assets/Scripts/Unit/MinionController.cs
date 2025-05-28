@@ -12,18 +12,30 @@ public class MinionController : UnitController
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public void Init(UnitTeamType team, Vector3 destination)
+    public override void Init(UnitTeamType team, ulong clientId)
     {
         NetworkObject.Spawn();
+        
+        base.Init(team, clientId);
+        
         SetTeamTypeRpc(team);
-        _moveDestination = destination;
-        SetMoveDestinationRpc(destination);
 
         _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
     }
 
+    public void SetDestination(Vector3 destination)
+    {
+        _moveDestination = destination;
+        SetMoveDestinationRpc(destination);
+    }
+
     public override void Dead()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         NetworkObject.Despawn();
         IsDead.Value = true;
 

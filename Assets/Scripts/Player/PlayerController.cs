@@ -19,10 +19,8 @@ public class PlayerController : UnitController
         base.Awake();
     }
 
-    private new void Start()
+    private void Start()
     {
-        base.Start();
-
         if (!IsOwner)
         {
             return;
@@ -35,19 +33,21 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnSkillButtonEvent.AddListener(OnSkillButtonDown);
     }
 
-    public void Init(UnitTeamType team, ulong clientId)
+    public override void Init(UnitTeamType team, ulong clientId)
     {
         NetworkObject.SpawnAsPlayerObject(clientId);
+
+        base.Init(team, clientId);
+
         SetTeamTypeRpc(team);
-        UIInitRpc(team);
+        InitPlayerUIRpc(team);
 
         _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void UIInitRpc(UnitTeamType team)
+    private void InitPlayerUIRpc(UnitTeamType team)
     {
-        UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
         HeroHpBarUI heroHpBarUI = _unitHPBarUI as HeroHpBarUI;
 
         heroHpBarUI.UpdateName(GetHeroName());
@@ -55,11 +55,12 @@ public class PlayerController : UnitController
 
         if (IsOwner)
         {
+            UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
+            UIManager.Instance.SetHUDHeroPortrait(_unitStatusController.GetHeroPortrait());
+            UIManager.Instance.UpdatePlayerStatus(_unitStatusController);
+
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
         }
-
-        UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
-        UIManager.Instance.InitializePlayerStatus(_unitStatusController);
     }
 
     private void OnAttackButtonDown()
@@ -74,11 +75,13 @@ public class PlayerController : UnitController
             return;
         }
 
-        IsDead.Value = true;
+        Logger.Info("Player Dead");
+
         _target = null;
         _collider.enabled = false;
-
+        IsDead.Value = true;
         StopMoveRpc();
+        StopAttack();
         SetAnimatorTriggerRpc("IsDead");
 
         StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME));
@@ -113,15 +116,16 @@ public class PlayerController : UnitController
         UIManager.Instance.DisableRespawnPanel();
         IsDead.Value = false;
         _collider.enabled = true;
+        _target = null;
         SetAnimatorTriggerRpc("IsRespawn");
-        transform.position = GameManager.Instance.GetRespawnPoint(TeamType);
+        BlinkToRpc(GameManager.Instance.GetRespawnPoint(TeamType));
         _hpController.Init(_unitStatusController.GetMaxHP());
     }
 
     public override void ReceiveDamage(float damage)
     {
         if (!IsDead.Value)
-        { 
+        {
             _hpController.ChangeHPRpc(-damage);
         }
     }
@@ -138,7 +142,7 @@ public class PlayerController : UnitController
             SetAnimatorBoolRpc("IsRun", _navMeshAgent.remainingDistance > _navMeshAgent.stoppingDistance);
         }
 
-        if (!IsOwner)
+        if (!IsOwner || IsDead.Value)
         {
             return;
         }
@@ -170,8 +174,6 @@ public class PlayerController : UnitController
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
                 StopMoveRpc();
-
-                Logger.Info($"&& : StopMove");
             }
         }
         else
@@ -205,7 +207,6 @@ public class PlayerController : UnitController
 
         if (IsDead.Value)
         {
-            Logger.Info("IsDead 켜져있음");
             return;
         }
 
@@ -263,7 +264,7 @@ public class PlayerController : UnitController
             {
                 Logger.Info($"Mouse Hit Unit: {unit.name}");
                 if (unit.TeamType != TeamType)
-                { 
+                {
                     _target = unit;
                     _isAttackSearching = true;
                 }
@@ -299,7 +300,7 @@ public class PlayerController : UnitController
         if (!_unitStatusController.IsItemListFull())
         {
             if (_unitStatusController.IsItemSlotEmpty(ButtonType.Q))
-            { 
+            {
                 _unitStatusController.AddItem(item, ButtonType.Q);
                 UIManager.Instance.SetItemImage(ButtonType.Q, item.ItemSO.ItemSprite);
             }

@@ -97,31 +97,22 @@ public abstract class UnitController : NetworkBehaviour
         _collider = GetComponent<Collider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
 
-        IsDead = new NetworkVariable<bool>(false);
+        IsDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
 
-    protected virtual void Start()
+    public virtual void Init(UnitTeamType team, ulong clientId)
     {
-        _hpController.Init(_unitStatusController.GetMaxHP());
-        _hpController.OnDeadEvent.AddListener(Dead);
-        _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
-        SetUnitHPBarUIClientRpc(TeamType);
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        _teamType.OnValueChanged += OnTeamTypeChanged;
-    }
-
-    private void OnTeamTypeChanged(UnitTeamType previousValue, UnitTeamType newValue)
-    {
-        SetUnitHPBarUIClientRpc(newValue);
+        InitUnitUIRpc(team);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    public void SetUnitHPBarUIClientRpc(UnitTeamType teamType)
+    public void InitUnitUIRpc(UnitTeamType teamType)
     {
-        _unitHPBarUI.SetHpBarColor(teamType == UnitTeamType.RedTeam);
+        _hpController.Init(_unitStatusController.GetMaxHP());
+        _hpController.OnDeadEvent.AddListener(Dead);
+
+        _unitHPBarUI.Init(_hpController.OnChangeHPEvent);
+        _unitHPBarUI.SetTeam(teamType);
     }
 
     [Rpc(SendTo.Server)]
@@ -154,7 +145,6 @@ public abstract class UnitController : NetworkBehaviour
         GameObject projectileObject = Instantiate(GetProjectilePrefab(), _projectileSpawnPoint.position, Quaternion.identity);
         projectileObject.GetComponent<TargetProjectile>().Init(targetNetworkObject.transform, speed, damage);
     }
-
 
     [Rpc(SendTo.Server)]
     public void FireNonTargetProjectileRpc(Vector3 destination, float speed, float damage, float lifeTime)
@@ -222,13 +212,9 @@ public abstract class UnitController : NetworkBehaviour
 
         foreach (var collider in colliders)
         {
-            if (IsClient)
-            {
-                Logger.Info(collider.name);
-            }
             if (collider.TryGetComponent<UnitController>(out var unit))
             {
-                if (unit.TeamType == TeamType)
+                if (unit.TeamType == TeamType || unit.IsDead.Value)
                 {
                     continue;
                 }
