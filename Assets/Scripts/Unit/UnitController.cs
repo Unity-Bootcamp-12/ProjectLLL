@@ -214,7 +214,7 @@ public abstract class UnitController : NetworkBehaviour
         {
             if (collider.TryGetComponent<UnitController>(out var unit))
             {
-                if (unit.TeamType == TeamType)
+                if (unit.TeamType == TeamType || unit.IsDead.Value)
                 {
                     continue;
                 }
