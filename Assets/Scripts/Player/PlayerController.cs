@@ -60,8 +60,6 @@ public class PlayerController : UnitController
             UIManager.Instance.UpdatePlayerStatus(_unitStatusController);
 
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
-            UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
-            UIManager.Instance.InitializePlayerStatus(_unitStatusController);
         }
     }
 
