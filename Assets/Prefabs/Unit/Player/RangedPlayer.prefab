@@ -2809,6 +2809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2541553945858272110}
   - component: {fileID: 8477257798367981844}
+  - component: {fileID: 2195094948789035430}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -2878,6 +2879,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2195094948789035430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886448325550125524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2914762067039144718
 GameObject:
   m_ObjectHideFlags: 0
@@ -6608,6 +6627,7 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 8477257798367981844}
   _projectileSpawnPoint: {fileID: 3883725963052603341}
+  _modelOutline: {fileID: 2195094948789035430}
   _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
   _unitHPBarUI: {fileID: 4774854154783254508}
   _teamType:

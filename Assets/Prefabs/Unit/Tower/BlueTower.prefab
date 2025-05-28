@@ -644,6 +644,7 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 9566220}
   _projectileSpawnPoint: {fileID: 1160628671351904217}
+  _modelOutline: {fileID: 982294702069515712}
   _nonTargetProjectilePrefab: {fileID: 0}
   _unitHPBarUI: {fileID: 1043053568508451952}
   _teamType:
@@ -885,6 +886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1872251382935212444}
+  - component: {fileID: 982294702069515712}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -913,6 +915,24 @@ Transform:
   - {fileID: 450010}
   m_Father: {fileID: 411524}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &982294702069515712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4044386724612149063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4475499760520653944
 GameObject:
   m_ObjectHideFlags: 0

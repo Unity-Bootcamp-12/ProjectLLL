@@ -13,7 +13,9 @@ public abstract class UnitController : NetworkBehaviour
     [SerializeField] private Animator _modelAnimator;
     [SerializeField] private Transform _projectileSpawnPoint;
 
-    //여기에 있으면 안되긴함...
+    [SerializeField] private Outline _modelOutline;
+
+    //여기에 있으면 안되긴함... 팩토리가 존재해야함
     [SerializeField] private GameObject _nonTargetProjectilePrefab;
 
     [SerializeField] protected UnitHPBarUI _unitHPBarUI;
@@ -96,6 +98,8 @@ public abstract class UnitController : NetworkBehaviour
         _unitStatusController = GetComponent<UnitStatusController>();
         _collider = GetComponent<Collider>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        SetOutline(false);
 
         IsDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     }
@@ -289,6 +293,14 @@ public abstract class UnitController : NetworkBehaviour
     {
         _hpController.SetMaxHPRpc(_unitStatusController.GetMaxHP());
         SetMoveSpeedRpc(_unitStatusController.GetMoveSpeed());
+    }
+
+    public void SetOutline(bool isActive)
+    {
+        if (_modelOutline != null)
+        {
+            _modelOutline.enabled = isActive;
+        }
     }
 
     // 에디터 전용 Gizmo 코드

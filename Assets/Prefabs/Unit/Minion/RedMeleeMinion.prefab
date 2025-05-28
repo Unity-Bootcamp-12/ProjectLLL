@@ -454,6 +454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1813839653942170435}
   - component: {fileID: 1813839653942170460}
+  - component: {fileID: 4553303571886356826}
   m_Layer: 0
   m_Name: FootmanMesh
   m_TagString: Untagged
@@ -555,6 +556,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -104.858246, y: 9.7334175, z: 2.0182877}
     m_Extent: {x: 157.07443, y: 77.538284, z: 119.81869}
   m_DirtyAABB: 0
+--- !u!114 &4553303571886356826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813839653942170434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1813839653947359829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1551,7 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 1813839654427011444}
   _projectileSpawnPoint: {fileID: 0}
+  _modelOutline: {fileID: 4553303571886356826}
   _nonTargetProjectilePrefab: {fileID: 0}
   _unitHPBarUI: {fileID: 6409539645438853310}
   _teamType:
