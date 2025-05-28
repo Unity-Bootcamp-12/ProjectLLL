@@ -19,10 +19,8 @@ public class PlayerController : UnitController
         base.Awake();
     }
 
-    private new void Start()
+    private void Start()
     {
-        base.Start();
-
         if (!IsOwner)
         {
             return;
@@ -35,19 +33,21 @@ public class PlayerController : UnitController
         PlayerInputManager.Instance.OnSkillButtonEvent.AddListener(OnSkillButtonDown);
     }
 
-    public void Init(UnitTeamType team, ulong clientId)
+    public override void Init(UnitTeamType team, ulong clientId)
     {
         NetworkObject.SpawnAsPlayerObject(clientId);
+
+        base.Init(team, clientId);
+
         SetTeamTypeRpc(team);
-        UIInitRpc(team);
+        InitPlayerUIRpc(team);
 
         _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
     }
 
     [Rpc(SendTo.ClientsAndHost)]
-    private void UIInitRpc(UnitTeamType team)
+    private void InitPlayerUIRpc(UnitTeamType team)
     {
-        UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
         HeroHpBarUI heroHpBarUI = _unitHPBarUI as HeroHpBarUI;
 
         heroHpBarUI.UpdateName(GetHeroName());
@@ -55,11 +55,12 @@ public class PlayerController : UnitController
 
         if (IsOwner)
         {
+            UIManager.Instance.Init(_hpController, team, _unitStatusController.GetHeroPortrait());
+            UIManager.Instance.SetHUDHeroPortrait(_unitStatusController.GetHeroPortrait());
+            UIManager.Instance.UpdatePlayerStatus(_unitStatusController);
+
             FindAnyObjectByType<CinemachineCamera>().Follow = transform;
         }
-
-        UIManager.Instance.SetHeroPortrait(_unitStatusController.GetHeroPortrait());
-        UIManager.Instance.InitializePlayerStatus(_unitStatusController);
     }
 
     private void OnAttackButtonDown()
@@ -74,10 +75,11 @@ public class PlayerController : UnitController
             return;
         }
 
-        IsDead.Value = true;
+        Logger.Info("Player Dead");
+
         _target = null;
         _collider.enabled = false;
-
+        IsDead.Value = true;
         StopMoveRpc();
         SetAnimatorTriggerRpc("IsDead");
 
@@ -114,7 +116,7 @@ public class PlayerController : UnitController
         IsDead.Value = false;
         _collider.enabled = true;
         SetAnimatorTriggerRpc("IsRespawn");
-        transform.position = GameManager.Instance.GetRespawnPoint(TeamType);
+        BlinkToRpc(GameManager.Instance.GetRespawnPoint(TeamType));
         _hpController.Init(_unitStatusController.GetMaxHP());
     }
 
@@ -170,8 +172,6 @@ public class PlayerController : UnitController
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
                 StopMoveRpc();
-
-                Logger.Info($"&& : StopMove");
             }
         }
         else
