@@ -7265,14 +7265,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6430479180836205479, guid: 58396b07aaf25434595175ad21285b00, type: 3}
-      propertyPath: _levelText
-      value: 
-      objectReference: {fileID: 2077432204327896700}
-    - target: {fileID: 6430479180836205479, guid: 58396b07aaf25434595175ad21285b00, type: 3}
-      propertyPath: _heroNameText
-      value: 
-      objectReference: {fileID: 7563827090606096867}
     - target: {fileID: 7372491529873420779, guid: 58396b07aaf25434595175ad21285b00, type: 3}
       propertyPath: m_Name
       value: HeroHPBarUI
@@ -7282,17 +7274,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58396b07aaf25434595175ad21285b00, type: 3}
---- !u!114 &2077432204327896700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 552416244884951607, guid: 58396b07aaf25434595175ad21285b00, type: 3}
-  m_PrefabInstance: {fileID: 1981045284111520843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &2339735859329142257 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4253227010683345338, guid: 58396b07aaf25434595175ad21285b00, type: 3}
@@ -7307,16 +7288,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4e38c2c82103334cb8ed94515dcc13b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7563827090606096867 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8324352615188239784, guid: 58396b07aaf25434595175ad21285b00, type: 3}
-  m_PrefabInstance: {fileID: 1981045284111520843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
