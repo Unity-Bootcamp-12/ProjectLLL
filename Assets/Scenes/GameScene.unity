@@ -673,6 +673,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 361630744}
     - target: {fileID: 8712246706885733003, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
+      propertyPath: _networkManagerUI
+      value: 
+      objectReference: {fileID: 664266102}
+    - target: {fileID: 8712246706885733003, guid: 320d07f08310d1a4b9b888c996eac9da, type: 3}
       propertyPath: _playerScreenHUDUI
       value: 
       objectReference: {fileID: 1109246799}
@@ -793,6 +797,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b605b4060bfb885458dc044db3da5a70, type: 3}
+--- !u!114 &664266102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5709272524782320361, guid: b605b4060bfb885458dc044db3da5a70, type: 3}
+  m_PrefabInstance: {fileID: 664266101}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a014d7b5ac2a74fa5de81ec5e234d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &755524803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1070,7 @@ Transform:
   m_GameObject: {fileID: 801708287}
   serializedVersion: 2
   m_LocalRotation: {x: 0.49999997, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 1.93, y: 10.288203, z: -4}
+  m_LocalPosition: {x: 46.33, y: 21.2, z: -17.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2639,15 +2654,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 380097331129558779, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 380097331129558779, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 380097331129558779, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 414171293331293172, guid: a3c926fd47c97784f8d8cfa2673efa2e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3105,7 +3120,7 @@ Transform:
   m_GameObject: {fileID: 1239806075}
   serializedVersion: 2
   m_LocalRotation: {x: 0.49999997, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 1.93, y: 10.288203, z: -4}
+  m_LocalPosition: {x: 46.33, y: 21.2, z: -17.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3872,15 +3887,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 945653324756221762, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1681282557947397009, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_Name
@@ -3888,15 +3903,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2117692914339697519, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4474401744627763263, guid: 37e5a7f478de9d94a8ec88abc4d3e435, type: 3}
       propertyPath: m_Pivot.x

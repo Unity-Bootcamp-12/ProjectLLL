@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PlayerScreenRespawnUI _playerScreenRespawnUI;
     [SerializeField] private PlayerScreenStatusUI _playerScreenStatusUI;
     [SerializeField] private GameOverUI _gameOverUI;
+    [SerializeField] private NetworkManagerUI _networkManagerUI;
 
     private CursorUIController _cursorUIController;
 
@@ -82,6 +83,8 @@ public class UIManager : MonoBehaviour
             _gameOverUI.ShowGameLosePanel();
         }
     }
+
+    public void HideNetworkUI() => _networkManagerUI.gameObject.SetActive(false);
 
     #region RespawnPanel 관련
     public void EnableRespawnPanel(float respawnTime) => _playerScreenRespawnUI.EnableRespawnPanel(respawnTime);
