@@ -169,7 +169,7 @@ public class PlayerController : UnitController
             }
             else
             {
-                _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f / GetAttackSpeed(), 0.5f));
+                _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f / GetAttackSpeed(), 0.5f / GetAttackSpeed()));
                 StopMoveRpc();
             }
         }
@@ -280,6 +280,7 @@ public class PlayerController : UnitController
         else if (Physics.Raycast(ray, out RaycastHit groundHit, 100f, _groundMask))
         {
             SetMoveDestinationRpc(groundHit.point);
+            StopAttack();
         }
     }
 
