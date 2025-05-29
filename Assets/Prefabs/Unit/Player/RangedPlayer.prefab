@@ -377,6 +377,7 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 8477257798367981844}
   _projectileSpawnPoint: {fileID: 3883725963052603341}
+  _isPlayer: 1
   _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
   _unitHPBarUI: {fileID: 4774854154783254508}
   _teamType:

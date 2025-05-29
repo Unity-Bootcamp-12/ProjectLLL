@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4169699407
+  GlobalObjectIdHash: 3228546555
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -78,10 +78,18 @@ MonoBehaviour:
   _blueTeamMinionSpawnPoint: {fileID: 0}
   _redTeamTowerSpawnPoint: {fileID: 0}
   _blueTeamTowerSpawnPoint: {fileID: 0}
-  _minionPrefab: {fileID: 8729553332809008028, guid: 3e3d3771da0c3a54e8ca5ac37b28bcd2, type: 3}
-  _towerPrefab: {fileID: 187918, guid: 30dedff2d11adc542be6a43b0ffcd851, type: 3}
-  _playerPrefab: {fileID: 7185691287541363168, guid: 502717801ae9780439759f4059980878, type: 3}
-  _itemPrefabList: []
+  _redMeleeMinionPrefab: {fileID: 8729553332809008028, guid: 3546915fcaa174842b521b8da8dceaeb, type: 3}
+  _redRangedMinionPrefab: {fileID: 8729553332809008028, guid: 1319ce1e97f44b046a088843fc8509c4, type: 3}
+  _blueMeleeMinionPrefab: {fileID: 8729553332809008028, guid: a4b6951646368994ba75bcb35d6927c6, type: 3}
+  _blueRangedMinionPrefab: {fileID: 8729553332809008028, guid: a4b6951646368994ba75bcb35d6927c6, type: 3}
+  _redTowerPrefab: {fileID: 187918, guid: 30dedff2d11adc542be6a43b0ffcd851, type: 3}
+  _blueTowerPrefab: {fileID: 187918, guid: 234d59564597f4847a9171b0311fec6a, type: 3}
+  _meleePlayerPrefab: {fileID: 7185691287541363168, guid: 06697cc21f683e343b610e9ebf2a23b9, type: 3}
+  _rangedPlayerPrefab: {fileID: 7185691287541363168, guid: 4c694d61b8065ef44bcea724a331aec6, type: 3}
+  _itemPrefabList:
+  - {fileID: 5356041263117964463, guid: 4380f338398f49348a62fcc72b8636f3, type: 3}
+  - {fileID: 5356041263117964463, guid: 24ac4a8e2e46aac40bdb49468f8fa75c, type: 3}
+  - {fileID: 5356041263117964463, guid: 3aa9a45528d0c7644805d4be49645dcc, type: 3}
 --- !u!114 &696436513701735076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +114,58 @@ MonoBehaviour:
   OnSkillButtonEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &6463320746941198321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 576732193484670105}
+  - component: {fileID: 5916049170918572197}
+  m_Layer: 0
+  m_Name: '@ParticleManager'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &576732193484670105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463320746941198321}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6686156123909288965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5916049170918572197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463320746941198321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f16c2ac64fb224cb84f1d45e2c9bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleList:
+  - {fileID: 7406234648031428160, guid: bf41c1f1c9f80c847921ee7a36500313, type: 3}
+  - {fileID: 4770283287461032814, guid: 2d2ab88b593b1db4985a6df4b70f9dd7, type: 3}
+  - {fileID: 8557829796960142683, guid: 5c519fa26c2a6cf46a169d5df0078106, type: 3}
+  - {fileID: 5892656265947278301, guid: d0947c75df5a5414492c385ab880aa8c, type: 3}
+  - {fileID: 1340617868816032594, guid: 984603a2fc613534596caf7ec6ce1bd3, type: 3}
+  - {fileID: 2215697923161939590, guid: cb9e91e1e76e67e49a802e75cc37b704, type: 3}
+  _defualtDestroyTime: 3
 --- !u!1 &6519377821441098135
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,5 +265,6 @@ Transform:
   m_Children:
   - {fileID: 6671932044834568979}
   - {fileID: 4257722449478319438}
+  - {fileID: 576732193484670105}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
