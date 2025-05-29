@@ -600,7 +600,7 @@ CapsuleCollider:
   m_Radius: 1
   m_Height: 5
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &4198572109825774764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +644,7 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 9566220}
   _projectileSpawnPoint: {fileID: 4105573755494899555}
+  _isPlayer: 0
   _modelOutline: {fileID: 2220986461490018360}
   _nonTargetProjectilePrefab: {fileID: 0}
   _unitHPBarUI: {fileID: 1043053568508451952}
@@ -903,7 +904,7 @@ Transform:
   m_GameObject: {fileID: 4044386724612149063}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 3, y: 4, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
