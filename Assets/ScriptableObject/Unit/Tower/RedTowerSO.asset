@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RedTowerSO
   m_EditorClassIdentifier: 
   _heroStatus:
-    _maxHP: 300
-    _attackPower: 20
+    _maxHP: 500
+    _attackPower: 30
     _attackSpeed: 1
     _attackRange: 8
     _moveSpeed: 3.5

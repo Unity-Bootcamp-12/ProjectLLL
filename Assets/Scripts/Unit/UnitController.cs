@@ -311,7 +311,7 @@ public abstract class UnitController : NetworkBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, GetAttackRange());
+        Gizmos.DrawWireSphere(transform.position, _attackDetectRange);
     }
 }
 
