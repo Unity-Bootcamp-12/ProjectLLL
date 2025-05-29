@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.5}
-  m_SizeDelta: {x: 2, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1.65}
+  m_SizeDelta: {x: 2, y: 0.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6502211622685631118
 MonoBehaviour:
@@ -2736,6 +2736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7612142742188039647}
   - component: {fileID: 7519559037779365129}
+  - component: {fileID: 2719527212188902849}
   m_Layer: 0
   m_Name: WizardBody
   m_TagString: Untagged
@@ -2880,6 +2881,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0000038146973, y: 9.283916, z: 89.01546}
     m_Extent: {x: 116.46152, y: 48.080334, z: 112.55812}
   m_DirtyAABB: 0
+--- !u!114 &2719527212188902849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617815726701616951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7617824881359708511
 GameObject:
   m_ObjectHideFlags: 0
@@ -3070,6 +3089,7 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 7557109360186962969}
   _projectileSpawnPoint: {fileID: 8103206898710714859}
+  _modelOutline: {fileID: 2719527212188902849}
   _nonTargetProjectilePrefab: {fileID: 0}
   _unitHPBarUI: {fileID: 6409539645438853310}
   _teamType:
@@ -3240,10 +3260,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8114392618483944605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2150611577822688757
 CanvasRenderer:

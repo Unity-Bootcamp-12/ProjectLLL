@@ -6113,6 +6113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3026676567264442743}
   - component: {fileID: 3163221919629151223}
+  - component: {fileID: 6121907200915785797}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -6359,6 +6360,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000062866835, y: 0.00009591319, z: 0.00069901673}
     m_Extent: {x: 0.0044631064, y: 0.010455042, z: 0.004582419}
   m_DirtyAABB: 0
+--- !u!114 &6121907200915785797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3030303808595465093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 3
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &3030304889852282435
 GameObject:
   m_ObjectHideFlags: 0
@@ -7115,6 +7134,7 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 3124390134628165133}
   _projectileSpawnPoint: {fileID: 6908313742010489230}
+  _modelOutline: {fileID: 6121907200915785797}
   _isPlayer: 1
   _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
   _unitHPBarUI: {fileID: 4774854154783254508}
@@ -7223,7 +7243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4253227010683345338, guid: 58396b07aaf25434595175ad21285b00, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4253227010683345338, guid: 58396b07aaf25434595175ad21285b00, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7259,7 +7279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4253227010683345338, guid: 58396b07aaf25434595175ad21285b00, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.5
+      value: 1.65
       objectReference: {fileID: 0}
     - target: {fileID: 4253227010683345338, guid: 58396b07aaf25434595175ad21285b00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -71,6 +71,8 @@ public class CursorUIController : MonoBehaviour
         }
     }
 
+    private UnitController _currentHoverUnit;
+
     private void CheckHoverTarget()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -78,7 +80,19 @@ public class CursorUIController : MonoBehaviour
 
         if (_isHovering)
         {
-            UnitTeamType teamType = unitHit.collider.GetComponent<UnitController>().TeamType;
+            UnitController hitUnit = unitHit.collider.GetComponent<UnitController>();
+
+            if (_currentHoverUnit != hitUnit)
+            {
+                if (_currentHoverUnit != null)
+                {
+                    _currentHoverUnit.SetOutline(false);
+                }
+                _currentHoverUnit = hitUnit;
+                _currentHoverUnit.SetOutline(true);
+            }
+
+            UnitTeamType teamType = hitUnit.TeamType;
             if (_currentState != CursorType.Attack && teamType != GameManager.Instance.LocalPlayerTeamType)
             {
                 SetHoverCursor();
@@ -86,6 +100,12 @@ public class CursorUIController : MonoBehaviour
         }
         else
         {
+            if (_currentHoverUnit != null)
+            {
+                _currentHoverUnit.SetOutline(false);
+                _currentHoverUnit = null;
+            }
+
             if (_currentState != CursorType.Attack)
             {
                 SetDefaultCursor();
