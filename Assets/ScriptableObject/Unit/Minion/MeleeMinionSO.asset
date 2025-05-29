@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MeleeMinionSO
   m_EditorClassIdentifier: 
   _heroStatus:
-    _maxHP: 60
+    _maxHP: 100
     _attackPower: 18
     _attackSpeed: 1
     _attackRange: 2.2

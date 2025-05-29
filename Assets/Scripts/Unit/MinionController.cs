@@ -20,7 +20,8 @@ public class MinionController : UnitController
         
         SetTeamTypeRpc(team);
 
-        _attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
+        //_attackDetectRange = Mathf.Clamp(GetAttackRange() * 2.0f, 6.0f, 10.0f);
+        _attackDetectRange = 10.0f;
     }
 
     public void SetDestination(Vector3 destination)
@@ -58,6 +59,10 @@ public class MinionController : UnitController
             {
                 SetMoveDestinationRpc(_moveDestination);
                 FindUnitInRangeRpc();
+                if (_target != null)
+                {
+                    SetMoveDestinationRpc(_target.transform.position);
+                }
             }
             return;
         }
