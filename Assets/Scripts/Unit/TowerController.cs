@@ -61,6 +61,7 @@ public class TowerController : UnitController
 
         StopAttack();
         GameManager.Instance.GameOverRpc(_teamType.Value);
+        ParticleManager.Instance.PlayParticleServerRpc(ParticleType.TowerDestruction, transform.position);
         NetworkObject.Despawn();
     }
 

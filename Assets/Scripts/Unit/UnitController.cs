@@ -12,6 +12,7 @@ public abstract class UnitController : NetworkBehaviour
     [SerializeField] protected LayerMask _unitLayerMask;
     [SerializeField] private Animator _modelAnimator;
     [SerializeField] private Transform _projectileSpawnPoint;
+    [SerializeField] private bool _isPlayer = false; // 파티클 출력을 위해 플레이어인지 미니언인지 구분하기 위함...
 
     [SerializeField] private Outline _modelOutline;
 
@@ -132,6 +133,10 @@ public abstract class UnitController : NetworkBehaviour
         if (GetAttackType() == AttackType.Melee)
         {
             unitController.ReceiveDamage(GetAttackPower());
+            if (_isPlayer == true)
+            {
+                ParticleManager.Instance.PlayParticleServerRpc(ParticleType.PlayerHit, unitController.transform.position);
+            }
         }
         else if (GetAttackType() == AttackType.Ranged)
         {
@@ -209,7 +214,7 @@ public abstract class UnitController : NetworkBehaviour
         targetPosition.y = transform.position.y;
         transform.LookAt(targetPosition);
     }
-    
+
     [Rpc(SendTo.Server)]
     protected void FindUnitInRangeRpc()
     {

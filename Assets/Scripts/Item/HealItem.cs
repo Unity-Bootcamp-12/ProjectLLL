@@ -9,5 +9,6 @@ public class HealItem : MonoBehaviour, IUsableItem
         Logger.Info("USE HEAL");
 
         player.ReceiveHeal(_healAmount);
+        ParticleManager.Instance.PlayParticleServerRpc(ParticleType.PlayerHeal, player.transform.position);
     }
 }

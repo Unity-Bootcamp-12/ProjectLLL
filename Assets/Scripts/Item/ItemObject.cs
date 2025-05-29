@@ -23,6 +23,7 @@ public class ItemObject : NetworkBehaviour
 
                 player.AddItem(new ItemData(_item, GetComponent<IUsableItem>()));
                 RemoveItemRpc();
+                ParticleManager.Instance.PlayParticleServerRpc(ParticleType.PlayerPickItem, transform.position);
             }
         }
     }

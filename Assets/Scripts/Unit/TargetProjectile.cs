@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class TargetProjectile : NetworkBehaviour
 {
+    [SerializeField] private bool _isPlayer = false;
+
     private Transform _target;
     private float _speed = 0.0f;
     private float _damage = 0.0f;
@@ -18,9 +20,9 @@ public class TargetProjectile : NetworkBehaviour
 
     private void Update()
     {
-        if (!IsServer) 
+        if (!IsServer)
         {
-            return; 
+            return;
         }
 
         if (_target == null)
@@ -40,6 +42,10 @@ public class TargetProjectile : NetworkBehaviour
             if (_target.TryGetComponent<UnitController>(out var unit))
             {
                 unit.ReceiveDamage(_damage);
+                if (_isPlayer == true)
+                {
+                    ParticleManager.Instance.PlayParticleServerRpc(ParticleType.PlayerHit, _target.position);
+                }
             }
 
             NetworkObject.Despawn();
