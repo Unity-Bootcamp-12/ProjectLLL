@@ -54,6 +54,8 @@ public class MinionController : UnitController
 
         if (_target == null)
         {
+            StopAttack();
+
             if (!_isAttacking)
             {
                 SetMoveDestinationRpc(_moveDestination);

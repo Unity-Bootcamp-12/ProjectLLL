@@ -182,7 +182,6 @@ public abstract class UnitController : NetworkBehaviour
         _isAttacking = false;
         _isPreAttacking = false;
         _isPostAttacking = false;
-        SetAnimatorBoolRpc("IsAttack", false);
     }
 
     protected void StopAttack()
