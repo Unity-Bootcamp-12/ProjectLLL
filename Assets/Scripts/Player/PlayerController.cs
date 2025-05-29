@@ -84,7 +84,7 @@ public class PlayerController : UnitController
         StopMoveRpc();
         StopAttack();
         SetAnimatorTriggerRpc("IsDead");
-
+        SoundManager.Instance.PlaySFX(SFXType.Grunt);
         StartCoroutine(WaitRespawnCoroutine(RESPAWN_TIME));
         UIManager.Instance.EnableRespawnPanel(RESPAWN_TIME);
     }
@@ -123,6 +123,7 @@ public class PlayerController : UnitController
         if (!IsDead.Value)
         {
             _hpController.ChangeHPRpc(-damage);
+            SoundManager.Instance.PlaySFX(SFXType.Impact);
         }
     }
 
@@ -310,17 +311,20 @@ public class PlayerController : UnitController
         {
             if (_unitStatusController.IsItemSlotEmpty(ButtonType.Q))
             {
+                SoundManager.Instance.PlaySFX(SFXType.SkillUse);
                 _unitStatusController.AddItem(item, ButtonType.Q);
                 UIManager.Instance.SetItemImage(ButtonType.Q, item.ItemSO.ItemSprite);
             }
             else if (_unitStatusController.IsItemSlotEmpty(ButtonType.W))
             {
+                SoundManager.Instance.PlaySFX(SFXType.SkillUse);
                 _unitStatusController.AddItem(item, ButtonType.W);
                 UIManager.Instance.SetItemImage(ButtonType.W, item.ItemSO.ItemSprite);
 
             }
             else if (_unitStatusController.IsItemSlotEmpty(ButtonType.E))
             {
+                SoundManager.Instance.PlaySFX(SFXType.SkillUse);
                 _unitStatusController.AddItem(item, ButtonType.E);
                 UIManager.Instance.SetItemImage(ButtonType.E, item.ItemSO.ItemSprite);
             }

@@ -128,10 +128,12 @@ public abstract class UnitController : NetworkBehaviour
         if (GetAttackType() == AttackType.Melee)
         {
             unitController.ReceiveDamage(GetAttackPower());
+            SoundManager.Instance.PlaySFX(SFXType.MAttack);
         }
         else if (GetAttackType() == AttackType.Ranged)
         {
             FireTargetProjectileRpc(unitController.NetworkObjectId, 12.0f, GetAttackPower());
+            SoundManager.Instance.PlaySFX(SFXType.RAttack);
         }
     }
 

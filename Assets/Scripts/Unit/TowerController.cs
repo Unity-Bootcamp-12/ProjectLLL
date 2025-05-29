@@ -49,6 +49,7 @@ public class TowerController : UnitController
             else
             {
                 _attackCoroutine = StartCoroutine(AttackCoroutine(_target, 1.0f, 1.0f));
+                SoundManager.Instance.PlaySFX(SFXType.NexusCannon);
             }
         }
     }
@@ -60,6 +61,7 @@ public class TowerController : UnitController
         }
 
         StopAttack();
+        SoundManager.Instance.PlaySFX(SFXType.NexusExplode);
         GameManager.Instance.GameOverRpc(_teamType.Value);
         NetworkObject.Despawn();
     }

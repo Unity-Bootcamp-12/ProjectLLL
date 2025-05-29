@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
@@ -28,9 +29,6 @@ public class SoundManager : MonoBehaviour
     {
 
         GameObject obj = new GameObject("SoundManager");
-        GameObject lhs = new GameObject("LHS");
-        Rigidbody2D rd = lhs.AddComponent<Rigidbody2D>();
-        rd.simulated = false;
         Instance = obj.AddComponent<SoundManager>();
         DontDestroyOnLoad(obj);
 
@@ -83,17 +81,19 @@ public class SoundManager : MonoBehaviour
     {
         if (scene.name == "Intro")
         {
-            PlayBGM(BGMType.Incomptech, 1f);
+            PlayBGM(BGMType.Lightlegend, 1f);
         }
-        else if (scene.name == "MainScene")
+        else if (scene.name == "GameScene")
         {
-            PlayBGM(BGMType.Shrine, 1f);
+            PlayBGM(BGMType.Lightlegend, 1f);
         }
     }
 
     public void PlaySFX(SFXType type) //효과음 재생
     {
         sfxSource.PlayOneShot(sfxDic[type]);
+        sfxSource.spatialBlend = 1;
+        SetSFXVolume(0.2f);
     }
 
     public void PlayBGM(BGMType type, float fadeTime = 0) //배경음 재생 함수(페이드효과 포함)
@@ -155,7 +155,7 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator FadeInBGM(float duration = 1.0f)
     {
-        float targetVolume = PlayerPrefs.GetFloat("BGMVolume", 0.01f);
+        float targetVolume = PlayerPrefs.GetFloat("BGMVolume", 0.015f);
         float time = 0f;
 
         while (time < duration)
@@ -194,5 +194,6 @@ public enum SFXType
     MinionAttack,
     NexusCannon,
     NexusExplode,
-    SkillUse
+    SkillUse,
+    Grunt,
 }
