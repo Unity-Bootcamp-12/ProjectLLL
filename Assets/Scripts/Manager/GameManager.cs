@@ -117,9 +117,19 @@ public class GameManager : NetworkBehaviour
         SpawnMinion(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
 
         yield return new WaitForSeconds(0.5f);
+        
+        SpawnMinion(_redMeleeMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
+        SpawnMinion(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
+
+        yield return new WaitForSeconds(0.5f);
 
         SpawnMinion(_redMeleeMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
         SpawnMinion(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
+
+        yield return new WaitForSeconds(0.5f);
+
+        SpawnMinion(_redRangedMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
+        SpawnMinion(_blueRangedMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
 
         yield return new WaitForSeconds(0.5f);
 
