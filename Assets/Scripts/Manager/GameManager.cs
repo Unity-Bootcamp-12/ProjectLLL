@@ -74,6 +74,8 @@ public class GameManager : NetworkBehaviour
         if (NetworkManager.Singleton.ConnectedClients.Count == 2)
         {
             Logger.Info("Game start");
+            UIManager.Instance.HideNetworkUI();
+
             PlayerSpawn(clientId);
             StartCoroutine(SpawnMinionWaveCoroutine());
             TowerSpawn();
@@ -113,6 +115,8 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator SpawnMinionWaveCoroutine()
     {
+        yield return new WaitForSeconds(MINION_SPAWN_TIME);
+
         SpawnMinion(_redMeleeMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
         SpawnMinion(_blueMeleeMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
 
@@ -135,8 +139,6 @@ public class GameManager : NetworkBehaviour
 
         SpawnMinion(_redRangedMinionPrefab, _redTeamMinionSpawnPoint.position, UnitTeamType.RedTeam, _blueTeamTowerSpawnPoint.position);
         SpawnMinion(_blueRangedMinionPrefab, _blueTeamMinionSpawnPoint.position, UnitTeamType.BlueTeam, _redTeamTowerSpawnPoint.position);
-
-        yield return new WaitForSeconds(MINION_SPAWN_TIME);
 
         StartCoroutine(SpawnMinionWaveCoroutine());
     }
