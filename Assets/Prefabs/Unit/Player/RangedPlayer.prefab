@@ -2809,7 +2809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2541553945858272110}
   - component: {fileID: 8477257798367981844}
-  - component: {fileID: 2195094948789035430}
+  - component: {fileID: 7105920229011301286}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -2867,7 +2867,7 @@ Animator:
   m_GameObject: {fileID: 2886448325550125524}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 26884749826e6774aa58a039de667f50, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4cd89bf230e35574699ede355086ed94, type: 2}
+  m_Controller: {fileID: 9100000, guid: 445622010574aa345adff84c9c3605af, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2879,7 +2879,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2195094948789035430
+--- !u!114 &7105920229011301286
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6627,7 +6627,8 @@ MonoBehaviour:
     m_Bits: 128
   _modelAnimator: {fileID: 8477257798367981844}
   _projectileSpawnPoint: {fileID: 3883725963052603341}
-  _modelOutline: {fileID: 2195094948789035430}
+  _isPlayer: 1
+  _modelOutline: {fileID: 7105920229011301286}
   _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
   _unitHPBarUI: {fileID: 4774854154783254508}
   _teamType:
@@ -9481,27 +9482,110 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9024975768160664838}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae7f3a4b1cf5a104f80a141557f1fd12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  _unitLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  _modelAnimator: {fileID: 8477257798367981844}
-  _projectileSpawnPoint: {fileID: 3883725963052603341}
-  _isPlayer: 1
-  _nonTargetProjectilePrefab: {fileID: 3181119103003630140, guid: 7dc6c3b45ecd0304497595f5ebfb276d, type: 3}
-  _unitHPBarUI: {fileID: 4774854154783254508}
-  _teamType:
-    m_InternalValue: 0
-  _target: {fileID: 0}
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
---- !u!195 &7876948354529644848
-NavMeshAgent:
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f7090f664acec9d429e20c4c4808128b, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: -4898061890006231156, guid: 26884749826e6774aa58a039de667f50, type: 3}
+  m_Bones:
+  - {fileID: 1490984651940320858}
+  - {fileID: 910298619823800703}
+  - {fileID: 2626947839985221408}
+  - {fileID: 921133594970401826}
+  - {fileID: 2487033954627787229}
+  - {fileID: 1701531210588445029}
+  - {fileID: 5416612800596995864}
+  - {fileID: 7620411682599826321}
+  - {fileID: 1764019786086324312}
+  - {fileID: 748080510833409968}
+  - {fileID: 5854187018814430459}
+  - {fileID: 3179273857866460936}
+  - {fileID: 2706269048040923601}
+  - {fileID: 3522223699182564803}
+  - {fileID: 4142807252114417085}
+  - {fileID: 6970626690062724069}
+  - {fileID: 5976972372270532027}
+  - {fileID: 6923594330583400866}
+  - {fileID: 8081412306089833739}
+  - {fileID: 4575722520529511146}
+  - {fileID: 5466955287736944236}
+  - {fileID: 4424554788493081499}
+  - {fileID: 6030927738338252191}
+  - {fileID: 7501277724061915261}
+  - {fileID: 2241818939767533064}
+  - {fileID: 5641385339079110725}
+  - {fileID: 6531175098302639862}
+  - {fileID: 3655593062612110254}
+  - {fileID: 1898000072091739686}
+  - {fileID: 6934996570990984087}
+  - {fileID: 4369627374853600646}
+  - {fileID: 2558792372661959125}
+  - {fileID: 7025717015157256608}
+  - {fileID: 6184015752956303909}
+  - {fileID: 7293745038117687063}
+  - {fileID: 628978683398472675}
+  - {fileID: 8766320142866600365}
+  - {fileID: 1232726345220084076}
+  - {fileID: 5444928867028150019}
+  - {fileID: 1323350893202999220}
+  - {fileID: 1777837595839176566}
+  - {fileID: 6721478667528455358}
+  - {fileID: 3992742514225071048}
+  - {fileID: 1288849676451756428}
+  - {fileID: 975996889461397408}
+  - {fileID: 960386828597046464}
+  - {fileID: 2752256303100295590}
+  - {fileID: 1783167417378768330}
+  - {fileID: 5054876969716691949}
+  - {fileID: 2298731619609050630}
+  - {fileID: 1708443456987267555}
+  - {fileID: 2242792690720541592}
+  - {fileID: 3534315466556527744}
+  - {fileID: 3144860569640374408}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 1490984651940320858}
+  m_AABB:
+    m_Center: {x: 0.000000014901161, y: 0.23193559, z: 0.7282417}
+    m_Extent: {x: 0.2028972, y: 0.14319983, z: 0.39751735}
+  m_DirtyAABB: 0
+--- !u!1 &9093730284371939571
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9614,7 +9698,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4253227010683345338, guid: 58396b07aaf25434595175ad21285b00, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.65
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4253227010683345338, guid: 58396b07aaf25434595175ad21285b00, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
