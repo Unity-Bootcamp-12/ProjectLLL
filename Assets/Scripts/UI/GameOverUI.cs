@@ -2,24 +2,24 @@ using UnityEngine;
 
 public class GameOverUI : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameWinPanel;
-    [SerializeField] private GameObject _gameLosePanel;
+    [SerializeField] private FadeInPanel _gameWinPanel;
+    [SerializeField] private FadeInPanel _gameLosePanel;
 
     private void Start()
     {
-        _gameWinPanel.SetActive(false);
-        _gameLosePanel.SetActive(false);
+        _gameWinPanel.gameObject.SetActive(false);
+        _gameLosePanel.gameObject.SetActive(false);
     }
 
     public void ShowGameWinPanel()
     {
-        _gameWinPanel.SetActive(true);
-        _gameLosePanel.SetActive(false);
+        _gameLosePanel.gameObject.SetActive(false);
+        _gameWinPanel.FadeIn();
     }
 
     public void ShowGameLosePanel()
     {
-        _gameWinPanel.SetActive(false);
-        _gameLosePanel.SetActive(true);
+        _gameWinPanel.gameObject.SetActive(false);
+        _gameLosePanel.FadeIn();
     }
 }
